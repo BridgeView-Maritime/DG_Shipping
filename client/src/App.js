@@ -1,14 +1,19 @@
 import "./App.css";
 import Add from "./adduser/Add";
-import User from "./getuser/User";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Update from "./updateuser/Update";
+import Login from "./Login/Login/Login";
+import Signup from "./Login/SignUp/SignUp";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <User />,
+      element: <Login />, // Default route to Login page
+    },
+    {
+      path: "/signup",
+      element: <Signup />, // Route for Signup page
     },
     {
       path: "/add",
@@ -19,6 +24,7 @@ function App() {
       element: <Update />,
     },
   ]);
+
   return (
     <div className="App">
       <RouterProvider router={route}></RouterProvider>
