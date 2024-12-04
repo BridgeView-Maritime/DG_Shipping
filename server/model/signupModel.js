@@ -14,7 +14,6 @@ const signupSchema = new mongoose.Schema({
     type: String,
     required: true, // Make password required
   },
-  
 });
 
 // You can specify the collection name here if needed

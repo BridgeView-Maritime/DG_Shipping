@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const loginSchema = new mongoose.Schema({
-  email: {
+  username: {
     type: String,
     required: true,
-    unique: true, // Ensure no duplicate emails
+    unique: true, // Ensure no duplicate usernames
   },
   password: {
     type: String,
@@ -12,5 +12,4 @@ const loginSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("User", loginSchema);
-export default User;
+export default mongoose.model("Login", loginSchema, "Login");

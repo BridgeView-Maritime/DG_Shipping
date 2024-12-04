@@ -1,38 +1,30 @@
 import React, { useState } from 'react';
 import './login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  
+  const navigate= useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const userData = { email: username, password };
-  console.log("loginData", userData);
 
-    // try {
-    //   const response = await axios.post("http://localhost:8000/api/login", userData);
-    //   toast.success(response.data.message, { position: "top-right" });
-    // } catch (error) {
-    //   toast.error(error.response?.data?.message || "Login failed!", {
-    //     position: "top-left",
-    //   });
-    // }
+    const userData = { username, password };
 
     try {
-      const response = await axios.post("http://localhost:5000/login", { username, password });
+      const response = await axios.post("http://localhost:8000/api/login", userData);
       if (response.status === 200) {
-        window.location.href = response.data.redirectUrl; // Redirect to /dashboard
+        navigate(response.data.redirectUrl); 
       }
     } catch (error) {
-      console.error("Login error:", error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "An error occurred during login");
+      console.error("Login error:", error.response ? error.response.data : error.message);
+      alert(error.response ? error.response.data.message : "An error occurred during login");
     }
   };
+  
 
   return (
     <div className="loginContainer">

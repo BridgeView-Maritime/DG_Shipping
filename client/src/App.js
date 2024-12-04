@@ -4,6 +4,7 @@ import Update from "./updateuser/Update";
 import Login from "./Login/Login/Login";
 import Signup from "./Login/SignUp/SignUp";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import DashBoard from "./DashBoard/DashBoard";
 
 function App() {
   const route = createBrowserRouter([
@@ -22,6 +23,11 @@ function App() {
     {
       path: "/update/:id",
       element: <Update />,
+    },
+
+    {
+      path: "/dashboard",
+      element: <DashBoard />, // Default route to Login page
     },
   ]);
 

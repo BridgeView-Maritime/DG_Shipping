@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';  // Make sure axios is imported
 import './signup.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
   // State for user input
@@ -12,6 +12,8 @@ function Signup() {
     confirmpassword: "",
   });
   const [error, setError] = useState('');  // Error message for UI
+
+  const navigate = useNavigate();
 
   // Input change handler
   const inputHandler = (e) => {
@@ -40,6 +42,7 @@ function Signup() {
       const response = await axios.post("http://localhost:8000/api/signup", userData);
       console.log('Signup Success:', response.data);
       // Reset the form or redirect user
+      navigate("/");
     } catch (err) {
       setError('An error occurred during signup');
       console.error('Signup error:', err);
