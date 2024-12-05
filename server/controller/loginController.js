@@ -1,35 +1,42 @@
 import Signup from "../model/signupModel.js";
-import Login from "../model/loginModel.js"
+// import Login from "../model/loginModel.js"
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   // Validate input
-  if (!username || !password) {
-    return res.status(400).json({ message: "Username and password are required!" });
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Email and password are required!" });
   }
 
   try {
-    // Find user by username in the Signup model
-    const user = await Signup.findOne({ username });
+    // Find user by email in the Signup model
+    const user = await Signup.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ message: "Invalid username or password!" });
+      return res.status(400).json({ message: "Invalid email or password!" });
     }
 
     // Compare password (plain-text comparison)
     if (user.password !== password) {
-      return res.status(400).json({ message: "Invalid username or password!" });
+      return res.status(400).json({ message: "Invalid email or password!" });
     }
 
     // Send success response and redirect URL
-    return res.status(200).json({ message: "Login successful!", redirectUrl: "/Dashboard" });
+    return res
+      .status(200)
+      .json({
+        message: "Login successful!",
+        userType: user.userType,
+        // redirectUrl: "/Dashboard",
+      });
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({ message: "An error occurred during login" });
   }
 };
-
 
 // Controller to handle user signup
 export const signup = async (req, res) => {
@@ -38,7 +45,12 @@ export const signup = async (req, res) => {
 
   // Validate if all fields are provided
   if (!email || !username || !password || !confirmpassword) {
-    console.log("Missing fields:", { email, username, password, confirmpassword });
+    console.log("Missing fields:", {
+      email,
+      username,
+      password,
+      confirmpassword,
+    });
     return res.status(400).json({ message: "All fields are required!" });
   }
 
@@ -59,7 +71,7 @@ export const signup = async (req, res) => {
     // Create the user, excluding confirmpassword from being saved
     const { confirmpassword, ...userData } = req.body;
     const newUser = new Signup({ ...userData });
-    console.log("newuser", newUser)
+    console.log("newuser", newUser);
     await newUser.save();
 
     console.log("User signed up successfully!");
@@ -69,6 +81,3 @@ export const signup = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-
-

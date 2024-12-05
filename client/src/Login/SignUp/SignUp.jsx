@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import axios from 'axios';  // Make sure axios is imported
-import './signup.css';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios"; // Make sure axios is imported
+import "./signup.css";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   // State for user input
@@ -10,9 +10,9 @@ function Signup() {
     email: "",
     password: "",
     confirmpassword: "",
+    userType: "",
   });
-  const [error, setError] = useState('');  // Error message for UI
-
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // Input change handler
@@ -24,28 +24,30 @@ function Signup() {
   // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const { username, email, password, confirmpassword } = loginuser;
-    console.log("loginuser", loginuser)
+
+    const { username, email, password, confirmpassword, userType } = loginuser;
+    console.log("loginuser", loginuser);
     // Validate the password match
     if (password !== confirmpassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
-    const userData = { username, email, password , confirmpassword};
+    const userData = { username, email, password, confirmpassword, userType };
 
-    console.log('User Data:', userData);
+    console.log("User Data:", userData);
 
     try {
       // Sending a POST request to the backend
-      const response = await axios.post("http://localhost:8000/api/signup", userData);
-      console.log('Signup Success:', response.data);
-      // Reset the form or redirect user
+      const response = await axios.post(
+        "http://localhost:8000/api/signup",
+        userData
+      );
+      console.log("Signup Success:", response.data);
       navigate("/");
     } catch (err) {
-      setError('An error occurred during signup');
-      console.error('Signup error:', err);
+      setError("An error occurred during signup");
+      console.error("Signup error:", err);
     }
   };
 
@@ -66,7 +68,6 @@ function Signup() {
               placeholder="Enter your username"
             />
           </div>
-
           <div className="inputGroup">
             <label htmlFor="email">Email</label>
             <input
@@ -79,7 +80,6 @@ function Signup() {
               placeholder="Enter your email"
             />
           </div>
-
           <div className="inputGroup">
             <label htmlFor="password">Password</label>
             <input
@@ -92,7 +92,6 @@ function Signup() {
               placeholder="Enter your password"
             />
           </div>
-
           <div className="inputGroup">
             <label htmlFor="confirmpassword">Confirm Password</label>
             <input
@@ -105,15 +104,29 @@ function Signup() {
               placeholder="Confirm your password"
             />
           </div>
-
-          {error && <p className="error">{error}</p>} {/* Display error message */}
-
+          {error && <p className="error">{error}</p>}{" "}
+          {/* Display error message */}
+          <div className="inputGroup">
+            <label htmlFor="userType">User Type</label>
+            <select
+              id="userType"
+              name="userType"
+              value={loginuser.userType || ""} // Bind to loginuser state
+              onChange={inputHandler}
+              required
+            >
+              <option value="">Select User Type</option>
+              <option value="crew">Crew</option>
+              <option value="versel_vendor">Versel Vendor</option>
+              <option value="rpsl_vendor">RPSL vendor</option>
+            </select>
+          </div>
           <button className="signupbtn" type="submit">
             Sign Up
           </button>
           <p>
-          If you already have an account, <Link to="/">Login</Link>.
-        </p>
+            If you already have an account, <Link to="/">Login</Link>.
+          </p>
         </form>
       </div>
     </div>

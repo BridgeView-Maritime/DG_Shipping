@@ -2,23 +2,37 @@ import React, { useState } from 'react';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
   const navigate= useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userData = { username, password };
+    const userData = { email, password };
 
     try {
       const response = await axios.post("http://localhost:8000/api/login", userData);
       if (response.status === 200) {
-        navigate(response.data.redirectUrl); 
-      }
+       
+         console.log("login sucess full"); 
+         // Store the userType in localStorage or sessionStorage
+         const { userType } = response.data;  // Assume response contains userType
+         localStorage.setItem("userType", userType);
+ 
+         // Redirect based on userType
+         if (userType === "crew") {
+           navigate("/crew");
+         } else if (userType === "versel_vendor") {
+           navigate("/verselvendor");
+         } else if (userType === "rpsl_vendor") {
+           navigate("/companyprofile");
+         } else {
+           alert("Unknown user type");
+         }
+        }
     } catch (error) {
       console.error("Login error:", error.response ? error.response.data : error.message);
       alert(error.response ? error.response.data.message : "An error occurred during login");
@@ -30,16 +44,16 @@ function Login() {
     <div className="loginContainer">
       <div className="loginFormContainer">
         <h1>Login</h1>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="logform" onSubmit={handleSubmit}>
           <div className="inputGroup">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="Enter your username"
+              placeholder="Enter your email"
             />
           </div>
 
@@ -54,6 +68,7 @@ function Login() {
               placeholder="Enter your password"
             />
           </div>
+
           <button className="loginbtn" type="submit">
             Login
           </button>

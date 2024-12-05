@@ -5,6 +5,9 @@ import Login from "./Login/Login/Login";
 import Signup from "./Login/SignUp/SignUp";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
+import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
+import Crew from "./crew/Crew";
+import VerselVendor from "./Versel Vendor/VerselVendor";
 
 function App() {
   const route = createBrowserRouter([
@@ -29,6 +32,18 @@ function App() {
       path: "/dashboard",
       element: <DashBoard />, // Default route to Login page
     },
+    {
+      path: "/companyprofile",
+      element: <CompanyProfile />
+    },
+    {
+      path:"/crew",
+      element:<Crew />
+    },
+    {
+      path:"/verselvendor",
+      element: <VerselVendor />
+    }
   ]);
 
   return (

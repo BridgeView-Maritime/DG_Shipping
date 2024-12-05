@@ -60,3 +60,18 @@
     background-color: #45a049;
   }
   
+  /* dropdown style */
+  select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
