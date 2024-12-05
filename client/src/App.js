@@ -1,14 +1,23 @@
 import "./App.css";
 import Add from "./adduser/Add";
-import User from "./getuser/User";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Update from "./updateuser/Update";
+import Login from "./Login/Login/Login";
+import Signup from "./Login/SignUp/SignUp";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import DashBoard from "./DashBoard/DashBoard";
+import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
+import Crew from "./crew/Crew";
+import VerselVendor from "./Versel Vendor/VerselVendor";
 
 function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <User />,
+      element: <Login />, // Default route to Login page
+    },
+    {
+      path: "/signup",
+      element: <Signup />, // Route for Signup page
     },
     {
       path: "/add",
@@ -18,7 +27,25 @@ function App() {
       path: "/update/:id",
       element: <Update />,
     },
+
+    {
+      path: "/dashboard",
+      element: <DashBoard />, // Default route to Login page
+    },
+    {
+      path: "/companyprofile",
+      element: <CompanyProfile />
+    },
+    {
+      path:"/crew",
+      element:<Crew />
+    },
+    {
+      path:"/verselvendor",
+      element: <VerselVendor />
+    }
   ]);
+
   return (
     <div className="App">
       <RouterProvider router={route}></RouterProvider>
