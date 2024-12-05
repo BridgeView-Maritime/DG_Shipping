@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./companyprofile.css";
 
 const CompanyProfile = () => {
@@ -59,135 +60,174 @@ const CompanyProfile = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleViewDocument = (documentName) => {
+    const file = formData[documentName];
+    if (file) {
+      // Check if the file is available in the formData state
+      const fileURL = URL.createObjectURL(file); // Create a URL for the uploaded file
+      window.open(fileURL, "_blank"); // Open the file in a new tab
+    } else {
+      alert("No document uploaded yet for this field.");
+    }
+  };
+  
+
   const validate = () => {
     const newErrors = {};
-  
+
     // Name of RPSL validation
     if (!formData.nameOfRPSL.trim()) {
       newErrors.nameOfRPSL = "Name of RPSL is required.";
     }
-  
+
     // RPSL Number validation
     if (!formData.rpslNumber.trim()) {
       newErrors.rpslNumber = "RPSL Number is required.";
     }
-  
+
     // Issue Date validation
     if (!formData.issueDate) {
       newErrors.issueDate = "Issue Date is required.";
     }
-  
+
     // Expiry Date validation
     if (!formData.expiryDate) {
       newErrors.expiryDate = "Expiry Date is required.";
     }
-  
+
     // Issue Place validation
     if (!formData.issuePlace.trim()) {
       newErrors.issuePlace = "Issue Place is required.";
     }
-  
+
     // TIN TAN Number validation
     if (!formData.tinTanNumber.trim()) {
       newErrors.tinTanNumber = "TIN TAN Number is required.";
     }
-  
+
     // Bank Name validation
     if (!formData.bankName) {
       newErrors.bankName = "Bank Name is required.";
     }
-  
+
     // Bank Guarantee Validity Date validation
     if (!formData.bankGuaranteeValidityDate) {
-      newErrors.bankGuaranteeValidityDate = "Bank Guarantee Validity Date is required.";
+      newErrors.bankGuaranteeValidityDate =
+        "Bank Guarantee Validity Date is required.";
     }
-  
+
     // Guarantee Amount validation
     if (!formData.guaranteeAmount) {
       newErrors.guaranteeAmount = "Guarantee Amount is required.";
     }
-  
+
     // Seafarer Recruited validation
     if (!formData.seafarerRecruited) {
       newErrors.seafarerRecruited = "Seafarer Recruited is required.";
     }
-  
+
     // Inspection Date validation
     if (!formData.inspectionDate) {
       newErrors.inspectionDate = "Inspection Date is required.";
     }
-  
+
     // PAN Number validation
     if (!formData.panNumber.trim()) {
       newErrors.panNumber = "PAN Number is required.";
     }
-  
+
     // Office validation
     if (!formData.office.trim()) {
       newErrors.office = "Office is required.";
     }
-  
+
     // Leased Validity Date validation
     if (!formData.leasedValidityDate) {
       newErrors.leasedValidityDate = "Leased Validity Date is required.";
     }
-  
+
     // Status validation
     if (!formData.status.trim()) {
       newErrors.status = "Status is required.";
     }
-  
+
     // Aadhar Number validation
     if (!formData.aadharNumber.trim()) {
       newErrors.aadharNumber = "Aadhar Number is required.";
     }
-  
+
     //Last inspection details
-    if(!formData.inspectorName.trim()) {
+    if (!formData.inspectorName.trim()) {
       newErrors.inspectorName = "Inspector Number is Required.";
     }
 
-    if(!formData.organizationName.trim()) {
+    if (!formData.organizationName.trim()) {
       newErrors.organizationName = "Organization Number is Required.";
     }
 
     //astAnnualInspectionDate
-    if(!formData.lastAnnualInspectionDate.trim()) {
-      newErrors.lastAnnualInspectionDate = "lastAnnualInspectionDate Number is Required."
+    if (!formData.lastAnnualInspectionDate.trim()) {
+      newErrors.lastAnnualInspectionDate =
+        "lastAnnualInspectionDate Number is Required.";
     }
 
     //lastRenewalDate
-    if(!formData.lastRenewalDate.trim()) {
+    if (!formData.lastRenewalDate.trim()) {
       newErrors.lastRenewalDate = "lastRenewalDate is Required.";
     }
 
     //lastInspectionPlace
-    if(!formData.lastInspectionPlace.trim()) {
-      newErrors.lastInspectionPlace ="lastInspectionPlace is Required.";
+    if (!formData.lastInspectionPlace.trim()) {
+      newErrors.lastInspectionPlace = "lastInspectionPlace is Required.";
     }
 
     //nextRenewalDate
-    if(!formData.nextRenewalDate.trim()) {
+    if (!formData.nextRenewalDate.trim()) {
       newErrors.nextRenewalDate = "nextRenewalDate is Required.";
     }
 
     //
     // Setting errors state
     setErrors(newErrors);
-  
+
     // Return true if no errors, false if errors exist
     return Object.keys(newErrors).length === 0;
   };
 
-  
-  const handleSubmit = (e) => {
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    // Update formData with the selected file
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0], // store the first file selected
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/companyprofile",
+        formData
+      );
+      setSuccessMessage(response.data.message);
+    } catch (error) {
+      console.error("Error submitting company profile:", error);
+      setErrors({
+        submit: error.response
+          ? error.response.data.message
+          : "An error occurred",
+      });
+    }
+
     if (validate()) {
       console.log("Form submitted successfully:", formData);
       setErrors({});
@@ -200,7 +240,6 @@ const CompanyProfile = () => {
     <div className="container">
       <h1 className="title">Company Profile</h1>
       <form onSubmit={handleSubmit}>
-
         {/* Profile Details Section */}
         <section>
           <h3>Profile Details</h3>
@@ -465,28 +504,28 @@ const CompanyProfile = () => {
           <h3>Last Inspection Details</h3>
           <div className="form-row">
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Name of the Inspector</label>
-              <input
-                type="text"
-                name="inspectorName"
-                value={formData.inspectorName}
-                onChange={handleChange}
-              />
+              <div className="input-label-row">
+                <label>Name of the Inspector</label>
+                <input
+                  type="text"
+                  name="inspectorName"
+                  value={formData.inspectorName}
+                  onChange={handleChange}
+                />
               </div>
               {errors.inspectorName && (
                 <p className="error">{errors.inspectorName}</p>
               )}
             </div>
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Name of the Organization</label>
-              <input
-                type="text"
-                name="organizationName"
-                value={formData.organizationName}
-                onChange={handleChange}
-              />
+              <div className="input-label-row">
+                <label>Name of the Organization</label>
+                <input
+                  type="text"
+                  name="organizationName"
+                  value={formData.organizationName}
+                  onChange={handleChange}
+                />
               </div>
               {errors.organizationName && (
                 <p className="error">{errors.organizationName}</p>
@@ -496,14 +535,14 @@ const CompanyProfile = () => {
 
           <div className="form-row">
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Date of Last Annual Inspection</label>
-              <input
-                type="date"
-                name="lastAnnualInspectionDate"
-                value={formData.lastAnnualInspectionDate}
-                onChange={handleChange}
-              />
+              <div className="input-label-row">
+                <label>Date of Last Annual Inspection</label>
+                <input
+                  type="date"
+                  name="lastAnnualInspectionDate"
+                  value={formData.lastAnnualInspectionDate}
+                  onChange={handleChange}
+                />
               </div>
               {errors.lastAnnualInspectionDate && (
                 <p className="error">{errors.lastAnnualInspectionDate}</p>
@@ -511,14 +550,14 @@ const CompanyProfile = () => {
             </div>
 
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Date of Last Renewal</label>
-              <input
-                type="date"
-                name="lastRenewalDate"
-                value={formData.lastRenewalDate}
-                onChange={handleChange}
-              />
+              <div className="input-label-row">
+                <label>Date of Last Renewal</label>
+                <input
+                  type="date"
+                  name="lastRenewalDate"
+                  value={formData.lastRenewalDate}
+                  onChange={handleChange}
+                />
               </div>
               {errors.lastRenewalDate && (
                 <p className="error">{errors.lastRenewalDate}</p>
@@ -528,34 +567,33 @@ const CompanyProfile = () => {
 
           <div className="form-row">
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Place of Last Inspection</label>
-              <select
-                name="lastInspectionPlace"
-                value={formData.lastInspectionPlace}
-                onChange={handleChange}
-              >
-                <option value="">Select Place</option>
-                <option value="Place A">BELAPUR CBD</option>
-                <option value="Place B">THANE</option>
-                <option value="Place C">MUMBAI</option>
-              </select>
+              <div className="input-label-row">
+                <label>Place of Last Inspection</label>
+                <select
+                  name="lastInspectionPlace"
+                  value={formData.lastInspectionPlace}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Place</option>
+                  <option value="Place A">BELAPUR CBD</option>
+                  <option value="Place B">THANE</option>
+                  <option value="Place C">MUMBAI</option>
+                </select>
               </div>
               {errors.lastInspectionPlace && (
                 <p className="error">{errors.lastInspectionPlace}</p>
               )}
             </div>
 
-
             <div className="form-group-row">
-            <div className="input-label-row">
-              <label>Date of Next Renewal</label>
-              <input
-                type="date"
-                name="nextRenewalDate"
-                value={formData.nextRenewalDate}
-                onChange={handleChange}
-              />
+              <div className="input-label-row">
+                <label>Date of Next Renewal</label>
+                <input
+                  type="date"
+                  name="nextRenewalDate"
+                  value={formData.nextRenewalDate}
+                  onChange={handleChange}
+                />
               </div>
               {errors.nextRenewalDate && (
                 <p className="error">{errors.nextRenewalDate}</p>
@@ -805,23 +843,24 @@ const CompanyProfile = () => {
           <div className="form-row-otherdetails">
             <div className="form-group-otherdetails">
               <label>
-                Experience in recruitment of seafarers, Number od years
+                Experience in recruitment of seafarers (Number of years)
               </label>
               <select
-                name="shippingActivitiesCarriedOut"
-                value={formData.shippingActivitiesCarriedOut}
+                name="recruitmentExperienceYears"
+                value={formData.recruitmentExperienceYears}
                 onChange={handleChange}
               >
                 <option value="">Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="1-3">1-3 Years</option>
+                <option value="4-6">4-6 Years</option>
+                <option value="7+">7+ Years</option>
               </select>
             </div>
             <div className="form-group">
               <textarea
-                name="shippingActivitiesDetails"
+                name="recruitmentExperienceDetails"
                 placeholder="If Yes, provide details."
-                value={formData.shippingActivitiesDetails}
+                value={formData.recruitmentExperienceDetails}
                 onChange={handleChange}
               />
             </div>
@@ -830,121 +869,153 @@ const CompanyProfile = () => {
 
         {/* Documents */}
         <section>
-          <h3>Documents</h3>
-          {/* Row 1 */}
-          <div className="form-row-document">
-            <div className="form-group">
-              <label>Registration Documents</label>
-              <input
-                type="file"
-                name="registrationDocuments"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("registrationDocuments")}
-              >
-                View
-              </button>
-            </div>
+  <h3>Documents</h3>
+  <div className="form-row-document">
+    {/* Registration Documents */}
+    <div className={`form-group ${formData.registrationDocuments ? 'uploaded' : ''}`}>
+      <label htmlFor="registrationDocuments">Registration Documents *</label>
+      <input
+        id="registrationDocuments"
+        type="file"
+        name="registrationDocuments"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Registration Documents"
+        onClick={() => handleViewDocument("registrationDocuments")}
+      >
+        View
+      </button>
+      {/* {!formData.registrationDocuments && <p className="error-message">This document is required.</p>} */}
+    </div>
 
-            <div className="form-group">
-              <label>Scan Copy of RPS License</label>
-              <input
-                type="file"
-                name="rpsLicense"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("rpsLicense")}
-              >
-                View
-              </button>
-            </div>
+    {/* Scan Copy of RPS License */}
+    <div className={`form-group ${formData.rpsLicense ? 'uploaded' : ''}`}>
+      <label htmlFor="rpsLicense">Scan Copy of RPS License *</label>
+      <input
+        id="rpsLicense"
+        type="file"
+        name="rpsLicense"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded RPS License"
+        onClick={() => handleViewDocument("rpsLicense")}
+      >
+        View
+      </button>
+      {/* {!formData.rpsLicense && <p className="error-message">This document is required.</p>} */}
+    </div>
 
-            {/* Row 2 */}
+    {/* Profit and Loss Account */}
+    <div className={`form-group ${formData.profitLossBalanceSheet ? 'uploaded' : ''}`}>
+      <label htmlFor="profitLossBalanceSheet">
+        Profit and Loss Account and Balance Sheet of Last 4 Years
+      </label>
+      <input
+        id="profitLossBalanceSheet"
+        type="file"
+        name="profitLossBalanceSheet"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Profit and Loss Account"
+        onClick={() => handleViewDocument("profitLossBalanceSheet")}
+      >
+        View
+      </button>
+    </div>
 
-            <div className="form-group">
-              <label>
-                Profit and Loss Account and Balance Sheet of Last 4 Years
-              </label>
-              <input
-                type="file"
-                name="profitLossBalanceSheet"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("profitLossBalanceSheet")}
-              >
-                View
-              </button>
-            </div>
+    {/* Certificate of Assets and Liabilities */}
+    <div className={`form-group ${formData.assetsLiabilitiesCertificate ? 'uploaded' : ''}`}>
+      <label htmlFor="assetsLiabilitiesCertificate">
+        Certificate of Assets and Liabilities of Chartered Accountant
+      </label>
+      <input
+        id="assetsLiabilitiesCertificate"
+        type="file"
+        name="assetsLiabilitiesCertificate"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Certificate of Assets and Liabilities"
+        onClick={() => handleViewDocument("assetsLiabilitiesCertificate")}
+      >
+        View
+      </button>
+    </div>
 
-            <div className="form-group">
-              <label>
-                Certificate of Assets and Liabilities of Chartered Accountant
-              </label>
-              <input
-                type="file"
-                name="assetsLiabilitiesCertificate"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("assetsLiabilitiesCertificate")}
-              >
-                View
-              </button>
-            </div>
+    {/* Income Tax Returns */}
+    <div className={`form-group ${formData.incomeTaxReturns ? 'uploaded' : ''}`}>
+      <label htmlFor="incomeTaxReturns">Scanned Copy of Income Tax Returns</label>
+      <input
+        id="incomeTaxReturns"
+        type="file"
+        name="incomeTaxReturns"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Income Tax Returns"
+        onClick={() => handleViewDocument("incomeTaxReturns")}
+      >
+        View
+      </button>
+    </div>
 
-            <div className="form-group">
-              <label>Scanned Copy of Income Tax Returns</label>
-              <input
-                type="file"
-                name="incomeTaxReturns"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("incomeTaxReturns")}
-              >
-                View
-              </button>
-            </div>
+    {/* Last One Year Audit Report */}
+    <div className={`form-group ${formData.auditReport ? 'uploaded' : ''}`}>
+      <label htmlFor="auditReport">Last One Year Audit Report</label>
+      <input
+        id="auditReport"
+        type="file"
+        name="auditReport"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Audit Report"
+        onClick={() => handleViewDocument("auditReport")}
+      >
+        View
+      </button>
+    </div>
 
-            {/* Row 3 */}
-            <div className="form-group">
-              <label>Last One Year Audit Report</label>
-              <input
-                type="file"
-                name="auditReport"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("auditReport")}
-              >
-                View
-              </button>
-            </div>
+    {/* Bank Guarantee Scanned Copy */}
+    <div className={`form-group ${formData.bankGuarantee ? 'uploaded' : ''}`}>
+      <label htmlFor="bankGuarantee">Bank Guarantee Scanned Copy</label>
+      <input
+        id="bankGuarantee"
+        type="file"
+        name="bankGuarantee"
+        accept=".pdf,.jpg,.jpeg,.png"
+        onChange={handleFileChange}
+      />
+      <button
+        type="button"
+        aria-label="View uploaded Bank Guarantee"
+        onClick={() => handleViewDocument("bankGuarantee")}
+      >
+        View
+      </button>
+    </div>
+  </div>
+</section>
 
-            <div className="form-group">
-              <label>Bank Guarantee Scanned Copy</label>
-              <input
-                type="file"
-                name="bankGuarantee"
-                // onChange={handleFileChange}
-              />
-              <button
-                type="button"
-                // onClick={() => handleViewDocument("bankGuarantee")}
-              >View</button>
-            </div>
-          </div>
-        </section>
-        <button style={{ backgroundColor: "lightBlue", color: "black" }}>
+        <button
+          style={{ backgroundColor: "lightBlue", color: "black" }}
+          type="submit"
+        >
           Submit
         </button>
       </form>
