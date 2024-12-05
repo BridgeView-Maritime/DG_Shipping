@@ -2,7 +2,7 @@ import "./App.css";
 import Add from "./adduser/Add";
 import User from "./getuser/User";
 import Update from "./updateuser/Update";
-import CrewDetails from "./crew/CrewDetails.jsx";  
+import CrewDetails from "./crew/SeafarerProfile.jsx";  
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
       element: <Update />,
     },
     {
-      path: "/crewdetails",  
+      path: "/SeafarerProfile",  
       element: <CrewDetails />,  
     },
   ]);
