@@ -8,6 +8,8 @@ import DashBoard from "./DashBoard/DashBoard";
 import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
 import Crew from "./crew/Crew";
 import VerselVendor from "./Versel Vendor/VerselVendor";
+import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
+import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
 
 function App() {
   const route = createBrowserRouter([
@@ -43,6 +45,14 @@ function App() {
     {
       path:"/verselvendor",
       element: <VerselVendor />
+    },
+    {
+      path: "/rpsdashboard",
+      element: <RpsDashboard />
+    },
+    {
+      path: "/companyprofiledisplay",
+      element: <CompanyProfileDisplay /> 
     }
   ]);
 

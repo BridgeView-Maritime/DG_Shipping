@@ -28,7 +28,7 @@ function Login() {
          } else if (userType === "versel_vendor") {
            navigate("/verselvendor");
          } else if (userType === "rpsl_vendor") {
-           navigate("/companyprofile");
+           navigate("/rpsdashboard");
          } else {
            alert("Unknown user type");
          }

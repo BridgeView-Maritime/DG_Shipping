@@ -1,63 +1,57 @@
-// companyprofileModel.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const companyProfileSchema = new mongoose.Schema({
-  // Profile Details
-  nameOfRPSL: { type: String, required: true },
-  rpslNumber: { type: String, required: true },
-  issueDate: { type: Date, required: true },
-  expiryDate: { type: Date, required: true },
-  issuePlace: { type: String, required: true },
-  tinTanNumber: { type: String, required: true },
-  bankName: { type: String, required: true },
-  bankGuaranteeValidityDate: { type: Date, required: true },
-  guaranteeAmount: { type: Number, required: true },
-  seafarerRecruited: { type: Number, required: true },
-  inspectionDate: { type: Date, required: true },
-  panNumber: { type: String, required: true },
-  office: { type: String, required: true },
-  leasedValidityDate: { type: Date, required: true },
-  status: { type: String, required: true },
-  aadharNumber: { type: String, required: true },
-
-  // Last Inspection Details
-  inspectorName: { type: String, required: true },
-  organizationName: { type: String, required: true },
-  lastAnnualInspectionDate: { type: Date, required: true },
-  lastRenewalDate: { type: Date, required: true },
-  lastInspectionPlace: { type: String, required: true },
-  nextRenewalDate: { type: Date, required: true },
-
-  // Registered Address Details
-  addressLine1: { type: String, required: true },
-  city: { type: String, required: true },
-  addressLine2: { type: String, required: true },
-  district: { type: String, required: true },
-  addressLine3: { type: String, required: true },
-  state: { type: String, required: true },
-  phoneNumber: { type: String, required: true },
-  mobileNumber: { type: String, required: true },
-  pin: { type: String, required: true },
-  fax: { type: String, required: true },
-  webUrl: { type: String, required: true },
-
-  // Contact Person & Details
-  contactPersonName: { type: String, required: true },
-  contactPersonMobile: { type: String, required: true },
-  contactPersonEmail: { type: String, required: true },
-
-  // Other Details
-  criminalCasePending: { type: Boolean, required: true },
-  criminalCaseDetails: { type: String },
-  complaintsPending: { type: Boolean, required: true },
-  complaintsDetails: { type: String },
-  shippingActivitiesCarriedOut: { type: Boolean, required: true },
-  shippingActivitiesDetails: { type: String },
-  seafarerRecruitmentExperience: { type: String },
-  yearsOfExperience: { type: Number, required: true }
+  nameOfRPSL: { type: String, trim: true },
+  rpslNumber: { type: String, trim: true },
+  issueDate: { type: Date },
+  expiryDate: { type: Date },
+  issuePlace: { type: String, trim: true },
+  tinTanNumber: { type: String, trim: true },
+  bankName: { type: String, trim: true },
+  bankGuaranteeValidityDate: { type: Date },
+  guaranteeAmount: { type: Number },
+  seafarerRecruited: { type: Number },
+  inspectionDate: { type: Date },
+  panNumber: { type: String, trim: true },
+  office: { type: String, trim: true },
+  leasedValidityDate: { type: Date }, // Fixed typo
+  status: { type: String, trim: true },
+  aadharNumber: { type: String, trim: true },
+  inspectorName: { type: String, trim: true },
+  organizationName: { type: String, trim: true },
+  lastAnnualInspectionDate: { type: Date },
+  lastRenewalDate: { type: Date },
+  lastInspectionPlace: { type: String, trim: true },
+  nextRenewalDate: { type: Date },
+  addressLine1: { type: String, trim: true },
+  city: { type: String, trim: true },
+  addressLine2: { type: String, trim: true },
+  district: { type: String, trim: true },
+  addressLine3: { type: String, trim: true },
+  state: { type: String, trim: true },
+  phoneNumber: { type: String, trim: true },
+  mobileNumber: { type: String, trim: true },
+  pin: { type: String, trim: true },
+  fax: { type: String, trim: true },
+  webUrl: { type: String, trim: true },
+  contactPersonName: { type: String, trim: true },
+  contactPersonMobile: { type: String, trim: true },
+  contactPersonEmail: { type: String, trim: true },
+  criminalCasePending: { type: Boolean },
+  criminalCaseDetails: { type: String, default: null },
+  complaintsPending: { type: Boolean },
+  complaintsDetails: { type: String, default: null },
+  shippingActivitiesCarriedOut: { type: Boolean },
+  shippingActivitiesDetails: { type: String, default: null },
+  registrationDocuments: { type: mongoose.Schema.Types.Mixed, default: {} },
+  rpsLicense: { type: mongoose.Schema.Types.Mixed, default: {} },
+  profitLossBalanceSheet: { type: mongoose.Schema.Types.Mixed, default: {} },
+  bankGuarantee: { type: mongoose.Schema.Types.Mixed, default: {} },
+  assetsLiabilitiesCertificate: { type: mongoose.Schema.Types.Mixed, default: {} },
+  incomeTaxReturns: { type: mongoose.Schema.Types.Mixed, default: {} },
+  auditReport: { type: mongoose.Schema.Types.Mixed, default: {} },
 });
 
-const CompanyProfile = mongoose.model('CompanyProfile', companyProfileSchema);
+const CompanyProfile = mongoose.model("CompanyProfile", companyProfileSchema);
 
 export default CompanyProfile;
-
