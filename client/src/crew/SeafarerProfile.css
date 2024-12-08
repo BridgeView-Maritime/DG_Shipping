@@ -1,0 +1,331 @@
+/* Navbar styling */
+.navbar {
+  background-color: #0c57a1; /* Light background for the navbar */
+  padding: 10px; /* Add some padding */
+  display: flex;
+  justify-content: center; /* Center the navbar items */
+  position: sticky; /* Keep navbar at the top */
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .menu {
+  list-style: none; /* Remove bullets */
+  display: flex; /* Arrange items in a single row */
+  gap: 10px; /* Add space between items */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar .menu li {
+  display: inline; 
+  font-size: 12px; 
+  cursor: pointer; 
+  padding: 1px 2px; 
+  color: white;
+}
+
+.navbar .menu li:hover {
+  background-color: #a3d1ff; 
+  border-radius: 4px; 
+}
+
+.navbar .menu li:active {
+  background-color: #df0025; 
+}
+
+
+/* General Form Container */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #f4f4f4;
+  margin-top: 20px; /* Space from navbar */
+}
+
+/* Form */
+#seafarerForm {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1300px; /* Thinner but larger width */
+  margin-top: 20px;
+}
+
+h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+
+fieldset {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+legend {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Flex Layout for Columns */
+.form-columns {
+  display: flex;
+  gap: 40px; /* More space between columns */
+  margin-bottom: 20px;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flex Layout for Each Form Field */
+.form-field {
+  display: flex;
+  align-items: center; /* Align the label and input vertically in the center */
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  width: 17%; /* Adjust label width */
+  margin-right: 10px; /* Space between label and input */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 80%; /* Adjust width of input fields */
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.7rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+select {
+  font-size: 0.7rem;
+  padding: 5px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Responsive Form */
+@media (max-width: 768px) {
+  .form-columns {
+    flex-direction: column; /* Stack columns on small screens */
+  }
+
+  .form-column {
+    margin-bottom: 20px;
+  }
+
+  #seafarerForm {
+    padding: 15px;
+  }
+
+  .form-field {
+    flex-direction: column; /* Stack label and input vertically on small screens */
+    align-items: flex-start;
+  }
+
+  label {
+    width: 100%; /* Full width for label on small screens */
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    width: 100%; /* Full width for input fields on small screens */
+  }
+}
+
+.required {
+  color: red;
+  font-weight: bold;
+  margin-left: 1px;
+}
+.input-error {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Address form css starts */
+
+Address Form Styling
+.addressFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  background-color: #f4f4f4;
+  margin-top: 20px; /* Space from navbar */
+}
+
+/* Address Form */
+#addressForm {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 100px; 
+  margin-top: 20px;
+}
+
+h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Form Fieldset */
+.address-fieldset {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.address-legend {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+/* Flex Layout for Columns */
+.address-columns {
+  display: flex;
+  gap: 40px; /* More space between columns */
+  margin-bottom: 20px;
+}
+
+.address-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.address-column h3 {
+  align-self: center; /* Move the heading to the center horizontally */
+  margin: 0 auto; /* Center the text horizontally within its parent */
+}
+
+/* Flex Layout for Each Form Field */
+.address-field {
+  display: flex;
+  align-items: center; /* Align the label and input vertically in the center */
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  width: 17%; /* Adjust label width */
+  margin-right: 10px; /* Space between label and input */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 80%; /* Adjust width of input fields */
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.7rem;
+  color: #333;
+}
+
+
+
+
+
+/* Button Group Styling */
+.buttonGroup {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 10px; 
+  margin-top: -10px; 
+  padding: 5px;
+}
+
+.buttonGroup button {
+  background-color: #aaaaaa; 
+  color: rgb(0, 0, 0); 
+  padding: 6px 12px; 
+  border: none; 
+  border-radius: 5px;
+  cursor: pointer; 
+  font-size: 12px; 
+  width: 8%; 
+  transition: background-color 0.3s ease; 
+}
+
+.buttonGroup button:hover {
+  background-color: #0dc2cf; /* Darker green on hover */
+}
+
+.buttonGroup button:focus {
+  outline: none;
+  background-color: #45a049;
+}
+
+.buttonGroup button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+/* Optional - Button Group Responsiveness */
+@media (max-width: 768px) {
+  .buttonGroup {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    align-items: center;
+  }
+
+  .buttonGroup button {
+    width: 80%; /* Make buttons take up more space on smaller screens */
+    margin-bottom: 10px; /* Add space between stacked buttons */
+  }
+}

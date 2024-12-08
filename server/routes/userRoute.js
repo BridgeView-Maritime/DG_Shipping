@@ -1,3 +1,4 @@
+// server/routes/userRoute.js
 import express from "express";
 import {
   create,
@@ -6,6 +7,7 @@ import {
   getUserById,
   update,
 } from "../controller/userController.js";
+import { createCrewDetails } from "../controller/crewController.js"; // Importing from updated path
 
 import { login, signup } from "../controller/loginController.js";
 import { createCompanyProfile , getCompanyProfile} from "../controller/companyprofileController.js"
@@ -13,6 +15,7 @@ import { createCompanyProfile , getCompanyProfile} from "../controller/companypr
 
 const route = express.Router();
 
+// User routes
 route.post("/user", create);
 route.get("/users", getAllUsers);
 route.get("/user/:id", getUserById);
@@ -23,5 +26,8 @@ route.post("/signup", signup);
 route.post("/companyprofile", createCompanyProfile);
 route.get("/companyprofile", getCompanyProfile);
 route.post("/upload", createCompanyProfile);
+
+// Crew details route
+route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
 
 export default route;
