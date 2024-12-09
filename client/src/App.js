@@ -3,11 +3,14 @@ import Add from "./adduser/Add";
 import Update from "./updateuser/Update";
 import Login from "./Login/Login/Login";
 import Signup from "./Login/SignUp/SignUp";
+import CrewDetails from "./crew/SeafarerProfile.jsx";  
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
 import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
-import Crew from "./crew/Crew";
+import Crew from "./crew/SeafarerProfile.jsx";
 import VerselVendor from "./Versel Vendor/VerselVendor";
+import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
+import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
 
 function App() {
   const route = createBrowserRouter([
@@ -43,7 +46,19 @@ function App() {
     {
       path:"/verselvendor",
       element: <VerselVendor />
-    }
+    },
+    {
+      path: "/rpsdashboard",
+      element: <RpsDashboard />
+    },
+    {
+      path: "/companyprofiledisplay",
+      element: <CompanyProfileDisplay /> 
+    },
+    {
+      path: "/SeafarerProfile",  
+      element: <CrewDetails />,  
+    },
   ]);
 
   return (
