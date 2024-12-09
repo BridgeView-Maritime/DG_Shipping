@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios"; // Import axios
 import "./SeafarerProfile.css";
 
 const SeafarerProfile = () => {
   const [currentPage, setCurrentPage] = useState("seafarer-details");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const states = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
@@ -65,7 +67,7 @@ const SeafarerProfile = () => {
 
   const validateFields = () => {
     const newErrors = {};
-  
+
     // Validate personal details
     Object.keys(personalDetails).forEach((key) => {
       if (!personalDetails[key].trim()) {
@@ -73,8 +75,8 @@ const SeafarerProfile = () => {
       }
     });
 
-     // Email validation: Must contain "@gmail.com"
-     if (personalDetails.email && !personalDetails.email.endsWith("@gmail.com")) {
+    // Email validation: Must contain "@gmail.com"
+    if (personalDetails.email && !personalDetails.email.endsWith("@gmail.com")) {
       newErrors.email = "Please enter a valid email address with @gmail.com";
     }
 
@@ -82,14 +84,14 @@ const SeafarerProfile = () => {
     if (personalDetails.phoneNumber && !/^\d{10}$/.test(personalDetails.phoneNumber)) {
       newErrors.phoneNumber = "Please enter a valid phone number with 10 digits";
     }
-  
+
     // Validate address details (both present and permanent)
     Object.keys(addressDetails.present).forEach((key) => {
       if (!addressDetails.present[key].trim()) {
         newErrors[`present_${key}`] = "This field is required.";
       }
     });
-  
+
     Object.keys(addressDetails.permanent).forEach((key) => {
       if (!addressDetails.permanent[key].trim()) {
         newErrors[`permanent_${key}`] = "This field is required.";
@@ -102,16 +104,31 @@ const SeafarerProfile = () => {
         newErrors[key] = "This field is required.";
       }
     });
-  
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
 
-  const handleSaveAndNext = () => {
+  const handleSaveAndNext = async () => {
     if (validateFields()) {
-      alert("Form saved successfully!");
-      setCurrentPage("educational-details");
+      try {
+        const formData = {
+          personalDetails,
+          addressDetails,
+          physicalDetails
+        };
+
+        // Send POST request to the server
+        const response = await axios.post("http://localhost:8000/api/seafarerdetails", formData);
+        
+        // Handle response (for example, redirect to next page or display success message)
+        console.log(response.data); // You can handle success here
+        alert("Form saved successfully!");
+        setCurrentPage("educational-details");
+      } catch (error) {
+        console.error("There was an error saving the form:", error);
+        alert("There was an error saving the form.");
+      }
     }
   };
 
@@ -134,7 +151,7 @@ const SeafarerProfile = () => {
       nationality: "",
       discipline: "",
       email: "",
-      mobileNumber: "",
+      phoneNumber: "",
     });
     setAddressDetails({
       present: {
@@ -156,6 +173,13 @@ const SeafarerProfile = () => {
         country: ""
       }
     });
+    setPhysicalDetails({
+      height: "",
+      eyeColor: "",
+      identificationMark: "na",
+      hairColor: "",
+      complexion: ""
+    });
     setErrors({});
   };
 
@@ -171,22 +195,34 @@ const SeafarerProfile = () => {
   return (
     <div>
       {/* Navbar */}
+      <div>
+      {/* Navbar */}
       <div className="navbar">
-      <ul className="menu">
-          <li onClick={() => navigateTo("seafarer-details")}>Seafarer Details</li>
-          <li onClick={() => navigateTo("educational-details")}>Educational Details</li>
-          <li onClick={() => navigateTo("professional-training-details")}>Professional Training Details</li>
-          <li onClick={() => navigateTo("certificates")}>Certificates</li>
-          <li onClick={() => navigateTo("documents")}>Documents</li>
-          <li onClick={() => navigateTo("print-profile")}>Click to View and Print Your Profile</li>
-          <li onClick={() => navigateTo("master-checker")}>Master Checker</li>
-          <li onClick={() => navigateTo("seaservice-details")}>Seaservice Details</li>
-          <li onClick={() => navigateTo("clearing_seaservice-details")}>Clearing Details</li>
-          <li onClick={() => navigateTo("mail-box")}>Mail Box</li>
-          <li onClick={() => navigateTo("cop")}>CoP</li>
-          <li onClick={() => navigateTo("main-menu")}>Main Menu</li>
-        </ul>
+        <div className="navbar-container">
+          {/* <div className="logo">Seafarer Profile</div> */}
+          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            ☰
+          </button>
+          <ul className={`menu ${isMenuOpen ? "open" : ""}`}>
+            <li onClick={() => navigateTo("seafarer-details")}>Seafarer Details</li>
+            <li onClick={() => navigateTo("educational-details")}>Educational Details</li>
+            <li onClick={() => navigateTo("professional-training-details")}>Professional Training Details</li>
+            <li onClick={() => navigateTo("certificates")}>Certificates</li>
+            <li onClick={() => navigateTo("documents")}>Documents</li>
+            <li onClick={() => navigateTo("print-profile")}>
+              Click to View and Print Your Profile
+            </li>
+            <li onClick={() => navigateTo("master-checker")}>Master Checker</li>
+            <li onClick={() => navigateTo("seaservice-details")}>Seaservice Details</li>
+            <li onClick={() => navigateTo("clearing_seaservice-details")}>Clearing Details</li>
+            <li onClick={() => navigateTo("mail-box")}>Mail Box</li>
+            <li onClick={() => navigateTo("cop")}>CoP</li>
+            <li onClick={() => navigateTo("main-menu")}>Main Menu</li>
+          </ul>
+        </div>
       </div>
+      </div>
+
 
       {currentPage === "seafarer-details" && (
         <div className="formContainer">

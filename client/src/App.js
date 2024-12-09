@@ -2,7 +2,7 @@ import "./App.css";
 import Add from "./adduser/Add";
 import User from "./getuser/User";
 import Update from "./updateuser/Update";
-import CrewDetails from "./crew/SeafarerProfile.jsx";  
+import SeafarerProfile from "./crew/SeafarerProfile.jsx";  
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
     },
     {
       path: "/SeafarerProfile",  
-      element: <CrewDetails />,  
+      element: <SeafarerProfile />,  
     },
   ]);
 

@@ -7,18 +7,18 @@ import {
   getUserById,
   update,
 } from "../controller/userController.js";
-import { createCrewDetails } from "../controller/crewController.js"; // Importing from updated path
+import { createSeafarerDetails } from "../controller/seafererController.js"; // Updated import for Seafarer Controller
 
 const route = express.Router();
 
 // User routes
-route.post("/user", create);
-route.get("/users", getAllUsers);
-route.get("/user/:id", getUserById);
-route.put("/update/user/:id", update);
-route.delete("/delete/:id", deleteUser);
+route.post("/user", create); // Add a new user
+route.get("/users", getAllUsers); // Fetch all users
+route.get("/user/:id", getUserById); // Fetch a user by ID
+route.put("/update/user/:id", update); // Update a user by ID
+route.delete("/delete/:id", deleteUser); // Delete a user by ID
 
-// Crew details route
-route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
+// Seafarer details route
+route.post("/seafarerdetails", createSeafarerDetails); // Handle the POST request to submit seafarer details
 
 export default route;
