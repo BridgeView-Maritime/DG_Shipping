@@ -11,6 +11,7 @@ import Crew from "./crew/SeafarerProfile.jsx";
 import VerselVendor from "./Versel Vendor/VerselVendor";
 import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
 import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
+// import FileUpload from "./FileUpload.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -59,6 +60,7 @@ function App() {
       path: "/SeafarerProfile",  
       element: <CrewDetails />,  
     },
+
   ]);
 
   return (

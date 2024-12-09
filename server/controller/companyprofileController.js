@@ -1,21 +1,21 @@
 
 import fs from 'fs';
 import path from 'path';
-import formidable from 'formidable';
 import CompanyProfile from '../model/companyprofileModel.js';
 
-const createCompanyProfile = async (req, res) => {
-  try {
-    const companyProfileData = req.body;
-    console.log("req.body", req.body)
-    const companyProfile = new CompanyProfile(companyProfileData);
-    await companyProfile.save();
-    res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
-  } catch (error) {
-    console.error('Error creating company profile:', error);
-    res.status(500).json({ message: 'Failed to create company profile', error: error.message });
-  }
-};
+
+// const createCompanyProfile = async (req, res) => {
+//   try {
+//     const companyProfileData = req.body;
+//     console.log("req.body", req.body)
+//     const companyProfile = new CompanyProfile(companyProfileData);
+//     await companyProfile.save();
+//     res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
+//   } catch (error) {
+//     console.error('Error creating company profile:', error);
+//     res.status(500).json({ message: 'Failed to create company profile', error: error.message });
+//   }
+// };
 
 // const createCompanyProfile = async (req, res) => {
 //   try {
@@ -93,6 +93,21 @@ const createCompanyProfile = async (req, res) => {
 //   });
 // };
 
+export const createCompanyProfile = async (req, res) => {
+  try {
+    const companyProfileData = req.body;
+
+    // Create the company profile document with the provided form data
+    const companyProfile = new CompanyProfile(companyProfileData);
+    await companyProfile.save();
+
+    res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
+  } catch (error) {
+    console.error('Error creating company profile:', error);
+    res.status(500).json({ message: 'Failed to create company profile', error: error.message });
+  }
+};
+
 export const getCompanyProfile = async (req, res) => {
   try {
     const companyProfiles = await CompanyProfile.find(); // Assuming you are using mongoose
@@ -105,4 +120,4 @@ export const getCompanyProfile = async (req, res) => {
 };
 
 
-export { createCompanyProfile };  
+

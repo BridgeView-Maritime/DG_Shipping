@@ -244,48 +244,40 @@ const CompanyProfile = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleFileChange = (event) => {
-  //   const { name, files } = event.target;
-  //   // Update formData with the selected file
-  //   console.log("Field name:", name);
-  //   console.log("Selected file:", files[0]);
-
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: files[0], // store the first file selected
-  //   }));
+  const handleFileChange = (e, fieldName) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: e.target.files[0], // Update only the field that changed
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    navigate("/companyprofiledisplay")
-    // Validate the form before submission
+    
+    // Validate the form before submission (if you choose to re-enable validation)
     if (!validate()) {
       console.log("Form contains errors.");
       return;
     }
   
-    // Prepare FormData for file uploads
-    const formDataToSend = new FormData();
-  
-    // Append form data to FormData object
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
+    // Prepare the form data to send
+    const formDataToSend = { ...formData };
   
     try {
-      // Make the POST request with FormData
+      // Make the POST request with form data
       const response = await axios.post(
         "http://localhost:8000/api/companyprofile",
         formDataToSend, // Send the form data
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set the appropriate content type
+            "Content-Type": "application/json", // Content type for non-file data
           },
         }
       );
       setSuccessMessage(response.data.message);
-      
+  
+      // Navigate only after the response is successfully received
+      navigate("/companyprofiledisplay");
     } catch (error) {
       console.error("Error submitting company profile:", error);
       setErrors({
@@ -297,10 +289,62 @@ const CompanyProfile = () => {
   
     console.log("Form submitted successfully:", formData);
     setErrors({});
-
-   
   };
   
+  
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault(); // Prevent default form submission
+  
+  //   // Validate the form before submission
+  //   if (!validate()) {
+  //     console.log("Form contains errors.");
+  //     return;
+  //   }
+  //   const selectedFile = formData.registrationDocuments || formData.rpsLicense;
+  //   if (!selectedFile) {
+  //     return alert("Please select a file to upload");
+  //   }
+  
+  //   // Prepare FormData for file uploads and form data
+  //   const formDataToSend = new FormData();
+  
+  //   // Append form fields to FormData
+  //   for (let key in formData) {
+  //     formDataToSend.append(key, formData[key]);
+  //   }
+  
+  //   // Append the file to FormData (ensure the key 'file' matches the backend's expected key)
+  //   formDataToSend.append("file", selectedFile);
+  
+  //   try {
+  //     // Make the POST request with FormData
+  //     const response = await axios.post(
+  //       "http://localhost:8000/api/companyprofile", // Your API endpoint
+  //       formDataToSend, // Send the form data including the file
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data", // Set the appropriate content type
+  //         },
+  //       }
+  //     );
+  
+  //     // Handle the response
+  //     setSuccessMessage(response.data.message);
+  //     navigate("/companyprofiledisplay"); // Navigate after successful submission
+  
+  //   } catch (error) {
+  //     console.error("Error submitting company profile:", error);
+  //     setErrors({
+  //       submit: error.response
+  //         ? error.response.data.message
+  //         : "An error occurred",
+  //     });
+  //   }
+  
+  //   console.log("Form submitted successfully:", formData);
+  //   setErrors({}); // Reset any previous errors
+  // };
   
   return (
     <>
@@ -839,21 +883,6 @@ const CompanyProfile = () => {
             <h3>Other Details</h3>
 
             <div className="form-row-otherdetails">
-              {/* <div className="form-group-otherdetails">
-              <label>
-                Is there any criminal or civil case pending in court?
-              </label>
-              <select
-                name="criminalCasePending"
-                value={formData.criminalCasePending}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div> */}
-
               <div className="form-group-otherdetails">
                 <label>
                   Is there any criminal or civil case pending in court?
@@ -886,21 +915,6 @@ const CompanyProfile = () => {
             </div>
 
             <div className="form-row-otherdetails">
-              {/* <div className="form-group-otherdetails">
-              <label>
-                Are there any complaints pending regarding the seafarers
-                recruited?
-              </label>
-              <select
-                name="complaintsPending"
-                value={formData.complaintsPending}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div> */}
               <div className="form-group-otherdetails">
                 <label>
                   Are there any complaints pending regarding the seafarers
@@ -933,18 +947,6 @@ const CompanyProfile = () => {
             </div>
 
             <div className="form-row-otherdetails">
-              {/* <div className="form-group-otherdetails">
-              <label>Any shipping-related activities carried out?</label>
-              <select
-                name="shippingActivitiesCarriedOut"
-                value={formData.shippingActivitiesCarriedOut}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div> */}
               <div className="form-group-otherdetails">
                 <label>Any shipping-related activities carried out?</label>
                 <select
@@ -1018,8 +1020,8 @@ const CompanyProfile = () => {
                   id="registrationDocuments"
                   type="file"
                   name="registrationDocuments"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={handleFileChange}
+                  accept="application/pdf" 
+                  onChange={(e) => handleFileChange(e, "registrationDocuments")}
                 />
                 <button
                   type="button"
@@ -1041,8 +1043,8 @@ const CompanyProfile = () => {
                   id="rpsLicense"
                   type="file"
                   name="rpsLicense"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={handleFileChange}
+                  accept="application/pdf" 
+                  onChange={(e) => handleFileChange(e, "rpsLicense")}
                 />
                 <button
                   type="button"
@@ -1066,7 +1068,7 @@ const CompanyProfile = () => {
                   id="profitLossBalanceSheet"
                   type="file"
                   name="profitLossBalanceSheet"
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1091,7 +1093,7 @@ const CompanyProfile = () => {
                   id="assetsLiabilitiesCertificate"
                   type="file"
                   name="assetsLiabilitiesCertificate"
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1118,7 +1120,7 @@ const CompanyProfile = () => {
                   id="incomeTaxReturns"
                   type="file"
                   name="incomeTaxReturns"
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1141,7 +1143,7 @@ const CompanyProfile = () => {
                   id="auditReport"
                   type="file"
                   name="auditReport"
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1166,7 +1168,7 @@ const CompanyProfile = () => {
                   id="bankGuarantee"
                   type="file"
                   name="bankGuarantee"
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
