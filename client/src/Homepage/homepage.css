@@ -1,0 +1,21 @@
+/* src/pages/homepage.css */
+.mainConatainer {
+    background-image: url('../../public/assets/shipimage.jpg'); /* Adjust path as needed */
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 80px; /* Adjust to make sure the text is below the navbar */
+    box-sizing: border-box;
+  }
+  
+  .mainConatainer h1 {
+    font-size: 48px;
+    color: white;
+    font-weight: bold;
+    margin-top: 2rem;
+    color: rgb(90, 95, 186);
+  }
+  

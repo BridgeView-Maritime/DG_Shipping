@@ -11,7 +11,7 @@ const RpsDashboard = () => {
               <Link to="/companyprofile">Company Profile</Link>
             </li>
             <li>
-              <Link to="/manning-agreement">Manning Agreement</Link>
+              <Link to="/manningAggrement">Manning Agreement</Link>
             </li>
             <li>
               <Link to="/ship">Ship</Link>

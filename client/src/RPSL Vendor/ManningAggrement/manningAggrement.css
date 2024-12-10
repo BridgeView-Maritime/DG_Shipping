@@ -1,0 +1,117 @@
+/* General Styles */
+.agreement-form-body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .agreement-form {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Form Rows */
+  .agreement-form-body .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .agreement-form-body .form-row .form-group {
+    display: flex;
+    justify-content: flex-start; /* Align input fields to the left */
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+  }
+  
+  .agreement-form-body .agreement-form .form-row .form-group > label {
+    text-align: right !important;
+    width: 180px;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #555555;
+  }
+  
+  .agreement-form-body .agreement-form .form-group > label {
+    text-align: right !important;
+    width: 180px;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #555555;
+  }
+  
+
+  .agreement-form-body .form-row .form-group input,
+  .agreement-form-body .form-row .form-group select {
+    width: calc(100% - 200px); /* Adjust width to account for label width */
+    padding: 0.75rem;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333333;
+    box-sizing: border-box;
+  }
+  
+  /* Button Styles */
+  .agreement-form-body .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .agreement-form-body .button-row button {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .agreement-form-body .button-row button[type="button"] {
+    background-color: #6c757d;
+    color: #ffffff;
+  }
+  
+  .agreement-form-body .button-row button[type="reset"] {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+  
+  .agreement-form-body .button-row button[type="submit"] {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  
+  .agreement-form-body .button-row button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .agreement-form-body .form-row {
+      flex-direction: column;
+    }
+  
+    .agreement-form-body .form-row .form-group {
+      width: 100%;
+    }
+  
+    .agreement-form-body .button-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+  

@@ -1,4 +1,4 @@
-// server/routes/userRoute.js
+
 import express from "express";
 import {
   create,
@@ -11,6 +11,7 @@ import { createCrewDetails } from "../controller/crewController.js"; // Importin
 
 import { login, signup } from "../controller/loginController.js";
 import { createCompanyProfile , getCompanyProfile} from "../controller/companyprofileController.js";
+import { createManningAgreement } from "../controller/manningAgreementController.js";
 
 
 const route = express.Router();
@@ -23,15 +24,11 @@ route.put("/update/user/:id", update);
 route.delete("/delete/:id", deleteUser);
 route.post("/login", login);
 route.post("/signup", signup);
-route.post("/companyprofile", createCompanyProfile);
-// route.post("/companyprofile", upload.single("file"), createCompanyProfile); 
+route.post("/companyprofile", createCompanyProfile); 
 route.get("/companyprofile", getCompanyProfile);
-// route.post("/upload", createCompanyProfile);
-
-// File upload route
-// route.post("/upload", upload.single("file"), uploadFile);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
+route.post("/manning-agreement", createManningAgreement);
 
 export default route;

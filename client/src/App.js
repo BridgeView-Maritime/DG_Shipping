@@ -11,17 +11,23 @@ import Crew from "./crew/SeafarerProfile.jsx";
 import VerselVendor from "./Versel Vendor/VerselVendor";
 import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
 import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
-// import FileUpload from "./FileUpload.jsx";
+import ManningAggrement from "./RPSL Vendor/ManningAggrement/ManningAggrement.jsx";
+import HomePage from "./Homepage/HomePage.jsx";
+
 
 function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <Login />, // Default route to Login page
+      element: <HomePage />
+    },
+    {
+      path: "/login",
+      element: <Login />, 
     },
     {
       path: "/signup",
-      element: <Signup />, // Route for Signup page
+      element: <Signup />,
     },
     {
       path: "/add",
@@ -34,7 +40,7 @@ function App() {
 
     {
       path: "/dashboard",
-      element: <DashBoard />, // Default route to Login page
+      element: <DashBoard />, 
     },
     {
       path: "/companyprofile",
@@ -60,6 +66,11 @@ function App() {
       path: "/SeafarerProfile",  
       element: <CrewDetails />,  
     },
+    {
+       path : "/manningAggrement",
+       element: <ManningAggrement />
+    },
+    
 
   ]);
 

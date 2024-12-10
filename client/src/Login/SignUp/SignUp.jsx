@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios"; // Make sure axios is imported
 import "./signup.css";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
 
 function Signup() {
   // State for user input
@@ -53,6 +54,7 @@ function Signup() {
 
   return (
     <div className="signupContainer">
+      <Navbar />
       <div className="signupFormContainer">
         <h1>Sign Up</h1>
         <form className="form" onSubmit={handleSubmit}>
@@ -125,7 +127,7 @@ function Signup() {
             Sign Up
           </button>
           <p>
-            If you already have an account, <Link to="/">Login</Link>.
+            If you already have an account, <Link to="/login">Login</Link>.
           </p>
         </form>
       </div>
