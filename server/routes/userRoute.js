@@ -11,7 +11,7 @@ import { createCrewDetails } from "../controller/crewController.js"; // Importin
 
 import { login, signup } from "../controller/loginController.js";
 import { createCompanyProfile , getCompanyProfile} from "../controller/companyprofileController.js";
-import { createManningAgreement } from "../controller/manningAgreementController.js";
+import { createManningAgreement, getAgreement } from "../controller/manningAgreementController.js";
 
 
 const route = express.Router();
@@ -29,6 +29,7 @@ route.get("/companyprofile", getCompanyProfile);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
-route.post("/manning-agreement", createManningAgreement);
+route.post("/manningAgreement", createManningAgreement);
+route.get("/manningAgreement", getAgreement);
 
 export default route;

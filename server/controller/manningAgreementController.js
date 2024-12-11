@@ -38,3 +38,25 @@ export const createManningAgreement = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", error });
   }
 };
+
+export const getAgreement = async (req, res) => {
+  try {
+    // Fetch agreements from the database
+    const agreements = await ManningAgreement.find();
+
+    // Send a successful response
+    return res.status(200).json({
+      success: true,
+      data: agreements,
+    });
+  } catch (error) {
+    // Handle any errors
+    console.error('Error fetching agreements:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to fetch agreements.',
+    });
+  }
+};
+
+

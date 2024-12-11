@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./manningAggrement.css";
+import axios from "axios";
 
 const ManningAgrrement = () => {
   const [formData, setFormData] = useState({
@@ -15,20 +16,37 @@ const ManningAgrrement = () => {
   });
 
   const [errors, setErrors] = useState({});
-
   const [agreements, setAgreements] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/api/manningAgreement")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("Fetched agreements:", data);
+  //       setAgreements(data.data);
+  //       console.log("data", data);
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Failed to fetch agreements:", err);
+  //     });
+  // }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/manningAgreement")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Fetched agreements:", data);
-        setAgreements(data);
-        console.log("data", data);
-      })
-      .catch((err) => {
-        toast.error("Failed to fetch agreements:", err);
-      });
+    const fetchAgreements = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/manningAgreement");
+        // Assuming the API returns { success: true, data: [...] }
+        setAgreements(response.data.data || []); 
+        console.log("response", response.data.data)
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch agreements:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchAgreements();
   }, []);
 
   const handleInputChange = (e) => {
@@ -86,7 +104,7 @@ const ManningAgrrement = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log("Fetched agreements after adding:", data);
-            setAgreements(data);
+            setAgreements(data.data);
           })
           .catch((err) => {
             console.error("Failed to fetch agreements:", err);
@@ -280,6 +298,7 @@ const ManningAgrrement = () => {
             </tr>
           </thead>
           <tbody>
+            {console.log("before",agreements)}
             {agreements.map((agreement, index) => (
               <tr key={agreement._id || index}>
                 <td>{agreement._id}</td>
