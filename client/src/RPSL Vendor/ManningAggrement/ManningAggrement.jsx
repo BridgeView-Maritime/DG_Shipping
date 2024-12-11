@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./manningAggrement.css";
 
 const ManningAgrrement = () => {
@@ -10,27 +12,30 @@ const ManningAgrrement = () => {
     validityType: "Permanent", // Default value
     validityDate: "",
     agreementType: "",
-    agreementFormVII: null,
-    supportingAgreement: null,
-    chainOfAgreement: null,
   });
 
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
+
+  const [agreements, setAgreements] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/manningAgreement")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched agreements:", data);
+        setAgreements(data);
+        console.log("data", data);
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch agreements:", err);
+      });
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e, fieldName) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      [fieldName]: file,
     }));
   };
 
@@ -44,51 +49,92 @@ const ManningAgrrement = () => {
       newErrors.validityDate = "Validity date is required.";
     if (!formData.agreementType)
       newErrors.agreementType = "Agreement Type is required.";
-    if (!formData.agreementFormVII)
-      newErrors.agreementFormVII = "Form VII upload is required.";
-    if (!formData.supportingAgreement)
-      newErrors.supportingAgreement = "Supporting Agreement upload is required.";
-    if (!formData.chainOfAgreement)
-      newErrors.chainOfAgreement = "Chain of Agreement upload is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleAddToList = async () => {
     if (!validate()) {
       console.log("Form validation failed.");
       return;
     }
-  
-    const formDataToSend = new FormData();
-  
-    // Append all form data (non-file fields)
-    for (const key in formData) {
-      if (formData[key] !== null) {
-        formDataToSend.append(key, formData[key]);
-      }
-    }
-  
-    // Append files
-    formDataToSend.append("agreementFormVII", formData.agreementFormVII);
-    formDataToSend.append("supportingAgreement", formData.supportingAgreement);
-    formDataToSend.append("chainOfAgreement", formData.chainOfAgreement);
-  
+
+    const dataToSend = {
+      ...formData,
+    };
+
     try {
-      const response = await fetch("http://localhost:5000/api/manningAgrrements", {
-        method: "POST",
-        body: formDataToSend,
-      });
-  
+      const response = await fetch(
+        "http://localhost:8000/api/manningAgreement",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
+
+      const result = await response.json();
+      console.log("Result from POST:", result);
+
+      if (response.ok) {
+        toast.success("Data added to list successfully!");
+
+        // Re-fetch the agreements list to get the updated list
+        fetch("http://localhost:8000/api/manningAgreement")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("Fetched agreements after adding:", data);
+            setAgreements(data);
+          })
+          .catch((err) => {
+            console.error("Failed to fetch agreements:", err);
+          });
+
+        // Reset form fields after successfully adding the data
+        handleReset();
+      } else {
+        toast.error(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Error during adding data to list:", error);
+      toast.error("Error during data submission");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validate()) {
+      console.log("Form validation failed.");
+      return;
+    }
+
+    const dataToSend = {
+      ...formData,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/manningAgreement",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
+
       const result = await response.json();
       if (response.ok) {
-        setSuccessMessage(result.message); // Show success message
+        toast.success(result.message || "Data saved successfully!");
       } else {
         console.error("Error:", result.message);
       }
     } catch (error) {
-      console.error("Error during form submission:", error);
+      console.error("Error during data submission:", error);
     }
   };
 
@@ -101,173 +147,161 @@ const ManningAgrrement = () => {
       validityType: "Permanent",
       validityDate: "",
       agreementType: "",
-      agreementFormVII: null,
-      supportingAgreement: null,
-      chainOfAgreement: null,
     });
     setErrors({});
-    setSuccessMessage("");
+    // toast.success("");
   };
 
   return (
-    <div class="agreement-form-body">
-    <div className="agreement-form">
-      <h2>Agreement or Contract Details</h2>
+    <>
+      <div className="agreement-form-body">
+        <div className="agreement-form">
+          <h2>Manning Agreement with the employer</h2>
 
-      {successMessage && (
-        <div className="success-message">{successMessage}</div>
-      )}
-      {errors.submit && <div className="error">{errors.submit}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="employerName">
+                  Name of the Employer/Owner/Manager *
+                </label>
+                <input
+                  id="employerName"
+                  type="text"
+                  name="employerName"
+                  value={formData.employerName || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email *</label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={formData.email || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="employerName">
-              Name of the Employer/Owner/Manager *
-            </label>
-            <input
-              id="employerName"
-              type="text"
-              name="employerName"
-              value={formData.employerName || ""}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email *</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              value={formData.email || ""}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="address">Address *</label>
+                <input
+                  id="address"
+                  type="text"
+                  name="address"
+                  value={formData.address || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="contact">Contact *</label>
+                <input
+                  id="contact"
+                  type="text"
+                  name="contact"
+                  value={formData.contact || ""}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="validityType">Validity Type *</label>
+              <select
+                id="validityType"
+                name="validityType"
+                value={formData.validityType || ""}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select</option>
+                <option value="type1">Type 1</option>
+                <option value="type2">Type 2</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="validityDate">Validity Date *</label>
+              <input
+                id="validityDate"
+                type="date"
+                name="validityDate"
+                value={formData.validityDate || ""}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="agreementType">Agreement Type *</label>
+              <input
+                id="agreementType"
+                type="text"
+                name="agreementType"
+                value={formData.agreementType || ""}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="button-row">
+              <button type="button">Back</button>
+              <button type="button" onClick={handleAddToList}>
+                Add to List
+              </button>
+              <button type="reset" onClick={handleReset}>
+                Reset
+              </button>
+              <button type="submit">Next</button>
+            </div>
+          </form>
         </div>
+      </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="address">Address *</label>
-            <input
-              id="address"
-              type="text"
-              name="address"
-              value={formData.address || ""}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="contact">Contact *</label>
-            <input
-              id="contact"
-              type="text"
-              name="contact"
-              value={formData.contact || ""}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-        </div>
+      <div className="agreement-table">
+        <h3>Agreements List</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Employer Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Contact</th>
+              <th>Validity Type</th>
+              <th>Validity Date</th>
+              <th>Agreement Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {agreements.map((agreement, index) => (
+              <tr key={agreement._id || index}>
+                <td>{agreement._id}</td>
+                <td>{agreement.employerName}</td>
+                <td>{agreement.email}</td>
+                <td>{agreement.address}</td>
+                <td>{agreement.contact}</td>
+                <td>{agreement.validityType}</td>
+                <td>{new Date(agreement.validityDate).toLocaleDateString()}</td>
+                <td>{agreement.agreementType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="validityType">Validity Type *</label>
-          <select
-            id="validityType"
-            name="validityType"
-            value={formData.validityType || ""}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select</option>
-            <option value="type1">Type 1</option>
-            <option value="type2">Type 2</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="validityDate">Validity Date *</label>
-          <input
-            id="validityDate"
-            type="date"
-            name="validityDate"
-            value={formData.validityDate || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="agreementType">Agreement Type *</label>
-          <input
-            id="agreementType"
-            type="text"
-            name="agreementType"
-            value={formData.agreementType || ""}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="agreementFormVII">Agreement (Form VII) Upload *</label>
-          <input
-            id="agreementFormVII"
-            type="file"
-            name="agreementFormVII"
-            accept="application/pdf"
-            onChange={(e) => handleFileChange(e, "agreementFormVII")}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="supportingAgreement">Supported by the Manning Agreement *</label>
-          <input
-            id="supportingAgreement"
-            type="file"
-            name="supportingAgreement"
-            accept="application/pdf"
-            onChange={(e) => handleFileChange(e, "supportingAgreement")}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="chainOfAgreement">IT with the Manager Chain of Agreement *</label>
-          <input
-            id="chainOfAgreement"
-            type="file"
-            name="chainOfAgreement"
-            accept="application/pdf"
-            onChange={(e) => handleFileChange(e, "chainOfAgreement")}
-            required
-          />
-        </div>
-
-        <div className="button-row">
-          <button
-            type="button"
-            // onClick={handleBack}
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            // onClick={handleAddToList}
-          >
-            Add to List
-          </button>
-          <button type="reset" onClick={handleReset}>
-            Reset
-          </button>
-          <button type="submit">Next</button>
-        </div>
-      </form>
-    </div>
-    </div>
+      {/* ToastContainer is required to render toasts */}
+      <ToastContainer 
+      position="top-right" 
+      autoClose={5000} 
+      toastStyle={{ transition: "bounce" }} />
+    </>
   );
 };
 
