@@ -23,4 +23,4 @@ const RpsDashboard = () => {
   )
 }
 
-export default RpsDashboard
+export default RpsDashboard;

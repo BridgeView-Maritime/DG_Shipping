@@ -13,6 +13,7 @@ import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
 import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
 import ManningAggrement from "./RPSL Vendor/ManningAggrement/ManningAggrement.jsx";
 import HomePage from "./Homepage/HomePage.jsx";
+import Ship from "./RPSL Vendor/Ship/Ship.jsx";
 
 
 function App() {
@@ -70,6 +71,10 @@ function App() {
        path : "/manningAggrement",
        element: <ManningAggrement />
     },
+    {
+      path : "/ship",
+      element: <Ship />
+    }
     
 
   ]);

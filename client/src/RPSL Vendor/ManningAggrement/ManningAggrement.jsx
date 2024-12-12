@@ -3,6 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./manningAggrement.css";
 import axios from "axios";
+import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx"
 
 const ManningAgrrement = () => {
   const [formData, setFormData] = useState({
@@ -172,6 +173,7 @@ const ManningAgrrement = () => {
 
   return (
     <>
+    <RpsDashboard />
       <div className="agreement-form-body">
         <div className="agreement-form">
           <h2>Manning Agreement with the employer</h2>
