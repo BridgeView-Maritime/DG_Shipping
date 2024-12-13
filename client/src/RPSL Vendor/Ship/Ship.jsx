@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ship.css";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Ship = () => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,8 @@ const Ship = () => {
     dmlcPart1: "",
     dmlcPart2: "",
   });
+
+  const navigate= useNavigate();
 
   const handleInputChange = (e)=>{
         const {name, value}= e.target;
@@ -69,6 +72,7 @@ const Ship = () => {
                 },
             });
             console.log("response", response.data);
+            navigate("/ShipDetailsDisplay")
         }catch(error){
             console.error("Error uploading form data:", error);
         }

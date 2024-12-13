@@ -1,4 +1,5 @@
-import shipDetails from "../model/shipDetailsModel.js";
+
+import ShipDetails from "../model/shipDetailsModel.js";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -18,7 +19,7 @@ const upload = multer({ storage: storage });
 //   res.status(200).json({ message: "Ship details received successfully!" });
 // };
 
-import ShipDetails from "../model/shipDetailsModel.js";
+
 
 export const createshipDetails = async (req, res) => {
   try {
@@ -115,6 +116,17 @@ export const createshipDetails = async (req, res) => {
   }
 };
 
+// Endpoint to fetch all ship details from the database
+export const getshipDetails = async (req, res) => {
+    try {
+      const shipDetails = await ShipDetails.find(); // Fetch all ship details
+      res.status(200).json(shipDetails); // Send the ship details as a JSON response
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error fetching ship details" });
+    }
+  };
+  
 
 export const uploadMiddleware = upload.fields([
   { name: "seaAggrement", maxCount: 1 },

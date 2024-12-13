@@ -14,6 +14,7 @@ import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyPr
 import ManningAggrement from "./RPSL Vendor/ManningAggrement/ManningAggrement.jsx";
 import HomePage from "./Homepage/HomePage.jsx";
 import Ship from "./RPSL Vendor/Ship/Ship.jsx";
+import ShipDetailsDisplay from "./RPSL Vendor/ShipDetailsDisplay/ShipDetailsDisplay.jsx";
 
 
 function App() {
@@ -74,6 +75,9 @@ function App() {
     {
       path : "/ship",
       element: <Ship />
+    },{
+      path : "/ShipDetailsDisplay",
+      element : <ShipDetailsDisplay />
     }
     
 
