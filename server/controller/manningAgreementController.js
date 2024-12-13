@@ -1,4 +1,16 @@
 import ManningAgreement from "../model/mannningAgreement.js";
+import multer from "multer";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "ManningAggrementDocuments/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 export const createManningAgreement = async (req, res) => {
   try {
@@ -11,9 +23,8 @@ export const createManningAgreement = async (req, res) => {
       validityType,
       validityDate,
       agreementType,
-      agreementFormVII,
-      supportingAgreement,
-      chainOfAgreement,
+      aggrementformvii,
+      manningAgree,
     } = req.body;
 
     // Create a new agreement document
@@ -25,19 +36,36 @@ export const createManningAgreement = async (req, res) => {
       validityType,
       validityDate,
       agreementType,
-      agreementFormVII,
-      supportingAgreement,
-      chainOfAgreement,
+      aggrementformvii: req.files?.aggrementformvii
+        ? {
+            originalName: req.files.aggrementformvii[0].originalname,
+            filePath: req.files.aggrementformvii[0].path,
+          }
+        : null,
+      manningAgree: req.files?.manningAgree
+        ? {
+            originalName: req.files.manningAgree[0].originalname,
+            filePath: req.files.manningAgree[0].path,
+          }
+        : null,
     });
 
     // Save to the database
     const savedAgreement = await newAgreement.save();
-    res.status(201).json({ message: "Manning Agreement created successfully", data: savedAgreement });
+    res.status(201).json({
+      message: "Manning Agreement created successfully",
+      data: savedAgreement,
+    });
   } catch (error) {
     console.error("Error creating Manning Agreement:", error);
     res.status(500).json({ message: "Internal Server Error", error });
   }
 };
+
+export const manninguploadMiddleware = upload.fields([
+  { name: "aggrementformvii", maxCount: 1 },
+  { name: "manningAgree", maxCount: 1 },
+]);
 
 export const getAgreement = async (req, res) => {
   try {
@@ -51,12 +79,10 @@ export const getAgreement = async (req, res) => {
     });
   } catch (error) {
     // Handle any errors
-    console.error('Error fetching agreements:', error);
+    console.error("Error fetching agreements:", error);
     return res.status(500).json({
       success: false,
-      message: 'Failed to fetch agreements.',
+      message: "Failed to fetch agreements.",
     });
   }
 };
-
-

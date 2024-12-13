@@ -11,7 +11,7 @@ import { createCrewDetails } from "../controller/crewController.js"; // Importin
 
 import { login, signup } from "../controller/loginController.js";
 import { createCompanyProfile , getCompanyProfile} from "../controller/companyprofileController.js";
-import { createManningAgreement, getAgreement } from "../controller/manningAgreementController.js";
+import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 
 const route = express.Router();
@@ -29,7 +29,9 @@ route.get("/companyprofile", getCompanyProfile);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
-route.post("/manningAgreement", createManningAgreement);
+
+//manningAgrement Route
+route.post("/manningAgreement", manninguploadMiddleware, createManningAgreement);
 route.get("/manningAgreement", getAgreement);
 
 //ship route
