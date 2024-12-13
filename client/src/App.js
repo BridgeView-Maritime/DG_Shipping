@@ -3,7 +3,7 @@ import Add from "./adduser/Add";
 import Update from "./updateuser/Update";
 import Login from "./Login/Login/Login";
 import Signup from "./Login/SignUp/SignUp";
-import CrewDetails from "./crew/SeafarerProfile.jsx";  
+import CrewDetails from "./crew/SeafarerProfile.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
 import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
@@ -15,17 +15,17 @@ import ManningAggrement from "./RPSL Vendor/ManningAggrement/ManningAggrement.js
 import HomePage from "./Homepage/HomePage.jsx";
 import Ship from "./RPSL Vendor/Ship/Ship.jsx";
 import ShipDetailsDisplay from "./RPSL Vendor/ShipDetailsDisplay/ShipDetailsDisplay.jsx";
-
+import ManningAggrementDisplay from "./RPSL Vendor/ManningAggrementDisplay/ManningAggrementDisplay.jsx";
 
 function App() {
   const route = createBrowserRouter([
     {
       path: "/",
-      element: <HomePage />
+      element: <HomePage />,
     },
     {
       path: "/login",
-      element: <Login />, 
+      element: <Login />,
     },
     {
       path: "/signup",
@@ -42,45 +42,48 @@ function App() {
 
     {
       path: "/dashboard",
-      element: <DashBoard />, 
+      element: <DashBoard />,
     },
     {
       path: "/companyprofile",
-      element: <CompanyProfile />
+      element: <CompanyProfile />,
     },
     {
-      path:"/crew",
-      element:<Crew />
+      path: "/crew",
+      element: <Crew />,
     },
     {
-      path:"/verselvendor",
-      element: <VerselVendor />
+      path: "/verselvendor",
+      element: <VerselVendor />,
     },
     {
       path: "/rpsdashboard",
-      element: <RpsDashboard />
+      element: <RpsDashboard />,
     },
     {
       path: "/companyprofiledisplay",
-      element: <CompanyProfileDisplay /> 
+      element: <CompanyProfileDisplay />,
     },
     {
-      path: "/SeafarerProfile",  
-      element: <CrewDetails />,  
+      path: "/SeafarerProfile",
+      element: <CrewDetails />,
     },
     {
-       path : "/manningAggrement",
-       element: <ManningAggrement />
+      path: "/manningAggrement",
+      element: <ManningAggrement />,
     },
     {
-      path : "/ship",
-      element: <Ship />
-    },{
-      path : "/ShipDetailsDisplay",
-      element : <ShipDetailsDisplay />
+      path: "/ship",
+      element: <Ship />,
+    },
+    {
+      path: "/ShipDetailsDisplay",
+      element: <ShipDetailsDisplay />,
+    },
+    {
+      path: "/ManningAggrementDisplay",
+      element: <ManningAggrementDisplay />
     }
-    
-
   ]);
 
   return (

@@ -3,7 +3,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./manningAggrement.css";
 import axios from "axios";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx"
+import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx";
+import { useNavigate } from "react-router-dom";
+
 
 const ManningAgrrement = () => {
   const [formData, setFormData] = useState({
@@ -14,41 +16,16 @@ const ManningAgrrement = () => {
     validityType: "Permanent", // Default value
     validityDate: "",
     agreementType: "",
+    aggrementformvii: "",
+    manningAgree: "",
   });
+
+  const navigate =useNavigate();
 
   const [errors, setErrors] = useState({});
   const [agreements, setAgreements] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/api/manningAgreement")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("Fetched agreements:", data);
-  //       setAgreements(data.data);
-  //       console.log("data", data);
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Failed to fetch agreements:", err);
-  //     });
-  // }, []);
-
-  useEffect(() => {
-    const fetchAgreements = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/manningAgreement");
-        // Assuming the API returns { success: true, data: [...] }
-        setAgreements(response.data.data || []); 
-        console.log("response", response.data.data)
-        setLoading(false);
-      } catch (error) {
-        console.error("Failed to fetch agreements:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchAgreements();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,66 +35,68 @@ const ManningAgrrement = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0],
+    }));
+  };
+
   const validate = () => {
     const newErrors = {};
     if (!formData.employerName) newErrors.employerName = "Name is required.";
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.address) newErrors.address = "Address is required.";
     if (!formData.contact) newErrors.contact = "Contact is required.";
-    if (!formData.validityDate)
-      newErrors.validityDate = "Validity date is required.";
-    if (!formData.agreementType)
-      newErrors.agreementType = "Agreement Type is required.";
+    if (!formData.validityDate) newErrors.validityDate = "Validity date is required.";
+    if (!formData.agreementType) newErrors.agreementType = "Agreement Type is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleAddToList = async () => {
     if (!validate()) {
-      console.log("Form validation failed.");
       return;
     }
 
-    const dataToSend = {
-      ...formData,
-    };
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (formData[key]) {
+        if (formData[key] instanceof File) {
+          formDataToSend.append(key, formData[key]);
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      }
+    }
 
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/manningAgreement",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("http://localhost:8000/api/manningAgreement", {
+        method: "POST",
+        body: formDataToSend,
+      });
 
       const result = await response.json();
-      console.log("Result from POST:", result);
 
       if (response.ok) {
         toast.success("Data added to list successfully!");
 
-        // Re-fetch the agreements list to get the updated list
         fetch("http://localhost:8000/api/manningAgreement")
           .then((res) => res.json())
           .then((data) => {
-            console.log("Fetched agreements after adding:", data);
             setAgreements(data.data);
+            navigate("/ManningAggrementDisplay");
           })
           .catch((err) => {
             console.error("Failed to fetch agreements:", err);
           });
 
-        // Reset form fields after successfully adding the data
         handleReset();
       } else {
         toast.error(`Error: ${result.message}`);
       }
     } catch (error) {
-      console.error("Error during adding data to list:", error);
       toast.error("Error during data submission");
     }
   };
@@ -126,34 +105,34 @@ const ManningAgrrement = () => {
     e.preventDefault();
 
     if (!validate()) {
-      console.log("Form validation failed.");
       return;
     }
 
-    const dataToSend = {
-      ...formData,
-    };
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (formData[key]) {
+        if (formData[key] instanceof File) {
+          formDataToSend.append(key, formData[key]);
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      }
+    }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/manningAgreement",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/manningAgreement", {
+        method: "POST",
+        body: formDataToSend,
+      });
 
       const result = await response.json();
       if (response.ok) {
         toast.success(result.message || "Data saved successfully!");
       } else {
-        console.error("Error:", result.message);
+        toast.error(result.message);
       }
     } catch (error) {
-      console.error("Error during data submission:", error);
+      toast.error("Error during data submission");
     }
   };
 
@@ -166,14 +145,15 @@ const ManningAgrrement = () => {
       validityType: "Permanent",
       validityDate: "",
       agreementType: "",
+      aggrementformvii: "",
+      manningAgree: "",
     });
     setErrors({});
-    // toast.success("");
   };
 
   return (
     <>
-    <RpsDashboard />
+      <RpsDashboard />
       <div className="agreement-form-body">
         <div className="agreement-form">
           <h2>Manning Agreement with the employer</h2>
@@ -192,6 +172,7 @@ const ManningAgrrement = () => {
                   onChange={handleInputChange}
                   required
                 />
+                {errors.employerName && <p className="error">{errors.employerName}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email *</label>
@@ -203,6 +184,7 @@ const ManningAgrrement = () => {
                   onChange={handleInputChange}
                   required
                 />
+                {errors.email && <p className="error">{errors.email}</p>}
               </div>
             </div>
 
@@ -217,6 +199,7 @@ const ManningAgrrement = () => {
                   onChange={handleInputChange}
                   required
                 />
+                {errors.address && <p className="error">{errors.address}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="contact">Contact *</label>
@@ -228,6 +211,7 @@ const ManningAgrrement = () => {
                   onChange={handleInputChange}
                   required
                 />
+                {errors.contact && <p className="error">{errors.contact}</p>}
               </div>
             </div>
 
@@ -241,8 +225,8 @@ const ManningAgrrement = () => {
                 required
               >
                 <option value="">Select</option>
-                <option value="type1">Type 1</option>
-                <option value="type2">Type 2</option>
+                <option value="Permanent">Permanent</option>
+                <option value="Temporary">Temporary</option>
               </select>
             </div>
 
@@ -256,6 +240,7 @@ const ManningAgrrement = () => {
                 onChange={handleInputChange}
                 required
               />
+              {errors.validityDate && <p className="error">{errors.validityDate}</p>}
             </div>
 
             <div className="form-group">
@@ -267,6 +252,29 @@ const ManningAgrrement = () => {
                 value={formData.agreementType || ""}
                 onChange={handleInputChange}
                 required
+              />
+              {errors.agreementType && <p className="error">{errors.agreementType}</p>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="aggrementformvii">Agreement (Form VII) upload</label>
+              <input
+                id="aggrementformvii"
+                type="file"
+                name="aggrementformvii"
+                onChange={handleFileChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="manningAgree">
+                Supported By Manning Agreement (if with manager chain of Agreement)
+              </label>
+              <input
+                id="manningAgree"
+                type="file"
+                name="manningAgree"
+                onChange={handleFileChange}
               />
             </div>
 
@@ -284,7 +292,7 @@ const ManningAgrrement = () => {
         </div>
       </div>
 
-      <div className="agreement-table">
+      {/* <div className="agreement-table">
         <h3>Agreements List</h3>
         <table>
           <thead>
@@ -300,7 +308,6 @@ const ManningAgrrement = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log("before",agreements)}
             {agreements.map((agreement, index) => (
               <tr key={agreement._id || index}>
                 <td>{agreement._id}</td>
@@ -315,13 +322,9 @@ const ManningAgrrement = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
 
-      {/* ToastContainer is required to render toasts */}
-      <ToastContainer 
-      position="top-right" 
-      autoClose={5000} 
-      toastStyle={{ transition: "bounce" }} />
+      <ToastContainer position="top-right" autoClose={5000} />
     </>
   );
 };
