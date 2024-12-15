@@ -8,13 +8,13 @@ const RpsDashboard = () => {
         <nav className="navbar">
           <ul className="nav-links">
             <li>
-              <Link to="/companyprofile">Company Profile</Link>
+              <Link to="/companyprofileDisplay">Company Profile</Link>
             </li>
             <li>
-              <Link to="/manningAggrement">Manning Agreement</Link>
+              <Link to="/ManningAggrementDisplay">Manning Agreement</Link>
             </li>
             <li>
-              <Link to="/ship">Ship</Link>
+              <Link to="/ShipDetailsDisplay">Ship</Link>
             </li>
           </ul>
         </nav>

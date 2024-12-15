@@ -51,13 +51,13 @@ const companyProfileSchema = new mongoose.Schema({
   incomeTaxReturns: { type: mongoose.Schema.Types.Mixed, default: {} },
   auditReport: { type: mongoose.Schema.Types.Mixed, default: {} },
 
-  // registrationDocuments: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // rpsLicense: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // profitLossBalanceSheet: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // bankGuarantee: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // assetsLiabilitiesCertificate: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // incomeTaxReturns: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
-  // auditReport: { type: mongoose.Schema.Types.ObjectId, ref: 'File' },
+  registrationDocuments: { originalName: String, filePath: String, },
+  rpsLicense: { originalName: String, filePath: String, },
+  profitLossBalanceSheet: { originalName: String, filePath: String, },
+  bankGuarantee: { originalName: String, filePath: String, },
+  assetsLiabilitiesCertificate: { originalName: String, filePath: String, },
+  incomeTaxReturns: { originalName: String, filePath: String, },
+  auditReport: { originalName: String, filePath: String, }, 
 });
 
 const CompanyProfile = mongoose.model("CompanyProfile", companyProfileSchema);

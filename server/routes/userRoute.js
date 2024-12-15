@@ -10,7 +10,7 @@ import {
 import { createCrewDetails } from "../controller/crewController.js"; // Importing from updated path
 
 import { login, signup } from "../controller/loginController.js";
-import { createCompanyProfile , getCompanyProfile} from "../controller/companyprofileController.js";
+import { createCompanyProfile , ComapanyuploadMiddleware, getCompanyProfile} from "../controller/companyprofileController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 
@@ -24,7 +24,9 @@ route.put("/update/user/:id", update);
 route.delete("/delete/:id", deleteUser);
 route.post("/login", login);
 route.post("/signup", signup);
-route.post("/companyprofile", createCompanyProfile); 
+
+//comapany profile route
+route.post("/companyprofile",ComapanyuploadMiddleware, createCompanyProfile); 
 route.get("/companyprofile", getCompanyProfile);
 
 // Crew details route

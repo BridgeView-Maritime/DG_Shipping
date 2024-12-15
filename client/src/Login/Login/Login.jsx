@@ -29,7 +29,7 @@ function Login() {
          } else if (userType === "versel_vendor") {
            navigate("/verselvendor");
          } else if (userType === "rpsl_vendor") {
-           navigate("/rpsdashboard");
+           navigate("/companyprofiledisplay");
          } else {
            alert("Unknown user type");
          }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./CompanyProfileDisplay.css";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard";
+import { Link } from "react-router-dom";
 
 const CompanyProfileDisplay = () => {
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/companyprofile")
@@ -21,7 +22,9 @@ const CompanyProfileDisplay = () => {
     <div className="company-profile">
       <RpsDashboard />
       <h1>Company Profile</h1>
-
+      <Link to="/CompanyProfile" className="add-companyprofile">
+        Add Profile
+      </Link>
       <table className="profile-table">
         <thead>
           <tr>
@@ -56,22 +59,27 @@ const CompanyProfileDisplay = () => {
                   <span className="key">Issue Place:</span> {user.issuePlace}
                 </p>
                 <p>
-                  <span className="key">TIN TAN Number:</span> {user.tinTanNumber}
+                  <span className="key">TIN TAN Number:</span>{" "}
+                  {user.tinTanNumber}
                 </p>
                 <p>
                   <span className="key">Bank Name:</span> {user.bankName}
                 </p>
                 <p>
-                  <span className="key">Bank Guarantee Validity Date:</span> {user.bankGuaranteeValidityDate}
+                  <span className="key">Bank Guarantee Validity Date:</span>{" "}
+                  {user.bankGuaranteeValidityDate}
                 </p>
                 <p>
-                  <span className="key">Guarantee Amount:</span> {user.guaranteeAmount}
+                  <span className="key">Guarantee Amount:</span>{" "}
+                  {user.guaranteeAmount}
                 </p>
                 <p>
-                  <span className="key">Seafarer Recruited:</span> {user.seafarerRecruited}
+                  <span className="key">Seafarer Recruited:</span>{" "}
+                  {user.seafarerRecruited}
                 </p>
                 <p>
-                  <span className="key">Inspection Date:</span> {user.inspectionDate}
+                  <span className="key">Inspection Date:</span>{" "}
+                  {user.inspectionDate}
                 </p>
                 <p>
                   <span className="key">PAN Number:</span> {user.panNumber}
@@ -80,40 +88,49 @@ const CompanyProfileDisplay = () => {
                   <span className="key">Office:</span> {user.office}
                 </p>
                 <p>
-                  <span className="key">Leased Validity Date:</span> {user.easedValidityDate}
+                  <span className="key">Leased Validity Date:</span>{" "}
+                  {user.leasedValidityDate}
                 </p>
                 <p>
                   <span className="key">Status:</span> {user.status}
                 </p>
                 <p>
-                  <span className="key">Aadhar Number:</span> {user.aadharNumber}
+                  <span className="key">Aadhar Number:</span>{" "}
+                  {user.aadharNumber}
                 </p>
               </td>
 
               <td>
                 <p>
-                  <span className="key">Name of the Inspector:</span> {user.inspectorName}
+                  <span className="key">Name of the Inspector:</span>{" "}
+                  {user.inspectorName}
                 </p>
                 <p>
-                  <span className="key">Name of the Organization:</span> {user.organizationName}
+                  <span className="key">Organization Name:</span>{" "}
+                  {user.organizationName}
                 </p>
                 <p>
-                  <span className="key">Last Annual Inspection Date:</span> {user.lastAnnualInspectionDate}
+                  <span className="key">Last Annual Inspection Date:</span>{" "}
+                  {user.lastAnnualInspectionDate}
                 </p>
                 <p>
-                  <span className="key">Last Renewal Date:</span> {user.lastRenewalDate}
+                  <span className="key">Last Renewal Date:</span>{" "}
+                  {user.lastRenewalDate}
                 </p>
                 <p>
-                  <span className="key">Last Inspection Place:</span> {user.lastInspectionPlace}
+                  <span className="key">Last Inspection Place:</span>{" "}
+                  {user.lastInspectionPlace}
                 </p>
                 <p>
-                  <span className="key">Date of Next Renewal:</span> {user.nextRenewalDate}
+                  <span className="key">Next Renewal Date:</span>{" "}
+                  {user.nextRenewalDate}
                 </p>
               </td>
 
               <td>
                 <p>
-                  <span className="key">Address:</span> {user.addressLine1}, {user.addressLine2}, {user.addressLine3}
+                  <span className="key">Address:</span> {user.addressLine1},{" "}
+                  {user.addressLine2}, {user.addressLine3}
                 </p>
                 <p>
                   <span className="key">City:</span> {user.city}
@@ -131,13 +148,14 @@ const CompanyProfileDisplay = () => {
                   <span className="key">Phone Number:</span> {user.phoneNumber}
                 </p>
                 <p>
-                  <span className="key">Mobile Number:</span> {user.mobileNumber}
+                  <span className="key">Mobile Number:</span>{" "}
+                  {user.mobileNumber}
                 </p>
                 <p>
                   <span className="key">Fax:</span> {user.fax}
                 </p>
                 <p>
-                  <span className="key">Web URL:</span> {user.webUrl}
+                  <span className="key">Website:</span> {user.webUrl}
                 </p>
               </td>
 
@@ -146,7 +164,8 @@ const CompanyProfileDisplay = () => {
                   <span className="key">Name:</span> {user.contactPersonName}
                 </p>
                 <p>
-                  <span className="key">Mobile:</span> {user.contactPersonMobile}
+                  <span className="key">Mobile:</span>{" "}
+                  {user.contactPersonMobile}
                 </p>
                 <p>
                   <span className="key">Email:</span> {user.contactPersonEmail}
@@ -155,29 +174,118 @@ const CompanyProfileDisplay = () => {
 
               <td>
                 <p>
-                  <span className="key">Criminal Case Pending:</span> {user.criminalCasePending ? "Yes" : "No"}
+                  <span className="key">Criminal Case Pending:</span>{" "}
+                  {user.criminalCasePending ? "Yes" : "No"}
                 </p>
+                {user.criminalCasePending && user.criminalCaseDetails && (
+                  <p>
+                    <span className="key">Criminal Case Details:</span>{" "}
+                    {user.criminalCaseDetails}
+                  </p>
+                )}
                 <p>
-                  <span className="key">Complaints Pending:</span> {user.complaintsPending ? "Yes" : "No"}
+                  <span className="key">Complaints Pending:</span>{" "}
+                  {user.complaintsPending ? "Yes" : "No"}
                 </p>
+                {user.complaintsPending && user.complaintsDetails && (
+                  <p>
+                    <span className="key">Complaints Details:</span>{" "}
+                    {user.complaintsDetails}
+                  </p>
+                )}
                 <p>
-                  <span className="key">Shipping Activities:</span> {user.shippingActivitiesCarriedOut ? "Yes" : "No"}
+                  <span className="key">Shipping Activities Carried Out:</span>{" "}
+                  {user.shippingActivitiesCarriedOut ? "Yes" : "No"}
                 </p>
-                <p>
-                  <span className="key">Recruitment Experience:</span> {user.recruitmentExperienceYears} years
-                </p>
+                {user.shippingActivitiesCarriedOut &&
+                  user.shippingActivitiesDetails && (
+                    <p>
+                      <span className="key">Shipping Activities Details:</span>{" "}
+                      {user.shippingActivitiesDetails}
+                    </p>
+                  )}
               </td>
 
               <td>
-                <p>
-                  <span className="key">Bank Guarantee:</span> {user.bankGuarantee ? "Available" : "Not Available"}
-                </p>
-                <p>
-                  <span className="key">Income Tax Returns:</span> {user.incomeTaxReturns ? "Available" : "Not Available"}
-                </p>
-                <p>
-                  <span className="key">Audit Report:</span> {user.auditReport ? "Available" : "Not Available"}
-                </p>
+                <ul>
+                  {user.registrationDocuments?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.registrationDocuments.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Registration Documents
+                      </a>
+                    </li>
+                  )}
+                  {user.rpsLicense?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.rpsLicense.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        RPS License
+                      </a>
+                    </li>
+                  )}
+                  {user.profitLossBalanceSheet?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.profitLossBalanceSheet.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Profit/Loss Balance Sheet
+                      </a>
+                    </li>
+                  )}
+                  {user.bankGuarantee?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.bankGuarantee.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Bank Guarantee
+                      </a>
+                    </li>
+                  )}
+                  {user.assetsLiabilitiesCertificate?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.assetsLiabilitiesCertificate.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Assets/Liabilities Certificate
+                      </a>
+                    </li>
+                  )}
+                  {user.incomeTaxReturns?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.incomeTaxReturns.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Income Tax Returns
+                      </a>
+                    </li>
+                  )}
+                  {user.auditReport?.filePath && (
+                    <li>
+                      <a
+                        href={`http://localhost:8000/${user.auditReport.filePath}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Audit Report
+                      </a>
+                    </li>
+                  )}
+                </ul>
               </td>
             </tr>
           ))}

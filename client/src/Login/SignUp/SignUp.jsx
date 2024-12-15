@@ -45,7 +45,7 @@ function Signup() {
         userData
       );
       console.log("Signup Success:", response.data);
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       setError("An error occurred during signup");
       console.error("Signup error:", err);

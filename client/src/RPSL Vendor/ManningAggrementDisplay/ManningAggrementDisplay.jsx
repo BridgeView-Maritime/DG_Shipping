@@ -1,31 +1,36 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import RpsDashboard from "../RPS DashBoard/RpsDashboard";
+import { Link } from "react-router-dom";
+import "./manningAggrementdisplay.css";
 
+const ManningAggrementDisplay = () => {
+  const [agreements, setAgreements] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const ManningAggrementDisplay= ()=>{
-    const [agreements, setAgreements] = useState([]);
-    const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchAgreements = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/manningAgreement"
+        );
+        setAgreements(response.data.data || []);
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch agreements:", error);
+        setLoading(false);
+      }
+    };
 
-    useEffect(() => {
-        const fetchAgreements = async () => {
-          try {
-            const response = await axios.get("http://localhost:8000/api/manningAgreement");
-            setAgreements(response.data.data || []); 
-            setLoading(false);
-          } catch (error) {
-            console.error("Failed to fetch agreements:", error);
-            setLoading(false);
-          }
-        };
-    
-        fetchAgreements();
-      }, []);
+    fetchAgreements();
+  }, []);
 
-    return (
-        <>
-
+  return (
+    <>
+      <RpsDashboard />
       <div className="agreement-table">
         <h3>Agreements List</h3>
+        <Link to="/ManningAggrement" className="add-manningaggrement">Add Manning Aggrement </Link>
         <table>
           <thead>
             <tr>
@@ -52,27 +57,35 @@ const ManningAggrementDisplay= ()=>{
                 <td>{agreement.validityType}</td>
                 <td>{new Date(agreement.validityDate).toLocaleDateString()}</td>
                 <td>{agreement.agreementType}</td>
-                <td>{agreement.aggrementformvii && (
+                <td>
+                  {agreement.aggrementformvii && (
                     <a
-                    href={`http://localhost:8000/${agreement.aggrementformvii.filePath}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Agreement (Form VII)</a>
-                )}</td>
-                <td>{agreement.manningAgree && (
+                      href={`http://localhost:8000/${agreement.aggrementformvii.filePath}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Agreement (Form VII)
+                    </a>
+                  )}
+                </td>
+                <td>
+                  {agreement.manningAgree && (
                     <a
-                    href={`http://localhost:8000/${agreement.manningAgree.filePath}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Manning Aggrement</a>
-                )}</td>
+                      href={`http://localhost:8000/${agreement.manningAgree.filePath}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Manning Aggrement
+                    </a>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default ManningAggrementDisplay;
