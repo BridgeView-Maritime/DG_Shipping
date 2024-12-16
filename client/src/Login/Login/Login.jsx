@@ -2,6 +2,7 @@ import  { useState } from 'react';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../../Navbar/Navbar';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,7 @@ function Login() {
          } else if (userType === "versel_vendor") {
            navigate("/verselvendor");
          } else if (userType === "rpsl_vendor") {
-           navigate("/rpsdashboard");
+           navigate("/companyprofiledisplay");
          } else {
            alert("Unknown user type");
          }
@@ -42,6 +43,7 @@ function Login() {
 
   return (
     <div className="loginContainer">
+      <Navbar />
       <div className="loginFormContainer">
         <h1>Login</h1>
         <form className="logform" onSubmit={handleSubmit}>

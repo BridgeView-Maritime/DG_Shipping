@@ -1,107 +1,170 @@
-
-import fs from 'fs';
-import path from 'path';
 import CompanyProfile from '../model/companyprofileModel.js';
+import multer from "multer";
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "CompanyProfileDocuments/"); 
+    console.log("Received files:", req.files);
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); 
+  },
+});
 
-// const createCompanyProfile = async (req, res) => {
-//   try {
-//     const companyProfileData = req.body;
-//     console.log("req.body", req.body)
-//     const companyProfile = new CompanyProfile(companyProfileData);
-//     await companyProfile.save();
-//     res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
-//   } catch (error) {
-//     console.error('Error creating company profile:', error);
-//     res.status(500).json({ message: 'Failed to create company profile', error: error.message });
-//   }
-// };
-
-// const createCompanyProfile = async (req, res) => {
-//   try {
-//     // Use multer to handle the file upload and get the file as base64 string
-//     upload(req, res, async (err) => {
-//       if (err) {
-//         return res.status(400).json({ message: err.message });
-//       }
-
-//       const { nameOfRPSL, rpslNumber, issueDate, expiryDate, registrationDocuments, rpsLicense, profitLossBalanceSheet, assetsLiabilitiesCertificate, incomeTaxReturns, bankGuarantee } = req.body;
-
-//       // Prepare the formData to be saved in the database
-//       const formData = {
-//         nameOfRPSL,
-//         rpslNumber,
-//         issueDate,
-//         expiryDate,
-//         registrationDocuments: req.file ? req.file.buffer.toString('base64') : registrationDocuments, // Store file as base64
-//         rpsLicense: req.file ? req.file.buffer.toString('base64') : rpsLicense, // For file fields, we check if they exist
-//         profitLossBalanceSheet: req.file ? req.file.buffer.toString('base64') : profitLossBalanceSheet,
-//         assetsLiabilitiesCertificate: req.file ? req.file.buffer.toString('base64') : assetsLiabilitiesCertificate,
-//         incomeTaxReturns: req.file ? req.file.buffer.toString('base64') : incomeTaxReturns,
-//         bankGuarantee: req.file ? req.file.buffer.toString('base64') : bankGuarantee,
-//       };
-
-//       // Create the company profile document
-//       const companyProfile = new CompanyProfile(formData);
-//       await companyProfile.save();
-
-//       res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
-//     });
-//   } catch (error) {
-//     console.error('Error creating company profile:', error);
-//     res.status(500).json({ message: 'Failed to create company profile', error: error.message });
-//   }
-// };
-
-//  const createCompanyProfile = (req, res) => {
-//   const form = new formidable.IncomingForm();
-  
-//   // Directory where files will be uploaded
-//   form.uploadDir = path.join(__dirname, '../assets');
-//   form.keepExtensions = true;  // Keep the file's original extension
-
-//   // Ensure the 'assets' directory exists
-//   const assetsFolder = path.join(__dirname, '../assets');
-//   if (!fs.existsSync(assetsFolder)) {
-//     fs.mkdirSync(assetsFolder);
-//   }
-
-//   form.parse(req, async (err, fields, files) => {
-//     if (err) {
-//       console.error('Error parsing the form:', err);
-//       return res.status(500).json({ message: 'Failed to parse form', error: err.message });
-//     }
-
-//     try {
-//       // Process the form data and the uploaded file
-//       const companyProfileData = {
-//         ...fields,
-//         registrationDocuments: files.registrationDocuments ? files.registrationDocuments[0].newFilename : null,
-//         // If you need more files, you can add them here in a similar way
-//       };
-
-//       // Create the company profile document with file paths
-//       const companyProfile = new CompanyProfile(companyProfileData);
-//       console.log(companyProfile);
-//       await companyProfile.save();
-
-//       res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
-//     } catch (error) {
-//       console.error('Error creating company profile:', error);
-//       res.status(500).json({ message: 'Failed to create company profile', error: error.message });
-//     }
-//   });
-// };
+const upload = multer({ storage: storage });
 
 export const createCompanyProfile = async (req, res) => {
+  console.log('Received files:', req.files); // Debugging line
+
   try {
-    const companyProfileData = req.body;
+    const {
+      nameOfRPSL,
+      rpslNumber,
+      issueDate,
+      expiryDate,
+      issuePlace,
+      tinTanNumber,
+      bankName,
+      bankGuaranteeValidityDate,
+      guaranteeAmount,
+      seafarerRecruited,
+      inspectionDate,
+      panNumber,
+      office,
+      leasedValidityDate,
+      status,
+      aadharNumber,
+  
+      // Last Inspection Details
+      inspectorName,
+      organizationName,
+      lastAnnualInspectionDate,
+      lastRenewalDate,
+      lastInspectionPlace,
+      nextRenewalDate,
+  
+      // Registered Address Details
+      addressLine1,
+      city,
+      addressLine2,
+      district,
+      addressLine3,
+      state,
+      phoneNumber,
+      mobileNumber,
+      pin,
+      fax,
+      webUrl,
+  
+      // Contact Person & Details
+      contactPersonName,
+      contactPersonMobile,
+      contactPersonEmail,
+  
+      // Other Details
+      criminalCasePending,
+      criminalCaseDetails,
+      complaintsPending,
+      complaintsDetails,
+      shippingActivitiesCarriedOut,
+      shippingActivitiesDetails,
+    }=req.body
 
-    // Create the company profile document with the provided form data
-    const companyProfile = new CompanyProfile(companyProfileData);
-    await companyProfile.save();
+    const newProfileCompany = new CompanyProfile({
+      nameOfRPSL,
+      rpslNumber,
+      issueDate,
+      expiryDate,
+      issuePlace,
+      tinTanNumber,
+      bankName,
+      bankGuaranteeValidityDate,
+      guaranteeAmount,
+      seafarerRecruited,
+      inspectionDate,
+      panNumber,
+      office,
+      leasedValidityDate,
+      status,
+      aadharNumber,
+  
+      // Last Inspection Details
+      inspectorName,
+      organizationName,
+      lastAnnualInspectionDate,
+      lastRenewalDate,
+      lastInspectionPlace,
+      nextRenewalDate,
+  
+      // Registered Address Details
+      addressLine1,
+      city,
+      addressLine2,
+      district,
+      addressLine3,
+      state,
+      phoneNumber,
+      mobileNumber,
+      pin,
+      fax,
+      webUrl,
+  
+      // Contact Person & Details
+      contactPersonName,
+      contactPersonMobile,
+      contactPersonEmail,
+  
+      // Other Details
+      criminalCasePending,
+      criminalCaseDetails,
+      complaintsPending,
+      complaintsDetails,
+      shippingActivitiesCarriedOut,
+      shippingActivitiesDetails,
+  
+      //Documents
+      registrationDocuments:req.files.registrationDocuments && req.files.registrationDocuments.length > 0
+        ? {
+          originalName: req.files.registrationDocuments[0].originalname,
+          filePath:req.files.registrationDocuments[0].path,
+        }: null,
 
-    res.status(201).json({ message: 'Company profile created successfully!', data: companyProfile });
+      rpsLicense:req.files.rpsLicense
+      ? {
+        originalName:req.files.rpsLicense[0].originalname,
+        filePath:req.files.rpsLicense[0].path,
+      }: null,
+      profitLossBalanceSheet: req.files.profitLossBalanceSheet
+      ? {
+        originalName: req.files.profitLossBalanceSheet[0].originalname,
+        filePath: req.files.profitLossBalanceSheet[0].path,
+      }: null,
+      assetsLiabilitiesCertificate: req.files.assetsLiabilitiesCertificate
+      ? {
+        originalName: req.files.assetsLiabilitiesCertificate[0].originalname,
+        filePath: req.files.assetsLiabilitiesCertificate[0].path,
+      }: null,
+      incomeTaxReturns: req.files.incomeTaxReturns
+      ? {
+        originalName : req.files.incomeTaxReturns[0].originalname,
+        filePath : req.files.incomeTaxReturns[0].path,
+      }: null,
+
+      auditReport : req.files.auditReport
+      ? {
+        originalName : req.files.auditReport[0].originalname,
+        filePath : req.files.auditReport[0].path,
+      } : null,
+      bankGuarantee: req.files.bankGuarantee
+      ? {
+        originalName: req.files.bankGuarantee[0].originalname,
+        filePath : req.files.bankGuarantee[0].path,
+      }:  null,
+    })
+
+  
+    const savedDetails = await newProfileCompany.save();
+    res.status(201).json({ message: 'Company profile created successfully!', data: savedDetails });
   } catch (error) {
     console.error('Error creating company profile:', error);
     res.status(500).json({ message: 'Failed to create company profile', error: error.message });
@@ -119,5 +182,15 @@ export const getCompanyProfile = async (req, res) => {
 
 };
 
+
+export const ComapanyuploadMiddleware = upload.fields([
+  { name: "registrationDocuments", maxCount: 1 },
+  { name: "rpsLicense", maxCount: 1 },
+  { name: "profitLossBalanceSheet", maxCount: 1 },
+  { name: "assetsLiabilitiesCertificate", maxCount: 1 },
+  { name: "incomeTaxReturns", maxCount: 1 },
+  { name: "auditReport", maxCount: 1 },
+  { name: "bankGuarantee", maxCount: 1 },
+]);
 
 
