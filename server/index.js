@@ -13,6 +13,7 @@ const app = express();
 app.use(cors());
 dotenv.config();
 
+
 app.use(express.json()); //if ship form not working please uncomment
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,7 +28,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/ManningAggrementDocuments', express.static(path.join(__dirname, 'ManningAggrementDocuments')));
 app.use('/CompanyProfileDocuments', express.static(path.join(__dirname, 'CompanyProfileDocuments')));
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 8080;
 const MONGOURL = process.env.MONGO_URL;
 
 mongoose
