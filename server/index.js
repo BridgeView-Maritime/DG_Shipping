@@ -26,7 +26,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/ManningAggrementDocuments', express.static(path.join(__dirname, 'ManningAggrementDocuments')));
 app.use('/CompanyProfileDocuments', express.static(path.join(__dirname, 'CompanyProfileDocuments')));
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 const MONGOURL = process.env.MONGO_URL;
 
 mongoose
