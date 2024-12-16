@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./CompanyProfileDisplay.css";
+// import "./CompanyProfileDisplay.css";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard";
 import { Link } from "react-router-dom";
-
+import "../../style/formCommon.css"
 const CompanyProfileDisplay = () => {
   const [profileData, setProfileData] = useState([]);
 
@@ -19,8 +19,9 @@ const CompanyProfileDisplay = () => {
   if (!profileData) return <div>Loading...</div>;
 
   return (
-    <div className="company-profile">
+    <>
       <RpsDashboard />
+      <div className="ship-details-table">
       <h1>Company Profile</h1>
       <Link to="/CompanyProfile" className="add-companyprofile">
         Add Profile
@@ -50,10 +51,10 @@ const CompanyProfileDisplay = () => {
                   <span className="key">RPSL Number:</span> {user.rpslNumber}
                 </p>
                 <p>
-                  <span className="key">Issue Date:</span> {user.issueDate}
+                  <span className="key">Issue Date:</span> {new Date(user.issueDate).toLocaleDateString()}
                 </p>
                 <p>
-                  <span className="key">Expiry Date:</span> {user.expiryDate}
+                  <span className="key">Expiry Date:</span> {new Date(user.expiryDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">Issue Place:</span> {user.issuePlace}
@@ -67,7 +68,7 @@ const CompanyProfileDisplay = () => {
                 </p>
                 <p>
                   <span className="key">Bank Guarantee Validity Date:</span>{" "}
-                  {user.bankGuaranteeValidityDate}
+                  {new Date(user.bankGuaranteeValidityDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">Guarantee Amount:</span>{" "}
@@ -79,7 +80,7 @@ const CompanyProfileDisplay = () => {
                 </p>
                 <p>
                   <span className="key">Inspection Date:</span>{" "}
-                  {user.inspectionDate}
+                  {new Date(user.inspectionDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">PAN Number:</span> {user.panNumber}
@@ -89,7 +90,7 @@ const CompanyProfileDisplay = () => {
                 </p>
                 <p>
                   <span className="key">Leased Validity Date:</span>{" "}
-                  {user.leasedValidityDate}
+                  {new Date(user.leasedValidityDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">Status:</span> {user.status}
@@ -111,11 +112,11 @@ const CompanyProfileDisplay = () => {
                 </p>
                 <p>
                   <span className="key">Last Annual Inspection Date:</span>{" "}
-                  {user.lastAnnualInspectionDate}
+                  {new Date(user.lastAnnualInspectionDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">Last Renewal Date:</span>{" "}
-                  {user.lastRenewalDate}
+                  {new Date(user.lastRenewalDate).toLocaleDateString()}
                 </p>
                 <p>
                   <span className="key">Last Inspection Place:</span>{" "}
@@ -123,7 +124,7 @@ const CompanyProfileDisplay = () => {
                 </p>
                 <p>
                   <span className="key">Next Renewal Date:</span>{" "}
-                  {user.nextRenewalDate}
+                  {new Date(user.nextRenewalDate).toLocaleDateString()}
                 </p>
               </td>
 
@@ -291,7 +292,8 @@ const CompanyProfileDisplay = () => {
           ))}
         </tbody>
       </table>
-    </div>
+      </div>
+    </>
   );
 };
 

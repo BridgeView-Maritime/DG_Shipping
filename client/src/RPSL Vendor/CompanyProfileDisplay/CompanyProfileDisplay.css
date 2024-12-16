@@ -1,4 +1,4 @@
-.company-profile {
+/* .company-profile {
   padding: 20px;
 }
 
@@ -28,14 +28,14 @@ h1 {
 }
 
 .key {
-  font-size: 1rem; /* Increase the font size for keys */
-  font-weight: bold; /* Make the keys bold */
+  font-size: 1rem; 
+  font-weight: bold; 
   display: inline-block;
-  margin-right: 5px; /* Add some spacing between key and value */
+  margin-right: 5px; 
 }
 
 .profile-table td {
-  font-size: 1rem; /* Default font size for values */
+  font-size: 1rem; 
 }
 
 .add-companyprofile{
@@ -44,4 +44,4 @@ h1 {
 background-color: #007bff;
 color: white;
 text-decoration: none;
-}
+} */

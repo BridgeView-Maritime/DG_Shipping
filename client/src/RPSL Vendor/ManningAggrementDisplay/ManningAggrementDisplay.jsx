@@ -2,7 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard";
 import { Link } from "react-router-dom";
-import "./manningAggrementdisplay.css";
+// import "../CompanyProfileDisplay/CompanyProfileDisplay.css";
+import "../../style/formCommon.css";
 
 const ManningAggrementDisplay = () => {
   const [agreements, setAgreements] = useState([]);
