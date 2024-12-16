@@ -21,7 +21,7 @@ const CompanyProfile = () => {
     inspectionDate: "",
     panNumber: "",
     office: "",
-    easedValidityDatel: "",
+    leasedValidityDate: "",
     status: "",
     aadharNumber: "",
 
@@ -60,13 +60,13 @@ const CompanyProfile = () => {
     shippingActivitiesDetails: "",
 
     //Documents
-    // registrationDocuments: null,
-    // rpsLicense: null,
-    // profitLossBalanceSheet: null,
-    // assetsLiabilitiesCertificat: null,
-    // incomeTaxReturns: null,
-    // auditReport: null,
-    // bankGuarantee: null,
+    registrationDocuments: "",
+    rpsLicense: "",
+    profitLossBalanceSheet: "",
+    assetsLiabilitiesCertificate: "",
+    incomeTaxReturns: "",
+    auditReport: "",
+    bankGuarantee: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -244,12 +244,14 @@ const CompanyProfile = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleFileChange = (e, fieldName) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [fieldName]: e.target.files[0], // Update only the field that changed
-    }));
-  };
+  const handleFileChange =(e)=>{
+    const {name , files}= e.target;
+    console.log("handlefilechange" ,name, files); 
+    setFormData((prevData)=>({
+      ...prevData,
+      [name]: files[0]
+    }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -261,7 +263,17 @@ const CompanyProfile = () => {
     }
   
     // Prepare the form data to send
-    const formDataToSend = { ...formData };
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+        if (formData[key]) {
+            if (formData[key] instanceof File) {
+                formDataToSend.append(key, formData[key]);
+            } else {
+                formDataToSend.append(key, formData[key]);
+            }
+        }
+    }
+    console.log("formDataToSend", formDataToSend)
   
     try {
       // Make the POST request with form data
@@ -270,7 +282,7 @@ const CompanyProfile = () => {
         formDataToSend, // Send the form data
         {
           headers: {
-            "Content-Type": "application/json", // Content type for non-file data
+            "Content-Type": "multipart/form-data", 
           },
         }
       );
@@ -290,61 +302,6 @@ const CompanyProfile = () => {
     console.log("Form submitted successfully:", formData);
     setErrors({});
   };
-  
-  
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault(); // Prevent default form submission
-  
-  //   // Validate the form before submission
-  //   if (!validate()) {
-  //     console.log("Form contains errors.");
-  //     return;
-  //   }
-  //   const selectedFile = formData.registrationDocuments || formData.rpsLicense;
-  //   if (!selectedFile) {
-  //     return alert("Please select a file to upload");
-  //   }
-  
-  //   // Prepare FormData for file uploads and form data
-  //   const formDataToSend = new FormData();
-  
-  //   // Append form fields to FormData
-  //   for (let key in formData) {
-  //     formDataToSend.append(key, formData[key]);
-  //   }
-  
-  //   // Append the file to FormData (ensure the key 'file' matches the backend's expected key)
-  //   formDataToSend.append("file", selectedFile);
-  
-  //   try {
-  //     // Make the POST request with FormData
-  //     const response = await axios.post(
-  //       "http://localhost:8000/api/companyprofile", // Your API endpoint
-  //       formDataToSend, // Send the form data including the file
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data", // Set the appropriate content type
-  //         },
-  //       }
-  //     );
-  
-  //     // Handle the response
-  //     setSuccessMessage(response.data.message);
-  //     navigate("/companyprofiledisplay"); // Navigate after successful submission
-  
-  //   } catch (error) {
-  //     console.error("Error submitting company profile:", error);
-  //     setErrors({
-  //       submit: error.response
-  //         ? error.response.data.message
-  //         : "An error occurred",
-  //     });
-  //   }
-  
-  //   console.log("Form submitted successfully:", formData);
-  //   setErrors({}); // Reset any previous errors
-  // };
   
   return (
     <>
@@ -1008,11 +965,7 @@ const CompanyProfile = () => {
             <h3>Documents</h3>
             <div className="form-row-document">
               {/* Registration Documents */}
-              <div
-                className={`form-group ${
-                  formData.registrationDocuments ? "uploaded" : ""
-                }`}
-              >
+              <div className="form-group">
                 <label htmlFor="registrationDocuments">
                   Registration Documents *
                 </label>
@@ -1020,8 +973,7 @@ const CompanyProfile = () => {
                   id="registrationDocuments"
                   type="file"
                   name="registrationDocuments"
-                  accept="application/pdf" 
-                  onChange={(e) => handleFileChange(e, "registrationDocuments")}
+                  onChange={handleFileChange}
                 />
                 <button
                   type="button"
@@ -1033,23 +985,18 @@ const CompanyProfile = () => {
               </div>
 
               {/* Scan Copy of RPS License */}
-              <div
-                className={`form-group ${
-                  formData.rpsLicense ? "uploaded" : ""
-                }`}
-              >
+              <div className="form-group">
                 <label htmlFor="rpsLicense">Scan Copy of RPS License *</label>
                 <input
                   id="rpsLicense"
                   type="file"
                   name="rpsLicense"
-                  accept="application/pdf" 
-                  onChange={(e) => handleFileChange(e, "rpsLicense")}
+                  onChange={handleFileChange}
                 />
                 <button
                   type="button"
                   aria-label="View uploaded RPS License"
-                  onClick={() => handleViewDocument("rpsLicense")}
+                  onClick={handleViewDocument}
                 >
                   View
                 </button>
@@ -1057,10 +1004,7 @@ const CompanyProfile = () => {
 
               {/* Profit and Loss Account */}
               <div
-                className={`form-group ${
-                  formData.profitLossBalanceSheet ? "uploaded" : ""
-                }`}
-              >
+                className= "form-group">
                 <label htmlFor="profitLossBalanceSheet">
                   Profit and Loss Account and Balance Sheet of Last 4 Years
                 </label>
@@ -1068,7 +1012,6 @@ const CompanyProfile = () => {
                   id="profitLossBalanceSheet"
                   type="file"
                   name="profitLossBalanceSheet"
-                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1082,10 +1025,7 @@ const CompanyProfile = () => {
 
               {/* Certificate of Assets and Liabilities */}
               <div
-                className={`form-group ${
-                  formData.assetsLiabilitiesCertificate ? "uploaded" : ""
-                }`}
-              >
+                className="form-group">
                 <label htmlFor="assetsLiabilitiesCertificate">
                   Certificate of Assets and Liabilities of Chartered Accountant
                 </label>
@@ -1093,7 +1033,6 @@ const CompanyProfile = () => {
                   id="assetsLiabilitiesCertificate"
                   type="file"
                   name="assetsLiabilitiesCertificate"
-                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1108,11 +1047,7 @@ const CompanyProfile = () => {
               </div>
 
               {/* Income Tax Returns */}
-              <div
-                className={`form-group ${
-                  formData.incomeTaxReturns ? "uploaded" : ""
-                }`}
-              >
+              <div className="form-group">
                 <label htmlFor="incomeTaxReturns">
                   Scanned Copy of Income Tax Returns
                 </label>
@@ -1120,7 +1055,6 @@ const CompanyProfile = () => {
                   id="incomeTaxReturns"
                   type="file"
                   name="incomeTaxReturns"
-                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1134,16 +1068,12 @@ const CompanyProfile = () => {
 
               {/* Last One Year Audit Report */}
               <div
-                className={`form-group ${
-                  formData.auditReport ? "uploaded" : ""
-                }`}
-              >
+                className="form-group">
                 <label htmlFor="auditReport">Last One Year Audit Report</label>
                 <input
                   id="auditReport"
                   type="file"
                   name="auditReport"
-                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
@@ -1157,10 +1087,7 @@ const CompanyProfile = () => {
 
               {/* Bank Guarantee Scanned Copy */}
               <div
-                className={`form-group ${
-                  formData.bankGuarantee ? "uploaded" : ""
-                }`}
-              >
+                className="form-group">
                 <label htmlFor="bankGuarantee">
                   Bank Guarantee Scanned Copy
                 </label>
@@ -1168,7 +1095,6 @@ const CompanyProfile = () => {
                   id="bankGuarantee"
                   type="file"
                   name="bankGuarantee"
-                  accept="application/pdf" 
                   onChange={handleFileChange}
                 />
                 <button
