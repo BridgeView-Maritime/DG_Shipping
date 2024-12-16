@@ -119,7 +119,7 @@ function Signup() {
             >
               <option value="">Select User Type</option>
               <option value="crew">Crew</option>
-              <option value="versel_vendor">Versel Vendor</option>
+              <option value="Vessel_vendor">Vessel Vendor</option>
               <option value="rpsl_vendor">RPSL vendor</option>
             </select>
           </div>

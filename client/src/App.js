@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
 import CompanyProfile from "./RPSL Vendor/CompanyProfile/CompanyProfile";
 import Crew from "./crew/SeafarerProfile.jsx";
-import VerselVendor from "./Versel Vendor/VerselVendor";
+import VesselVendor from "./Vessel_Vendor/VesselVendor";
 import RpsDashboard from "./RPSL Vendor/RPS DashBoard/RpsDashboard";
 import CompanyProfileDisplay from "./RPSL Vendor/CompanyProfileDisplay/CompanyProfileDisplay";
 import ManningAggrement from "./RPSL Vendor/ManningAggrement/ManningAggrement.jsx";
@@ -53,8 +53,8 @@ function App() {
       element: <Crew />,
     },
     {
-      path: "/verselvendor",
-      element: <VerselVendor />,
+      path: "/Vesselvendor",
+      element: <VesselVendor />,
     },
     {
       path: "/rpsdashboard",

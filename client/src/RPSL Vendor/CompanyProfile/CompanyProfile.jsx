@@ -748,6 +748,7 @@ const CompanyProfile = () => {
                   type="text"
                   name="phoneNumber"
                   value={formData.phoneNumber}
+                  maxLength="10" 
                   onChange={handleChange}
                 />
               </div>
@@ -757,6 +758,7 @@ const CompanyProfile = () => {
                   type="text"
                   name="mobileNumber"
                   value={formData.mobileNumber}
+                  maxLength="10" 
                   onChange={handleChange}
                 />
               </div>

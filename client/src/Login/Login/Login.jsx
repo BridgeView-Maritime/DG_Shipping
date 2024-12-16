@@ -26,8 +26,8 @@ function Login() {
          // Redirect based on userType
          if (userType === "crew") {
            navigate("/SeafarerProfile");
-         } else if (userType === "versel_vendor") {
-           navigate("/verselvendor");
+         } else if (userType === "Vessel_vendor") {
+           navigate("/Vesselvendor");
          } else if (userType === "rpsl_vendor") {
            navigate("/companyprofiledisplay");
          } else {

@@ -6,7 +6,7 @@ function DashBoard() {
     <div className="dashboardContainer">
       <nav className="navbar">
         <button className="navButton">Crew</button>
-        <button className="navButton">Versel vendor</button>
+        <button className="navButton">Vessel vendor</button>
         <button className="navButton">RPSL Vendor</button>
       </nav>
       <div className="content">

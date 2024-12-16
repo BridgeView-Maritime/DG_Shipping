@@ -31,8 +31,8 @@ const Navbar = () => {
         {userType === "crew" && (
           <Link to="/SeafarerProfile">Seafarer Profile</Link>
         )}
-        {userType === "versel_vendor" && (
-          <Link to="/verselvendor">Versel Vendor</Link>
+        {userType === "Vessel_vendor" && (
+          <Link to="/Vesselvendor">Vessel Vendor</Link>
         )}
         {userType === "rpsl_vendor" && (
           <>
