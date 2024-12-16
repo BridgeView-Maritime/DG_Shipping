@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard";
 import { Link } from "react-router-dom";
 import "../../style/formCommon.css"
+import Navbar from "../../Navbar/Navbar";
 const CompanyProfileDisplay = () => {
   const [profileData, setProfileData] = useState([]);
 
@@ -20,8 +21,9 @@ const CompanyProfileDisplay = () => {
 
   return (
     <>
-      <RpsDashboard />
-      <div className="ship-details-table">
+      {/* <RpsDashboard /> */}
+      <Navbar />
+      <div className="ship-details-table company-profile-container">
       <h1>Company Profile</h1>
       <Link to="/CompanyProfile" className="add-companyprofile">
         Add Profile

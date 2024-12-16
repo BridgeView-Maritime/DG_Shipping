@@ -4,6 +4,7 @@ import RpsDashboard from "../RPS DashBoard/RpsDashboard";
 import { Link } from "react-router-dom";
 // import "../CompanyProfileDisplay/CompanyProfileDisplay.css";
 import "../../style/formCommon.css";
+import Navbar from "../../Navbar/Navbar";
 
 const ManningAggrementDisplay = () => {
   const [agreements, setAgreements] = useState([]);
@@ -28,7 +29,8 @@ const ManningAggrementDisplay = () => {
 
   return (
     <>
-      <RpsDashboard />
+    <Navbar />
+      {/* <RpsDashboard /> */}
       <div className="agreement-table">
         <h3>Agreements List</h3>
         <Link to="/ManningAggrement" className="add-manningaggrement">Add Manning Aggrement </Link>

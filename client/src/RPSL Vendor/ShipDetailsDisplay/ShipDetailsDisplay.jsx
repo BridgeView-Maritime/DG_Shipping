@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./shipdetailsDisplay.css";
 import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx"
 import { Link } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar.jsx";
 
 const ShipDetailsDisplay = () => {
   const [shipDetails, setShipDetails] = useState([]); // State to store ship details
@@ -23,7 +23,8 @@ const ShipDetailsDisplay = () => {
 
   return (
     <>
-      <RpsDashboard />
+    <Navbar />
+      {/* <RpsDashboard /> */}
     <div className="ship-details-table">   
       <h2>Ship Details</h2>
       <Link to="/Ship" className="add-Ship">Add Ship </Link>
