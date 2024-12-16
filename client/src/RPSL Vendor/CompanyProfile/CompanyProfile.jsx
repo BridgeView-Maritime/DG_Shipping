@@ -278,7 +278,7 @@ const CompanyProfile = () => {
     try {
       // Make the POST request with form data
       const response = await axios.post(
-        "http://localhost:8000/api/companyprofile",
+        "http://3.109.202.136:8000/api/companyprofile",
         formDataToSend, // Send the form data
         {
           headers: {

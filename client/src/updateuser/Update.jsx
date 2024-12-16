@@ -25,7 +25,7 @@ const Update = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/user/${id}`)
+      .get(`http://3.109.202.136:8000/api/user/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -37,7 +37,7 @@ const Update = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:8000/api/update/user/${id}`, user)
+      .put(`http://3.109.202.136:8000/api/update/user/${id}`, user)
       .then((response) => {
         // console.log(response.data.message);
         toast.success(response.data.message, { position: "top-right" });

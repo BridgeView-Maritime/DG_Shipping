@@ -24,7 +24,7 @@ const Add = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:8000/api/user", user)
+      .post("http://3.109.202.136:8000/api/user", user)
       .then((response) => {
         toast.success(response.data.message, { position: "top-right" });
         navigate("/");

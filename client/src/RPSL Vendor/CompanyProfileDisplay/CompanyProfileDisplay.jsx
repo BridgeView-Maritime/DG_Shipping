@@ -7,7 +7,7 @@ const CompanyProfileDisplay = () => {
   const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/companyprofile")
+    fetch("http://3.109.202.136:8000/api/companyprofile")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Profile Data:", data);
@@ -211,7 +211,7 @@ const CompanyProfileDisplay = () => {
                   {user.registrationDocuments?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.registrationDocuments.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.registrationDocuments.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -222,7 +222,7 @@ const CompanyProfileDisplay = () => {
                   {user.rpsLicense?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.rpsLicense.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.rpsLicense.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -233,7 +233,7 @@ const CompanyProfileDisplay = () => {
                   {user.profitLossBalanceSheet?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.profitLossBalanceSheet.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.profitLossBalanceSheet.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -244,7 +244,7 @@ const CompanyProfileDisplay = () => {
                   {user.bankGuarantee?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.bankGuarantee.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.bankGuarantee.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -255,7 +255,7 @@ const CompanyProfileDisplay = () => {
                   {user.assetsLiabilitiesCertificate?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.assetsLiabilitiesCertificate.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.assetsLiabilitiesCertificate.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -266,7 +266,7 @@ const CompanyProfileDisplay = () => {
                   {user.incomeTaxReturns?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.incomeTaxReturns.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.incomeTaxReturns.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -277,7 +277,7 @@ const CompanyProfileDisplay = () => {
                   {user.auditReport?.filePath && (
                     <li>
                       <a
-                        href={`http://localhost:8000/${user.auditReport.filePath}`}
+                        href={`http://3.109.202.136:8000/${user.auditReport.filePath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
