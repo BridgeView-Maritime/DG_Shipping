@@ -7,7 +7,7 @@ import {
   getUserById,
   update,
 } from "../controller/userController.js";
-import { createCrewDetails } from "../controller/crewController.js"; // Importing from updated path
+import { createCrewDetails } from "../controller/crewController.js"; 
 
 import { login, signup } from "../controller/loginController.js";
 import { createCompanyProfile , ComapanyuploadMiddleware, getCompanyProfile} from "../controller/companyprofileController.js";
@@ -25,9 +25,9 @@ route.delete("/delete/:id", deleteUser);
 route.post("/login", login);
 route.post("/signup", signup);
 
-//comapany profile route
-route.post("/companyprofile",ComapanyuploadMiddleware, createCompanyProfile); 
-route.get("/companyprofile", getCompanyProfile);
+//vessel Owner route
+route.post("/vesselOwner",ComapanyuploadMiddleware, createCompanyProfile); 
+route.get("/vesselOwner", getCompanyProfile);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
@@ -36,8 +36,8 @@ route.post("/crewdetails", createCrewDetails); // Handle the POST request to sub
 route.post("/manningAgreement", manninguploadMiddleware, createManningAgreement);
 route.get("/manningAgreement", getAgreement);
 
-//ship route
-route.post("/shipDetails", uploadMiddleware, createshipDetails);
-route.get("/shipDetails", getshipDetails)
+//vessel Form route
+route.post("/vesselform", uploadMiddleware, createshipDetails);
+route.get("/vesselform", getshipDetails)
 
 export default route;

@@ -7,15 +7,22 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Assuming userType is stored in localStorage, you can change it based on your authentication flow
     const userTypeFromStorage = localStorage.getItem("userType");
     setUserType(userTypeFromStorage);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("userType"); // Clear the userType on logout
-    setUserType(null); // Reset userType
-    navigate("/login"); // Redirect to login page
+    localStorage.removeItem("userType");
+    setUserType(null);
+    navigate("/login");
+  };
+
+  // Smooth scrolling handler
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -23,22 +30,36 @@ const Navbar = () => {
       <div className="navbar-logo">MyLogo</div>
       <nav className="navbar-links">
         <Link to="/">Home</Link>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
+        <a
+          href="#about"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("about");
+          }}
+        >
+          About Us
+        </a>
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToSection("contact");
+          }}
+        >
+          Contact
+        </a>
 
-        {/* Conditional Rendering Based on userType */}
         {userType === "crew" && (
           <Link to="/SeafarerProfile">Seafarer Profile</Link>
         )}
         {userType === "Vessel_vendor" && (
           <Link to="/Vesselvendor">Vessel Vendor</Link>
         )}
-        {userType === "rpsl_vendor" && (
+        {userType === "vessel_owner" && (
           <>
-            <Link to="/companyprofiledisplay">Company Profile</Link>
-            <Link to="/ManningAggrementDisplay">Manning Agreement</Link>
-            <Link to="/shipDetailsDisplay">Ship</Link>
+            <Link to="/vessel_owner_table">Vessel Owner</Link>
+            {/* <Link to="/ManningAggrementDisplay">Manning Agreement</Link> */}
+            <Link to="/vessel_Table">Vessel</Link>
           </>
         )}
 
@@ -55,3 +76,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

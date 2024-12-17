@@ -3,8 +3,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./manningAggrement.css";
 import axios from "axios";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx";
+// import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar.jsx";
 
 
 const ManningAgrrement = () => {
@@ -153,7 +154,8 @@ const ManningAgrrement = () => {
 
   return (
     <>
-      <RpsDashboard />
+      {/* <RpsDashboard /> */}
+      <Navbar />
       <div className="agreement-form-body">
         <div className="agreement-form">
           <h2>Manning Agreement with the employer</h2>
@@ -207,6 +209,7 @@ const ManningAgrrement = () => {
                   id="contact"
                   type="text"
                   name="contact"
+                  maxLength={10}
                   value={formData.contact || ""}
                   onChange={handleInputChange}
                   required
@@ -279,50 +282,18 @@ const ManningAgrrement = () => {
             </div>
 
             <div className="button-row">
-              <button type="button">Back</button>
+              {/* <button type="button">Back</button> */}
               <button type="button" onClick={handleAddToList}>
                 Add to List
               </button>
               <button type="reset" onClick={handleReset}>
                 Reset
               </button>
-              <button type="submit">Next</button>
+              {/* <button type="submit">Next</button> */}
             </div>
           </form>
         </div>
       </div>
-
-      {/* <div className="agreement-table">
-        <h3>Agreements List</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Employer Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Contact</th>
-              <th>Validity Type</th>
-              <th>Validity Date</th>
-              <th>Agreement Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {agreements.map((agreement, index) => (
-              <tr key={agreement._id || index}>
-                <td>{agreement._id}</td>
-                <td>{agreement.employerName}</td>
-                <td>{agreement.email}</td>
-                <td>{agreement.address}</td>
-                <td>{agreement.contact}</td>
-                <td>{agreement.validityType}</td>
-                <td>{new Date(agreement.validityDate).toLocaleDateString()}</td>
-                <td>{agreement.agreementType}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
 
       <ToastContainer position="top-right" autoClose={5000} />
     </>

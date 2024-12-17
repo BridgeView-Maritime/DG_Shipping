@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./companyprofile.css";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard";
+import "./VesselOwnerForm.css";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
 
-const CompanyProfile = () => {
+const VesselOwnerForm = () => {
   const [formData, setFormData] = useState({
     // Profile Details
     nameOfRPSL: "",
@@ -111,7 +111,7 @@ const CompanyProfile = () => {
       "20 Lakh": 2000000,
     };
 
-    return amountMap[value] || 0; // Default to 0 if no valid match
+    return amountMap[value] || 0; 
   };
 
   const handleViewDocument = (fileName) => {
@@ -276,10 +276,9 @@ const CompanyProfile = () => {
     console.log("formDataToSend", formDataToSend)
   
     try {
-      // Make the POST request with form data
       const response = await axios.post(
-        "http://localhost:8000/api/companyprofile",
-        formDataToSend, // Send the form data
+        "http://localhost:8000/api/vesselOwner",
+        formDataToSend, 
         {
           headers: {
             "Content-Type": "multipart/form-data", 
@@ -288,8 +287,7 @@ const CompanyProfile = () => {
       );
       setSuccessMessage(response.data.message);
   
-      // Navigate only after the response is successfully received
-      navigate("/companyprofiledisplay");
+      navigate("/vessel_owner_table");
     } catch (error) {
       console.error("Error submitting company profile:", error);
       setErrors({
@@ -305,9 +303,9 @@ const CompanyProfile = () => {
   
   return (
     <>
-      <RpsDashboard />
+      <Navbar />
       <div className="container">
-        <h1 className="title">Company Profile</h1>
+        <h1 className="title">Vessel Owner Form</h1>
         <form onSubmit={handleSubmit}>
           {/* Profile Details Section */}
           <section>
@@ -1122,4 +1120,4 @@ const CompanyProfile = () => {
   );
 };
 
-export default CompanyProfile;
+export default VesselOwnerForm;

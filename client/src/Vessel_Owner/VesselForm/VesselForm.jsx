@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./ship.css";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx";
+import "./VesselForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar.jsx";
 
-const Ship = () => {
+const VesselForm = () => {
   const [formData, setFormData] = useState({
     employer: "",
     nameOfShip: "",
@@ -66,13 +66,13 @@ const Ship = () => {
     
 
         try{
-            const response = await axios.post("http://localhost:8000/api/shipDetails", FormDataToSend, {
+            const response = await axios.post("http://localhost:8000/api/vesselform", FormDataToSend, {
                 headers :{
                     "Content-Type":"multipart/form-data",
                 },
             });
             console.log("response", response.data);
-            navigate("/ShipDetailsDisplay")
+            navigate("vessel_Table")
         }catch(error){
             console.error("Error uploading form data:", error);
         }
@@ -80,7 +80,7 @@ const Ship = () => {
 
   return (
     <>
-      <RpsDashboard />
+      <Navbar />
       <div className="ship-form-container">
         <h2>Ship Details</h2>
         <form className="shipContainer" onSubmit={handlesubmit}>
@@ -401,4 +401,4 @@ const Ship = () => {
   );
 };
 
-export default Ship;
+export default VesselForm;

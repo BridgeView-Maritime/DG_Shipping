@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-// import "./CompanyProfileDisplay.css";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard";
 import { Link } from "react-router-dom";
 import "../../style/formCommon.css"
 import Navbar from "../../Navbar/Navbar";
-const CompanyProfileDisplay = () => {
+const VesselOwnerTable = () => {
   const [profileData, setProfileData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/companyprofile")
+    fetch("http://localhost:8000/api/vesselOwner")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Profile Data:", data);
@@ -24,9 +22,9 @@ const CompanyProfileDisplay = () => {
       {/* <RpsDashboard /> */}
       <Navbar />
       <div className="ship-details-table company-profile-container">
-      <h1>Company Profile</h1>
-      <Link to="/CompanyProfile" className="add-companyprofile">
-        Add Profile
+      <h1>Vessel Owner Table</h1>
+      <Link to="/vessel_owner_form" className="add-companyprofile">
+        Add Vessel Owner
       </Link>
       <table className="profile-table">
         <thead>
@@ -299,4 +297,4 @@ const CompanyProfileDisplay = () => {
   );
 };
 
-export default CompanyProfileDisplay;
+export default VesselOwnerTable ;

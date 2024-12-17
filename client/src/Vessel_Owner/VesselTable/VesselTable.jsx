@@ -1,33 +1,30 @@
 import React, { useState, useEffect } from "react";
-import RpsDashboard from "../RPS DashBoard/RpsDashboard.jsx"
 import { Link } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar.jsx";
 
-const ShipDetailsDisplay = () => {
-  const [shipDetails, setShipDetails] = useState([]); // State to store ship details
+const VesselTable = () => {
+  const [shipDetails, setShipDetails] = useState([]); 
 
   useEffect(() => {
-    // Fetch ship details from the backend API
     const fetchShipDetails = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/shipDetails");
+        const response = await fetch("http://localhost:8000/api/vesselform");
         const data = await response.json();
-        setShipDetails(data); // Store the data in state
+        setShipDetails(data); 
       } catch (error) {
         console.error("Error fetching ship details:", error);
       }
     };
 
-    fetchShipDetails(); // Call the fetch function on component mount
+    fetchShipDetails(); 
   }, []);
 
   return (
     <>
     <Navbar />
-      {/* <RpsDashboard /> */}
     <div className="ship-details-table">   
-      <h2>Ship Details</h2>
-      <Link to="/Ship" className="add-Ship">Add Ship </Link>
+      <h2>Vessel Table</h2>
+      <Link to="/vessel" className="add-Ship">Add Vessel </Link>
       <table>
           <thead>
             <tr>
@@ -40,7 +37,6 @@ const ShipDetailsDisplay = () => {
           <tbody>
             {shipDetails.map((ship, index) => (
               <tr key={index}>
-                {/* Group 1: Ship Information */}
                 <td>
                   <p><strong>Employer:</strong> {ship.employer}</p>
                   <p><strong>Name of Ship:</strong> {ship.nameOfShip}</p>
@@ -149,4 +145,4 @@ const ShipDetailsDisplay = () => {
   );
 };
 
-export default ShipDetailsDisplay;
+export default VesselTable;
