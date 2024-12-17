@@ -7,7 +7,6 @@ import Crew from "./crew/SeafarerProfile.jsx";
 import VesselVendor from "./Vessel_Manager/VesselVendor.jsx";
 import ManningAggrement from "./Vessel_Owner/ManningAggrement/ManningAggrement.jsx";
 import HomePage from "./Homepage/HomePage.jsx";
-import ShipDetailsDisplay from "./Vessel_Owner/VesselTable/VesselTable.jsx";
 import ManningAggrementDisplay from "./Vessel_Owner/ManningAggrementDisplay/ManningAggrementDisplay.jsx";
 import VesselOwnerTable from "./Vessel_Owner/VesselOwnerTable/VesselOwnerTable.jsx";
 import VesselOwnerForm from "./Vessel_Owner/VesselOwnerForm/VesselOwnerForm.jsx";
@@ -60,10 +59,6 @@ function App() {
     {
       path : "/vessel_Table",
       element: <VesselTable />
-    },
-    {
-      path: "/ShipDetailsDisplay",
-      element: <ShipDetailsDisplay />,
     },
     {
       path: "/ManningAggrementDisplay",

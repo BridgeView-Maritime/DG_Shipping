@@ -815,6 +815,7 @@ const VesselOwnerForm = () => {
                 <input
                   type="text"
                   name="contactPersonMobile"
+                  maxLength={10}
                   value={formData.contactPersonMobile}
                   onChange={handleChange}
                 />
