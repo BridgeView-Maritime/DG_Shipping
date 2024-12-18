@@ -72,7 +72,7 @@ const VesselForm = () => {
                 },
             });
             console.log("response", response.data);
-            navigate("vessel_Table")
+            navigate("/vessel_Table")
         }catch(error){
             console.error("Error uploading form data:", error);
         }
