@@ -125,6 +125,7 @@ function Signup() {
             >
               <option value="">Select User Type</option>
               <option value="crew">Crew</option>
+              <option value="crewing_agent">Crewing Agent</option>
               <option value="vessel_owner">Vessel Owner</option>
               <option value="vessel_manager">Vessel Manager</option>
               <option value="travel_agent">Travel Agent</option>
