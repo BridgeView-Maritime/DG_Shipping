@@ -5,6 +5,7 @@ import route from "./routes/userRoute.js";
 import cors from "cors";
 import shipRoutes from "./routes/userRoute.js"
 import path from 'path'; 
+// const path = require("path");
 import { fileURLToPath } from 'url';
 
 const app = express();

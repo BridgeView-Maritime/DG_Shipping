@@ -3,6 +3,8 @@ import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../Navbar/Navbar';
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -11,7 +13,6 @@ function Login() {
   const navigate= useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const userData = { email, password };
 
     try {
@@ -19,19 +20,21 @@ function Login() {
       if (response.status === 200) {
        
          console.log("login sucess full"); 
+        
          // Store the userType in localStorage or sessionStorage
          const { userType } = response.data;  // Assume response contains userType
          localStorage.setItem("userType", userType);
- 
          // Redirect based on userType
          if (userType === "crew") {
            navigate("/SeafarerProfile");
-         } else if (userType === "versel_vendor") {
-           navigate("/verselvendor");
-         } else if (userType === "rpsl_vendor") {
-           navigate("/companyprofiledisplay");
+         } else if (userType === "Vessel_vendor") {
+           navigate("/Vesselvendor");
+         } else if (userType === "vessel_owner") { 
+          toast.success("User signed up Successfully!");       
+           navigate("/vessel_owner_table");
          } else {
-           alert("Unknown user type");
+          //  alert("Unknown user type");
+           toast.error("Unknown user type");
          }
         }
     } catch (error) {
@@ -79,6 +82,8 @@ function Login() {
         </p>
         </form>
       </div>
+
+       <ToastContainer position="top-right" autoClose={5000} />
     </div>
   );
 }

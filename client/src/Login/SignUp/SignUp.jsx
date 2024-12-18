@@ -34,6 +34,12 @@ function Signup() {
       return;
     }
 
+    // Validate user type
+    if (!userType) {
+      setError("Please select a user type");
+      return;
+    }
+
     const userData = { username, email, password, confirmpassword, userType };
 
     console.log("User Data:", userData);
@@ -119,8 +125,10 @@ function Signup() {
             >
               <option value="">Select User Type</option>
               <option value="crew">Crew</option>
-              <option value="versel_vendor">Versel Vendor</option>
-              <option value="rpsl_vendor">RPSL vendor</option>
+              <option value="vessel_owner">Vessel Owner</option>
+              <option value="vessel_manager">Vessel Manager</option>
+              <option value="travel_agent">Travel Agent</option>
+              <option value="institute">Marine Institute</option>
             </select>
           </div>
           <button className="signupbtn" type="submit">

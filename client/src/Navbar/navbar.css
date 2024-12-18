@@ -2,7 +2,7 @@
 .navbar-homepage {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
     background-color: #333;
     color: white;
     position: fixed; /* Keeps the navbar fixed at the top */

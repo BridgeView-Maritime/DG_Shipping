@@ -1,0 +1,157 @@
+/* General Styling */
+.ship-form-container .shipContainer {
+    margin: 55px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 900px;
+}
+
+.ship-form-container .shipContainer h2,
+.ship-form-container .shipContainer h3 {
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.ship-form-container .form-section {
+    margin-bottom: 30px;
+}
+
+/* Form Rows */
+.ship-form-container .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Aligns labels and inputs */
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.ship-form-container .form-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+.ship-form-container label {
+    display: inline-block; /* Ensures labels are inline with inputs */
+    font-weight: bold;
+    margin-right: 10px; /* Adds spacing between label and input */
+    color: #333;
+    width: 150px; /* Fixed width for uniform alignment */
+    /* text-align: right;  */
+}
+
+.ship-form-container input[type="text"],
+.ship-form-container input[type="file"],
+.ship-form-container input[type="date"],
+.ship-form-container input[type="number"],
+.ship-form-container select {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: calc(100% - 160px); /* Default width calculation */
+}
+
+.ship-form-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ship-form-container button:hover {
+    background-color: #0056b3;
+}
+
+.ship-form-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.ship-form-container .form-actions {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    gap:2rem;
+   
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ship-form-container .form-row {
+        flex-direction: column;
+    }
+
+    .ship-form-container label {
+        width: 100%; /* Labels stack on top of inputs */
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .ship-form-container input[type="text"],
+    .ship-form-container input[type="file"],
+    .ship-form-container input[type="date"],
+    .ship-form-container input[type="number"],
+    .ship-form-container select {
+        width: 100%; /* Full width for inputs on smaller screens */
+    }
+}
+
+/* Specific Field Width Adjustments */
+.ship-form-container .seaAggrement,
+.ship-form-container .cbaref,
+.ship-form-container .cbaaggrement {
+    flex: 1;
+    width: auto; /* Allows dynamic resizing */
+}
+
+.ship-form-container select {
+    width: auto; /* Default width for dropdowns */
+}
+
+/* Specific styles for SEA and CBA rows */
+.ship-form-container .sea-row label,
+.ship-form-container .cba-row label {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 10px; /* Space between label and input */
+    color: #333;
+    width: 300px; /* Sufficient width for long label text */
+    /* text-align: right;  */
+    white-space: nowrap; /* Prevent label wrapping */
+}
+
+.ship-form-container .sea-row input,
+.ship-form-container .cba-row input {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: calc(100% - 320px); /* Adjust width for label and spacing */
+}
+
+.ship-form-container .sea-row select,
+.ship-form-container .cba-row select {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 320px); /* Adjust width for label and spacing */
+}
+
+.file-input {
+    display: flex;
+    align-items: center;
+  }
+  
