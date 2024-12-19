@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./VesselOwnerForm.css";
+import "./VesselMangerForm.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 
-const VesselOwnerForm = () => {
+const VesselMangerForm = () => {
   const [formData, setFormData] = useState({
     // Profile Details
     nameOfRPSL: "",
@@ -304,7 +304,7 @@ const VesselOwnerForm = () => {
     <>
       <Navbar />
       <div className="container">
-        <h1 className="title">Vessel Owner Form</h1>
+        <h1 className="title">Vessel Manager Form</h1>
         <form onSubmit={handleSubmit}>
           {/* Profile Details Section */}
           <section>
@@ -1120,4 +1120,4 @@ const VesselOwnerForm = () => {
   );
 };
 
-export default VesselOwnerForm;
+export default VesselMangerForm;
