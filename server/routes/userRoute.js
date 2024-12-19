@@ -10,7 +10,7 @@ import {
 import { createCrewDetails } from "../controller/crewController.js"; 
 
 import { login, signup } from "../controller/loginController.js";
-import { createCrewprofile , ComapanyuploadMiddleware, getCrewingAgent} from "../controller/companyprofileController.js";
+import { createCrewprofile , ComapanyuploadMiddleware, getCrewingAgent} from "../controller/CrewingAgentController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 

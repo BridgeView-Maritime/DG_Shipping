@@ -1,4 +1,4 @@
-import CompanyProfile from '../model/companyprofileModel.js';
+import CompanyProfile from '../model/CrewingAgentModel.js';
 import multer from "multer";
 
 const storage = multer.diskStorage({

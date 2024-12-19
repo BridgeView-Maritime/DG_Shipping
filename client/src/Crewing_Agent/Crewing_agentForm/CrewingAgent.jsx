@@ -286,7 +286,7 @@ const CrewingAgent = () => {
       );
       setSuccessMessage(response.data.message);
   
-      // navigate("/vessel_owner_table");
+      navigate("/CrewingAgentTable");
     } catch (error) {
       console.error("Error submitting company profile:", error);
       setErrors({

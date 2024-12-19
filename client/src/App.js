@@ -39,7 +39,7 @@ function App() {
       element: <VesselOwnerTable />,
     },
     {
-      path: "/vessel_owner_form",
+      path: "/vesselownerform",
       element: <VesselOwnerForm />
     },
     {
