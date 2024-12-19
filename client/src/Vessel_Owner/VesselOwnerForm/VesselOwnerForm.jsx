@@ -7,7 +7,7 @@ import Navbar from "../../Navbar/Navbar";
 const VesselOwnerForm = () => {
   const [formData, setFormData] = useState({
     // Profile Details
-    nameOfRPSL: "",
+    nameofCrewingAgent: "",
     rpslNumber: "",
     issueDate: "",
     expiryDate: "",
@@ -125,8 +125,8 @@ const VesselOwnerForm = () => {
     const newErrors = {};
 
     // Name of RPSL validation
-    if (!formData.nameOfRPSL.trim()) {
-      newErrors.nameOfRPSL = "Name of RPSL is required.";
+    if (!formData.nameofCrewingAgent.trim()) {
+      newErrors.nameofCrewingAgent = "Name of RPSL is required.";
     }
 
     // RPSL Number validation
@@ -315,13 +315,13 @@ const VesselOwnerForm = () => {
                   <label>Name of Vessel</label>
                   <input
                     type="text"
-                    name="nameOfRPSL"
-                    value={formData.nameOfRPSL}
+                    name="nameofCrewingAgent"
+                    value={formData.nameofCrewingAgent}
                     onChange={handleChange}
                   />
                 </div>
-                {errors.nameOfRPSL && (
-                  <p className="error">{errors.nameOfRPSL}</p>
+                {errors.nameofCrewingAgent && (
+                  <p className="error">{errors.nameofCrewingAgent}</p>
                 )}
               </div>
 

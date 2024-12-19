@@ -32,7 +32,9 @@ function Login() {
          } else if (userType === "vessel_owner") { 
           toast.success("User signed up Successfully!");       
            navigate("/vessel_owner_table");
-         } else {
+         } else if(userType === "crewing_agent"){ 
+              navigate("/CrewingAgentTable");
+         }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");
          }

@@ -13,12 +13,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-export const createCompanyProfile = async (req, res) => {
+export const createCrewprofile = async (req, res) => {
   console.log('Received files:', req.files); // Debugging line
 
   try {
     const {
-      nameOfRPSL,
+      nameofCrewingAgent,
       rpslNumber,
       issueDate,
       expiryDate,
@@ -71,7 +71,7 @@ export const createCompanyProfile = async (req, res) => {
     }=req.body
 
     const newProfileCompany = new CompanyProfile({
-      nameOfRPSL,
+      nameofCrewingAgent,
       rpslNumber,
       issueDate,
       expiryDate,
@@ -171,10 +171,10 @@ export const createCompanyProfile = async (req, res) => {
   }
 };
 
-export const getCompanyProfile = async (req, res) => {
+export const getCrewingAgent = async (req, res) => {
   try {
-    const companyProfiles = await CompanyProfile.find(); // Assuming you are using mongoose
-    res.status(200).json(companyProfiles); // Send all profiles as response
+    const CrewingAgent = await CompanyProfile.find(); // Assuming you are using mongoose
+    res.status(200).json(CrewingAgent); // Send all profiles as response
   } catch (error) {
     console.error("Error fetching company profiles:", error); // Log the error
     res.status(500).json({ message: "Error fetching company profiles", error: error.message });

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./VesselMangerForm.css";
+import "./CrewingAgent.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 
-const VesselMangerForm = () => {
+const CrewingAgent = () => {
   const [formData, setFormData] = useState({
     // Profile Details
     nameofCrewingAgent: "",
@@ -276,7 +276,7 @@ const VesselMangerForm = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/vesselOwner",
+        "http://localhost:8000/api/crewingAgent",
         formDataToSend, 
         {
           headers: {
@@ -286,7 +286,7 @@ const VesselMangerForm = () => {
       );
       setSuccessMessage(response.data.message);
   
-      navigate("/vessel_owner_table");
+      // navigate("/vessel_owner_table");
     } catch (error) {
       console.error("Error submitting company profile:", error);
       setErrors({
@@ -304,7 +304,7 @@ const VesselMangerForm = () => {
     <>
       <Navbar />
       <div className="container">
-        <h1 className="title">Vessel Manager Form</h1>
+        <h1 className="title">Crewing Agent</h1>
         <form onSubmit={handleSubmit}>
           {/* Profile Details Section */}
           <section>
@@ -312,7 +312,7 @@ const VesselMangerForm = () => {
             <div className="form-row">
               <div className="form-group-row">
                 <div className="input-label-row">
-                  <label>Name of Vessel</label>
+                  <label>Name of Crewing Agent</label>
                   <input
                     type="text"
                     name="nameofCrewingAgent"
@@ -1120,4 +1120,4 @@ const VesselMangerForm = () => {
   );
 };
 
-export default VesselMangerForm;
+export default CrewingAgent;

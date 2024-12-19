@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const companyProfileSchema = new mongoose.Schema({
-  nameOfRPSL: { type: String, trim: true },
+  nameofCrewingAgent: { type: String, trim: true },
   rpslNumber: { type: String, trim: true },
   issueDate: { type: Date },
   expiryDate: { type: Date },
@@ -60,6 +60,6 @@ const companyProfileSchema = new mongoose.Schema({
   auditReport: { originalName: String, filePath: String, }, 
 });
 
-const CompanyProfile = mongoose.model("CompanyProfile", companyProfileSchema);
+const CompanyProfile = mongoose.model("createCrewprofile", companyProfileSchema);
 
 export default CompanyProfile;

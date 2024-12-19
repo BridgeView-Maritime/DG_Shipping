@@ -10,7 +10,7 @@ import {
 import { createCrewDetails } from "../controller/crewController.js"; 
 
 import { login, signup } from "../controller/loginController.js";
-import { createCompanyProfile , ComapanyuploadMiddleware, getCompanyProfile} from "../controller/companyprofileController.js";
+import { createCrewprofile , ComapanyuploadMiddleware, getCrewingAgent} from "../controller/companyprofileController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 
@@ -25,9 +25,9 @@ route.delete("/delete/:id", deleteUser);
 route.post("/login", login);
 route.post("/signup", signup);
 
-//vessel Owner route
-route.post("/vesselOwner",ComapanyuploadMiddleware, createCompanyProfile); 
-route.get("/vesselOwner", getCompanyProfile);
+//Crewing Agent route
+route.post("/crewingAgent",ComapanyuploadMiddleware, createCrewprofile); 
+route.get("/crewingAgentTable", getCrewingAgent);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details

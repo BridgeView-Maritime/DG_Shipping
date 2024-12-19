@@ -12,6 +12,8 @@ import VesselOwnerForm from "./Vessel_Owner/VesselOwnerForm/VesselOwnerForm.jsx"
 import VesselForm from "./Vessel_Owner/VesselForm/VesselForm.jsx";
 import VesselTable from "./Vessel_Owner/VesselTable/VesselTable.jsx";
 import VesselMangerForm from "./Vessel_Manager/VesselMangerForm/VesselMangerForm.jsx";
+import CrewingAgent from "./Crewing_Agent/Crewing_agentForm/CrewingAgent.jsx";
+import CrewingAgentTable from "./Crewing_Agent/Crewing_agent_table/CrewingAgentTable.jsx";
 
 function App() {
 
@@ -59,12 +61,22 @@ function App() {
     {
       path: "/ManningAggrementDisplay",
       element: <ManningAggrementDisplay />
-    }  ,
+    },
     //vessel Manger routes
     {
       path : "/VesselMangerForm",
       element: <VesselMangerForm />
-    }
+    },
+
+    //Crewing_Agent routes
+    {
+      path: "/Crewing_Agent",
+      element: <CrewingAgent />
+    },
+    {
+      path: "/CrewingAgentTable",
+      element: <CrewingAgentTable />
+    },
   ]);
 
   return (
