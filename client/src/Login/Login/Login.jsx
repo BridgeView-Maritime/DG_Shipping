@@ -48,7 +48,7 @@ function Login() {
     <div className="loginContainer">
       <Navbar />
       <div className="loginFormContainer">
-        <h1>Login</h1>
+        <h1>Login User</h1>
         <form className="logform" onSubmit={handleSubmit}>
           <div className="inputGroup">
             <label htmlFor="email">Email</label>
