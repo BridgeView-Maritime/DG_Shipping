@@ -262,7 +262,104 @@ const VesselOwnerForm = () => {
               />
             </div>
           </div>
-          <button type="submit">Submit</button>
+
+          <h2>Name of Accounting Team Personnel</h2>
+          {/* Name of Person in Accounts Department */}
+          <div className="form-group">
+            <label>Name of Person in Accounts Department</label>
+            <div className="flex-row">
+              <select
+                name="accountsTitle"
+                value={formData.accountsTitle}
+                onChange={handleInputChange}
+              >
+                <option value="MR.">MR.</option>
+                <option value="MRS.">MRS.</option>
+                <option value="MISS">MISS</option>
+              </select>
+              <input
+                type="text"
+                name="accountsPersonName"
+                value={formData.accountsPersonName}
+                onChange={handleInputChange}
+                placeholder="Enter name"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Phone Number/Email of Accounts Department */}
+          <div className="form-group">
+            <label>Phone Number/Email of Accounts Department</label>
+            <div className="flex-row">
+              <input
+                type="tel"
+                name="accountsPhoneNumber"
+                value={formData.accountsPhoneNumber}
+                onChange={handleInputChange}
+                placeholder="Phone Number"
+                required
+              />
+              <input
+                type="email"
+                name="accountsEmail"
+                value={formData.accountsEmail}
+                onChange={handleInputChange}
+                placeholder="Email"
+                required
+              />
+            </div>
+          </div>
+          {/* Name of Another Person in Accounts Department */}
+          <div className="form-group">
+            <label>Name of Another Person in Accounts Department</label>
+            <div className="flex-row">
+              <select
+                name="anotherAccountsTitle"
+                value={formData.anotherAccountsTitle}
+                onChange={handleInputChange}
+              >
+                <option value="MR.">MR.</option>
+                <option value="MRS.">MRS.</option>
+                <option value="MISS">MISS</option>
+              </select>
+              <input
+                type="text"
+                name="anotherAccountsPersonName"
+                value={formData.anotherAccountsPersonName}
+                onChange={handleInputChange}
+                placeholder="Enter name"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Phone Number/Email of Another Accounts Department */}
+          <div className="form-group">
+            <label>Phone Number/Email of Another Accounts Department</label>
+            <div className="flex-row">
+              <input
+                type="tel"
+                name="anotherAccountsPhoneNumber"
+                value={formData.anotherAccountsPhoneNumber}
+                onChange={handleInputChange}
+                placeholder="Phone Number"
+                required
+              />
+              <input
+                type="email"
+                name="anotherAccountsEmail"
+                value={formData.anotherAccountsEmail}
+                onChange={handleInputChange}
+                placeholder="Email"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" className="vesselformbtn">
+            Submit
+          </button>
         </form>
       </div>
     </>

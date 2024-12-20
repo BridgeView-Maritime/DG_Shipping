@@ -1077,6 +1077,7 @@ const CrewingAgent = () => {
                   onChange={handleFileChange}
                 />
                 <button
+                className="viewbtn"
                   type="button"
                   aria-label="View uploaded Audit Report"
                   onClick={() => handleViewDocument("auditReport")}
