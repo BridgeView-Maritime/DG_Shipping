@@ -41,5 +41,9 @@ mongoose
   }) 
   .catch((error) => console.log(error));
 
+app.get("/", (req, res) => {
+  res.send("Server is running!");
+});
+
 app.use("/api", route);
 
