@@ -10,7 +10,7 @@ const ShipDetailsDisplay = () => {
     // Fetch ship details from the backend API
     const fetchShipDetails = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/shipDetails");
+        const response = await fetch("http://3.110.185.220:8000/api/shipDetails");
         const data = await response.json();
         setShipDetails(data); // Store the data in state
       } catch (error) {
@@ -74,7 +74,7 @@ const ShipDetailsDisplay = () => {
               <td>
                 {ship.seaAgreement && (
                   <a
-                    href={`http://localhost:8000/${ship.seaAgreement.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.seaAgreement.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -85,7 +85,7 @@ const ShipDetailsDisplay = () => {
               <td>
                 {ship.cbaAgreement && (
                   <a
-                    href={`http://localhost:8000/${ship.cbaAgreement.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.cbaAgreement.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -95,7 +95,7 @@ const ShipDetailsDisplay = () => {
                 <td>
                 {ship.piDoc && (
                   <a
-                    href={`http://localhost:8000/${ship.piDoc.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.piDoc.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -106,7 +106,7 @@ const ShipDetailsDisplay = () => {
                 <td>
                 {ship.mlcCertDoc && (
                   <a
-                    href={`http://localhost:8000/${ship.mlcCertDoc.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.mlcCertDoc.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -116,7 +116,7 @@ const ShipDetailsDisplay = () => {
                 <td>
                 {ship.financialDoc && (
                   <a
-                    href={`http://localhost:8000/${ship.financialDoc.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.financialDoc.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -127,7 +127,7 @@ const ShipDetailsDisplay = () => {
                 <td>
                 {ship.dmlcPart1 && (
                   <a
-                    href={`http://localhost:8000/${ship.dmlcPart1.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.dmlcPart1.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -138,7 +138,7 @@ const ShipDetailsDisplay = () => {
                 <td>
                 {ship.dmlcPart2 && (
                   <a
-                    href={`http://localhost:8000/${ship.dmlcPart2.filePath}`}
+                    href={`http://3.110.185.220:8000/${ship.dmlcPart2.filePath}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

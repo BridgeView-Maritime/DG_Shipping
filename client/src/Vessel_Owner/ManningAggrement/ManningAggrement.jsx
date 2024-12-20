@@ -73,7 +73,7 @@ const ManningAgrrement = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/manningAgreement", {
+      const response = await fetch("http://3.110.185.220:8000/api/manningAgreement", {
         method: "POST",
         body: formDataToSend,
       });
@@ -83,7 +83,7 @@ const ManningAgrrement = () => {
       if (response.ok) {
         toast.success("Data added to list successfully!");
 
-        fetch("http://localhost:8000/api/manningAgreement")
+        fetch("http://3.110.185.220:8000/api/manningAgreement")
           .then((res) => res.json())
           .then((data) => {
             setAgreements(data.data);
