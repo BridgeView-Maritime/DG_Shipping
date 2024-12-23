@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./VesselOwnerForm.css";
 import axios from "axios";
+import Navbar from "../../Navbar/Navbar";
 
 
 const VesselOwnerForm = () => {
@@ -95,6 +96,7 @@ const VesselOwnerForm = () => {
 
   return (
     <>
+    <Navbar />
       <div className="container">
         <h2>Company Information Form</h2>
         <div className="add-back-button">
