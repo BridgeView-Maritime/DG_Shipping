@@ -4,7 +4,6 @@ import Signup from "./Login/SignUp/SignUp";
 import CrewDetails from "./crew/SeafarerProfile.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Crew from "./crew/SeafarerProfile.jsx";
-import VesselVendor from "./Vessel_Manager/VesselVendor.jsx";
 import ManningAggrement from "./Vessel_Owner/ManningAggrement/ManningAggrement.jsx";
 import HomePage from "./Homepage/HomePage.jsx";
 import ManningAggrementDisplay from "./Vessel_Owner/ManningAggrementDisplay/ManningAggrementDisplay.jsx";
@@ -12,6 +11,9 @@ import VesselOwnerTable from "./Vessel_Owner/VesselOwnerTable/VesselOwnerTable.j
 import VesselOwnerForm from "./Vessel_Owner/VesselOwnerForm/VesselOwnerForm.jsx";
 import VesselForm from "./Vessel_Owner/VesselForm/VesselForm.jsx";
 import VesselTable from "./Vessel_Owner/VesselTable/VesselTable.jsx";
+import VesselMangerForm from "./Vessel_Manager/VesselMangerForm/VesselMangerForm.jsx";
+import CrewingAgent from "./Crewing_Agent/Crewing_agentForm/CrewingAgent.jsx";
+import CrewingAgentTable from "./Crewing_Agent/Crewing_agent_table/CrewingAgentTable.jsx";
 
 function App() {
 
@@ -33,15 +35,11 @@ function App() {
       element: <Crew />,
     },
     {
-      path: "/Vesselvendor",
-      element: <VesselVendor />,
-    },
-    {
       path: "/vessel_owner_table",
       element: <VesselOwnerTable />,
     },
     {
-      path: "/vessel_owner_form",
+      path: "/vesselownerform",
       element: <VesselOwnerForm />
     },
     {
@@ -63,7 +61,22 @@ function App() {
     {
       path: "/ManningAggrementDisplay",
       element: <ManningAggrementDisplay />
-    }
+    },
+    //vessel Manger routes
+    {
+      path : "/VesselMangerForm",
+      element: <VesselMangerForm />
+    },
+
+    //Crewing_Agent routes
+    {
+      path: "/Crewing_Agent",
+      element: <CrewingAgent />
+    },
+    {
+      path: "/CrewingAgentTable",
+      element: <CrewingAgentTable />
+    },
   ]);
 
   return (
