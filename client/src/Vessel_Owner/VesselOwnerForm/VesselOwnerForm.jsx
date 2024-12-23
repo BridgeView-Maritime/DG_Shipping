@@ -1,20 +1,89 @@
 import React, { useState } from "react";
 import "./VesselOwnerForm.css";
+import axios from "axios";
+
 
 const VesselOwnerForm = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    companyName: "",
+    companyDocument: {
+      originalName: "",
+      filePath: "",
+    },
+    companyShortName: "",
+    phoneNumber: "",
+    title: "Mr.",
+    personName: "",
+    email: "",
+    address: "",
+    companyPAN: "",
+    companyGST: "",
+    country: "India",
+    crewingTitle: "Mr.",
+    crewingPersonName: "",
+    crewingDate: "",
+    crewingPhoneNumber: "",
+    crewingEmail: "",
+    personalcrewingTitle: "Mr.",
+    personalcrewingPersonName: "",
+    personalcrewingDate: "",
+    personalcrewingPhoneNumber: "",
+    personalcrewingEmail: "",
+    accountsTitle: "Mr.",
+    accountsPersonName: "",
+    accountsPhoneNumber: "",
+    accountsEmail: "",
+    anotherAccountsTitle: "Mr.",
+    anotherAccountsPersonName: "",
+    anotherAccountsPhoneNumber: "",
+    anotherAccountsEmail: "",
+  });
 
-  const handleInputChange = () => {
-    console.log("handleInputChange");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleFileChange = () => {
-    console.log("handleFileChange");
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0],
+    }));
   };
 
-  const handleSubmit = () => {
-    console.log("handleSubmit");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (formData[key]) {
+        formDataToSend.append(key, formData[key]); 
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    try{
+      const response = await axios.post("http://localhost:8000/api/vesselOwnerform", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data", 
+        }},)
+
+        if (response.status === 200) {
+          console.log(response.data.message || "Data saved successfully!");
+        } else {
+          console.log(response.data.message || "Something went wrong.");
+        }
+    }catch(err){
+      console.log(err)
+    }
+
   };
+
   const countries = [
     "India",
     "United States",
@@ -216,8 +285,8 @@ const VesselOwnerForm = () => {
             <label>Name of Crewing Team Personnel</label>
             <div className="flex-row">
               <select
-                name="crewingTitle"
-                value={formData.crewingTitle}
+                name="personalcrewingTitle"
+                value={formData.personalcrewingTitle}
                 onChange={handleInputChange}
               >
                 <option value="MR.">MR.</option>
@@ -226,16 +295,16 @@ const VesselOwnerForm = () => {
               </select>
               <input
                 type="text"
-                name="crewingPersonName"
-                value={formData.crewingPersonName}
+                name="personalcrewingPersonName"
+                value={formData.personalcrewingPersonName}
                 onChange={handleInputChange}
                 placeholder="Enter name"
                 required
               />
               <input
                 type="date"
-                name="crewingDate"
-                value={formData.crewingDate}
+                name="personalcrewingDate"
+                value={formData.personalcrewingDate}
                 onChange={handleInputChange}
                 required
               />
@@ -246,16 +315,16 @@ const VesselOwnerForm = () => {
             <div className="flex-row">
               <input
                 type="tel"
-                name="crewingPhoneNumber"
-                value={formData.crewingPhoneNumber}
+                name="personalcrewingPhoneNumber"
+                value={formData.personalcrewingPhoneNumber}
                 onChange={handleInputChange}
                 placeholder="Phone Number"
                 required
               />
               <input
                 type="email"
-                name="crewingEmail"
-                value={formData.crewingEmail}
+                name="personalcrewingEmail"
+                value={formData.personalcrewingEmail}
                 onChange={handleInputChange}
                 placeholder="Email"
                 required

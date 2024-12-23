@@ -13,6 +13,7 @@ import { login, signup } from "../controller/loginController.js";
 import { createCrewprofile , ComapanyuploadMiddleware, getCrewingAgent} from "../controller/CrewingAgentController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
+import { CreateVesselOwner, getVesselOwnerForm, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
 
 const route = express.Router();
 
@@ -39,5 +40,9 @@ route.get("/manningAgreement", getAgreement);
 //vessel Form route
 route.post("/vesselform", uploadMiddleware, createshipDetails);
 route.get("/vesselform", getshipDetails)
+
+//VesselOwnerForm Route
+route.post("/vesselOwnerform", VesselOwnerFormMiddleware, CreateVesselOwner)
+route.get("/vesselOwnerform", getVesselOwnerForm)
 
 export default route;

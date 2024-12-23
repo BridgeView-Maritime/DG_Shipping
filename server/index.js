@@ -26,6 +26,7 @@ const __dirname = path.dirname(__filename); // Get the directory path
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/ManningAggrementDocuments', express.static(path.join(__dirname, 'ManningAggrementDocuments')));
 app.use('/CompanyProfileDocuments', express.static(path.join(__dirname, 'CompanyProfileDocuments')));
+app.use('/vesselOwnerform' , express.static(path.join(__dirname, 'Documents/VesselOwnerFormDocuments')))
 
 const PORT = process.env.PORT || 8000;
 const MONGOURL = process.env.MONGO_URL;
