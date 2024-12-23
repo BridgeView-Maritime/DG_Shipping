@@ -47,7 +47,7 @@ function Signup() {
     try {
       // Sending a POST request to the backend
       const response = await axios.post(
-        "http://3.110.185.220:8000/api/signup",
+        "http://localhost:8000/api/signup",
         userData
       );
       console.log("Signup Success:", response.data);
