@@ -1,300 +1,169 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import "../../style/formCommon.css"
 import Navbar from "../../Navbar/Navbar";
+// import "./VesselOwnerTable.css";
+
 const VesselOwnerTable = () => {
-  const [profileData, setProfileData] = useState([]);
+  const [vesselData, setVesselData] = useState([]);
 
   useEffect(() => {
-    fetch("http://3.110.185.220:8000/api/vesselOwner")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched Profile Data:", data);
-        setProfileData(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+    // Fetch data from the API to populate the table
+    const fetchVesselData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/vesselOwnerform"
+        );
+        setVesselData(response.data.data); // Assuming data is in `response.data.data`
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchVesselData();
   }, []);
 
-  if (!profileData) return <div>Loading...</div>;
+  console.log("vesselData", vesselData);
 
   return (
     <>
-      {/* <RpsDashboard /> */}
-      <Navbar />
-      <div className="ship-details-table company-profile-container">
-      <h1>Vessel Owner Table</h1>
-      <Link to="/vessel_owner_form" className="add-companyprofile">
-        Add Vessel Owner
+    <Navbar />
+    <div className="container">
+      <h2>Vessel Owner Information</h2>
+      <Link to="/vesselownerform">
+        <button>Add Vessel Owner</button>
       </Link>
-      <table className="profile-table">
-        <thead>
-          <tr>
-            <th>Profile No.</th>
-            <th>Profile Details</th>
-            <th>Inspection Details</th>
-            <th>Registered Address</th>
-            <th>Contact Person</th>
-            <th>Other Details</th>
-            <th>Documents</th>
-          </tr>
-        </thead>
-        <tbody>
-          {profileData.map((user, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
+      <div className="vessel-container">
+        {/* Company Details Column */}
+        <div className="vessel-column">
+          <h3>Company Details</h3>
+          <table className="vessel-table">
+            <thead>
+              <tr>
+                <th>Company Info</th>
+                <th>Crewing Team Personnel</th>
+                <th>Accounting Team Personnel</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vesselData.map((vessel, index) => (
+                <tr key={index}>
+                  {/* Company Info */}
+                  <td>
+                    <div>
+                      <strong>Company Name:</strong> {vessel.companyName}
+                    </div>
+                    <div>
+                      <strong>Company Short Name:</strong>{" "}
+                      {vessel.companyShortName}
+                    </div>
+                    <div>
+                      <strong>Phone Number:</strong> {vessel.phoneNumber}
+                    </div>
+                    <div>
+                      <strong>Contact Person Name:</strong>{" "}
+                      {`${vessel.title} ${vessel.personName}`}
+                    </div>
+                    <div>
+                      <strong>Email:</strong> {vessel.email}
+                    </div>
+                    <div>
+                      <strong>Address:</strong> {vessel.address}
+                    </div>
+                    <div>
+                      <strong>Company PAN:</strong> {vessel.companyPAN}
+                    </div>
+                    <div>
+                      <strong>Company GST:</strong> {vessel.companyGST}
+                    </div>
+                    <div>
+                      <strong>Country:</strong> {vessel.country}
+                    </div>
+                    <div>
+                      <strong>Company Document:</strong>
+                      {vessel.companyDocument ? (
+                        <a
+                          href={`http://localhost:8000/uploads/${vessel.companyDocument.filePath}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          View Document
+                        </a>
+                      ) : (
+                        "No Document Available"
+                      )}
+                    </div>
+                  </td>
 
-              <td>
-                <p>
-                  <span className="key">Name Of RPSL:</span> {user.nameOfRPSL}
-                </p>
-                <p>
-                  <span className="key">RPSL Number:</span> {user.rpslNumber}
-                </p>
-                <p>
-                  <span className="key">Issue Date:</span> {new Date(user.issueDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Expiry Date:</span> {new Date(user.expiryDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Issue Place:</span> {user.issuePlace}
-                </p>
-                <p>
-                  <span className="key">TIN TAN Number:</span>{" "}
-                  {user.tinTanNumber}
-                </p>
-                <p>
-                  <span className="key">Bank Name:</span> {user.bankName}
-                </p>
-                <p>
-                  <span className="key">Bank Guarantee Validity Date:</span>{" "}
-                  {new Date(user.bankGuaranteeValidityDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Guarantee Amount:</span>{" "}
-                  {user.guaranteeAmount}
-                </p>
-                <p>
-                  <span className="key">Seafarer Recruited:</span>{" "}
-                  {user.seafarerRecruited}
-                </p>
-                <p>
-                  <span className="key">Inspection Date:</span>{" "}
-                  {new Date(user.inspectionDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">PAN Number:</span> {user.panNumber}
-                </p>
-                <p>
-                  <span className="key">Office:</span> {user.office}
-                </p>
-                <p>
-                  <span className="key">Leased Validity Date:</span>{" "}
-                  {new Date(user.leasedValidityDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Status:</span> {user.status}
-                </p>
-                <p>
-                  <span className="key">Aadhar Number:</span>{" "}
-                  {user.aadharNumber}
-                </p>
-              </td>
+                  {/* Crewing Team Personnel */}
+                  <td>
+                    <div>
+                      <strong>Person Name:</strong> {vessel.crewingTitle}{" "}
+                      {vessel.crewingPersonName}
+                    </div>
+                    <div>
+                      <strong>Date:</strong> {vessel.crewingDate}
+                    </div>
+                    <div>
+                      <strong>Phone Number:</strong> {vessel.crewingPhoneNumber}
+                    </div>
+                    <div>
+                      <strong>Email:</strong> {vessel.crewingEmail}
+                    </div>
+                    <br />
+                    <div>
+                      <strong>Second Person Name:</strong>{" "}
+                      {vessel.personalcrewingTitle}{" "}
+                      {vessel.personalcrewingPersonName}
+                    </div>
+                    <div>
+                      <strong>Date:</strong> {vessel.personalcrewingDate}
+                    </div>
+                    <div>
+                      <strong>Phone Number:</strong>{" "}
+                      {vessel.personalcrewingPhoneNumber}
+                    </div>
+                    <div>
+                      <strong>Email:</strong> {vessel.personalcrewingEmail}
+                    </div>
+                  </td>
 
-              <td>
-                <p>
-                  <span className="key">Name of the Inspector:</span>{" "}
-                  {user.inspectorName}
-                </p>
-                <p>
-                  <span className="key">Organization Name:</span>{" "}
-                  {user.organizationName}
-                </p>
-                <p>
-                  <span className="key">Last Annual Inspection Date:</span>{" "}
-                  {new Date(user.lastAnnualInspectionDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Last Renewal Date:</span>{" "}
-                  {new Date(user.lastRenewalDate).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="key">Last Inspection Place:</span>{" "}
-                  {user.lastInspectionPlace}
-                </p>
-                <p>
-                  <span className="key">Next Renewal Date:</span>{" "}
-                  {new Date(user.nextRenewalDate).toLocaleDateString()}
-                </p>
-              </td>
-
-              <td>
-                <p>
-                  <span className="key">Address:</span> {user.addressLine1},{" "}
-                  {user.addressLine2}, {user.addressLine3}
-                </p>
-                <p>
-                  <span className="key">City:</span> {user.city}
-                </p>
-                <p>
-                  <span className="key">District:</span> {user.district}
-                </p>
-                <p>
-                  <span className="key">State:</span> {user.state}
-                </p>
-                <p>
-                  <span className="key">Pin:</span> {user.pin}
-                </p>
-                <p>
-                  <span className="key">Phone Number:</span> {user.phoneNumber}
-                </p>
-                <p>
-                  <span className="key">Mobile Number:</span>{" "}
-                  {user.mobileNumber}
-                </p>
-                <p>
-                  <span className="key">Fax:</span> {user.fax}
-                </p>
-                <p>
-                  <span className="key">Website:</span> {user.webUrl}
-                </p>
-              </td>
-
-              <td>
-                <p>
-                  <span className="key">Name:</span> {user.contactPersonName}
-                </p>
-                <p>
-                  <span className="key">Mobile:</span>{" "}
-                  {user.contactPersonMobile}
-                </p>
-                <p>
-                  <span className="key">Email:</span> {user.contactPersonEmail}
-                </p>
-              </td>
-
-              <td>
-                <p>
-                  <span className="key">Criminal Case Pending:</span>{" "}
-                  {user.criminalCasePending ? "Yes" : "No"}
-                </p>
-                {user.criminalCasePending && user.criminalCaseDetails && (
-                  <p>
-                    <span className="key">Criminal Case Details:</span>{" "}
-                    {user.criminalCaseDetails}
-                  </p>
-                )}
-                <p>
-                  <span className="key">Complaints Pending:</span>{" "}
-                  {user.complaintsPending ? "Yes" : "No"}
-                </p>
-                {user.complaintsPending && user.complaintsDetails && (
-                  <p>
-                    <span className="key">Complaints Details:</span>{" "}
-                    {user.complaintsDetails}
-                  </p>
-                )}
-                <p>
-                  <span className="key">Shipping Activities Carried Out:</span>{" "}
-                  {user.shippingActivitiesCarriedOut ? "Yes" : "No"}
-                </p>
-                {user.shippingActivitiesCarriedOut &&
-                  user.shippingActivitiesDetails && (
-                    <p>
-                      <span className="key">Shipping Activities Details:</span>{" "}
-                      {user.shippingActivitiesDetails}
-                    </p>
-                  )}
-              </td>
-
-              <td>
-                <ul>
-                  {user.registrationDocuments?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.registrationDocuments.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Registration Documents
-                      </a>
-                    </li>
-                  )}
-                  {user.rpsLicense?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.rpsLicense.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        RPS License
-                      </a>
-                    </li>
-                  )}
-                  {user.profitLossBalanceSheet?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.profitLossBalanceSheet.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Profit/Loss Balance Sheet
-                      </a>
-                    </li>
-                  )}
-                  {user.bankGuarantee?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.bankGuarantee.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Bank Guarantee
-                      </a>
-                    </li>
-                  )}
-                  {user.assetsLiabilitiesCertificate?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.assetsLiabilitiesCertificate.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Assets/Liabilities Certificate
-                      </a>
-                    </li>
-                  )}
-                  {user.incomeTaxReturns?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.incomeTaxReturns.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Income Tax Returns
-                      </a>
-                    </li>
-                  )}
-                  {user.auditReport?.filePath && (
-                    <li>
-                      <a
-                        href={`http://3.110.185.220:8000/${user.auditReport.filePath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Audit Report
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {/* Accounting Team Personnel */}
+                  <td>
+                    <div>
+                      <strong>Person Name:</strong> {vessel.accountsTitle}{" "}
+                      {vessel.accountsPersonName}
+                    </div>
+                    <div>
+                      <strong>Phone Number:</strong>{" "}
+                      {vessel.accountsPhoneNumber}
+                    </div>
+                    <div>
+                      <strong>Email:</strong> {vessel.accountsEmail}
+                    </div>
+                    <br />
+                    <div>
+                      <strong>Another Person Name:</strong>{" "}
+                      {vessel.anotherAccountsTitle}{" "}
+                      {vessel.anotherAccountsPersonName}
+                    </div>
+                    <div>
+                      <strong>Another Phone Number:</strong>{" "}
+                      {vessel.anotherAccountsPhoneNumber}
+                    </div>
+                    <div>
+                      <strong>Another Email:</strong>{" "}
+                      {vessel.anotherAccountsEmail}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
     </>
   );
 };
 
-export default VesselOwnerTable ;
+export default VesselOwnerTable;

@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("http://3.110.185.220:8000/api/login", userData);
+      const response = await axios.post("http://localhost:8000/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucess full"); 
@@ -32,7 +32,9 @@ function Login() {
          } else if (userType === "vessel_owner") { 
           toast.success("User signed up Successfully!");       
            navigate("/vessel_owner_table");
-         } else {
+         } else if(userType === "crewing_agent"){ 
+              navigate("/CrewingAgentTable");
+         }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");
          }

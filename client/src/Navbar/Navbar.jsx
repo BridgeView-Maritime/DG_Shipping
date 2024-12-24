@@ -62,7 +62,9 @@ const Navbar = () => {
             <Link to="/vessel_Table">Vessel</Link>
           </>
         )}
-
+          {userType === "crewing_agent" && (
+            <Link to="/CrewingAgentTable">Crewing Agent</Link>
+          )}
         {userType ? (
           <>
             <button onClick={handleLogout}>Logout</button>
