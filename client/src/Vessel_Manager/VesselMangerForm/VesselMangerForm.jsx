@@ -276,7 +276,7 @@ const VesselMangerForm = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/vesselOwner",
+        "http://3.110.185.220:8000/api/vesselOwner",
         formDataToSend, 
         {
           headers: {

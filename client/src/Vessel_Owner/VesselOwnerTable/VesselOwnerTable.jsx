@@ -12,7 +12,7 @@ const VesselOwnerTable = () => {
     const fetchVesselData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/vesselOwnerform"
+          "http://3.110.185.220:8000/api/vesselOwnerform"
         );
         setVesselData(response.data.data); // Assuming data is in `response.data.data`
       } catch (error) {
@@ -82,7 +82,7 @@ const VesselOwnerTable = () => {
                       <strong>Company Document:</strong>
                       {vessel.companyDocument ? (
                         <a
-                          href={`http://localhost:8000/uploads/${vessel.companyDocument.filePath}`}
+                          href={`http://3.110.185.220:8000/uploads/${vessel.companyDocument.filePath}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

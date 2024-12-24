@@ -276,7 +276,7 @@ const CrewingAgent = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/crewingAgent",
+        "http://3.110.185.220:8000/api/crewingAgent",
         formDataToSend, 
         {
           headers: {
