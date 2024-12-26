@@ -82,7 +82,7 @@ const VesselOwnerTable = () => {
                       <strong>Company Document:</strong>
                       {vessel.companyDocument ? (
                         <a
-                          href={`http://localhost:8000/uploads/${vessel.companyDocument.filePath}`}
+                          href={`http://localhost:8000/${vessel.companyDocument.filePath}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
