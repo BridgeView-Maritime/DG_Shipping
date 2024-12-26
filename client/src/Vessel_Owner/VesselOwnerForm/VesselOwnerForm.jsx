@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./VesselOwnerForm.css";
 import axios from "axios";
 import Navbar from "../../Navbar/Navbar";
-
+import {Link, useNavigate } from "react-router-dom";
 
 const VesselOwnerForm = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +40,7 @@ const VesselOwnerForm = () => {
     anotherAccountsEmail: "",
   });
 
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -79,6 +80,7 @@ const VesselOwnerForm = () => {
         } else {
           console.log(response.data.message || "Something went wrong.");
         }
+        navigate("/vessel_owner_table")
     }catch(err){
       console.log(err)
     }
@@ -100,7 +102,8 @@ const VesselOwnerForm = () => {
       <div className="container">
         <h2>Company Information Form</h2>
         <div className="add-back-button">
-          <button className="backbtn">Back</button>
+          {/* <button className="backbtn">Back</button> */}
+          <Link to="/vessel_owner_table" className="backbtn">Back</Link>
           <h2>Add/Edit Company</h2>
         </div>
         <form onSubmit={handleSubmit}>

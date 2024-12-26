@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./VesselForm.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar.jsx";
 
 const VesselForm = () => {
@@ -32,51 +32,73 @@ const VesselForm = () => {
     dmlcPart2: "",
   });
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const handleInputChange = (e)=>{
-        const {name, value}= e.target;
-        setFormData((prevData)=>({
+  useEffect(() => {
+    if (id) {
+      // Fetch the company data based on the id
+      axios   
+        .get(`http://localhost:8000/api/vesselOwnerform/${id}`) // Adjust the endpoint to match your API
+        .then((response) => {
+          const companyData = response.data;
+          setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
-        }));
+            employer: companyData.data.companyName || "", // Set the employer field to companyName
+          }));
+        })
+        .catch((error) => {
+          console.error("Error fetching company data:", error);
+        });
+    }
+  }, [id]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleFileChange = (e)=>{
-    const {name, files}= e.target;
-    setFormData((prevData)=>({
-        ...prevData,
-        [name] : files[0]
-    }))
-  }
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0],
+    }));
+  };
 
-  const handlesubmit = async (e)=>{
+  const handlesubmit = async (e) => {
     e.preventDefault();
     console.log("Form submission started");
     const FormDataToSend = new FormData();
     for (const key in formData) {
-        if (formData[key]) {
-            if (formData[key] instanceof File) {
-                FormDataToSend.append(key, formData[key]);
-            } else {
-                FormDataToSend.append(key, formData[key]);
-            }
+      if (formData[key]) {
+        if (formData[key] instanceof File) {
+          FormDataToSend.append(key, formData[key]);
+        } else {
+          FormDataToSend.append(key, formData[key]);
         }
+      }
     }
-    
 
-        try{
-            const response = await axios.post("http://3.110.185.220:8000/api/vesselform", FormDataToSend, {
-                headers :{
-                    "Content-Type":"multipart/form-data",
-                },
-            });
-            console.log("response", response.data);
-            navigate("/vessel_Table")
-        }catch(error){
-            console.error("Error uploading form data:", error);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/vesselform",
+        FormDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
-  }
+      );
+      console.log("response", response.data);
+      navigate("/vessel_Table");
+    } catch (error) {
+      console.error("Error uploading form data:", error);
+    }
+  };
 
   return (
     <>
@@ -95,6 +117,7 @@ const VesselForm = () => {
                   name="employer"
                   value={formData.employer}
                   onChange={handleInputChange}
+                  disabled
                 />
               </div>
             </div>
@@ -319,11 +342,11 @@ const VesselForm = () => {
                 <label htmlFor="mlcCertDoc">
                   MLC(Maritime Labour Convention) Certificate*
                 </label>
-                <input 
-                type="file" 
-                id="mlcCertDoc"
-                name="mlcCertDoc" 
-                onChange={handleFileChange}
+                <input
+                  type="file"
+                  id="mlcCertDoc"
+                  name="mlcCertDoc"
+                  onChange={handleFileChange}
                 />
               </div>
             </div>
@@ -333,24 +356,24 @@ const VesselForm = () => {
                 <label htmlFor="financialDocnum">
                   Financial Security Document Number*
                 </label>
-                <input 
-                type="number"
-                id="financialDocnum"
-                name="financialDocnum"
-                value={formData.financialDocnum} 
-                onChange={handleInputChange}
+                <input
+                  type="number"
+                  id="financialDocnum"
+                  name="financialDocnum"
+                  value={formData.financialDocnum}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="form-col">
                 <label htmlFor="finnancialdocValidity">
                   Financial Security Document Validity*
                 </label>
-                <input 
-                type="date" 
-                id="finnancialdocValidity"
-                name="finnancialdocValidity"
-                value={formData.finnancialdocValidity}
-                onChange={handleInputChange}
+                <input
+                  type="date"
+                  id="finnancialdocValidity"
+                  name="finnancialdocValidity"
+                  value={formData.finnancialdocValidity}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -360,32 +383,32 @@ const VesselForm = () => {
                   Financial Security Document *
                 </label>
                 <input
-                 type="file"
+                  type="file"
                   id="financialDoc"
                   name="financialDoc"
                   onChange={handleFileChange}
-                   />
+                />
               </div>
             </div>
             <div className="form-row">
               <div className="form-col">
                 <label htmlFor="dmlcPart1">DMLC Part 1 *</label>
-                <input 
-                type="file" 
-                id="dmlcPart1"
-                name="dmlcPart1"
-                onChange={handleFileChange}
+                <input
+                  type="file"
+                  id="dmlcPart1"
+                  name="dmlcPart1"
+                  onChange={handleFileChange}
                 />
               </div>
             </div>
             <div className="form-row">
               <div className="form-col">
                 <label htmlFor="dmlcPart2">DMLC Part 2 *</label>
-                <input 
-                type="file" 
-                id="dmlcPart2" 
-                name="dmlcPart2"
-                onChange={handleFileChange}
+                <input
+                  type="file"
+                  id="dmlcPart2"
+                  name="dmlcPart2"
+                  onChange={handleFileChange}
                 />
               </div>
             </div>

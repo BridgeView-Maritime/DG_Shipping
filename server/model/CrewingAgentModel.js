@@ -1,65 +1,18 @@
 import mongoose from "mongoose";
 
-const companyProfileSchema = new mongoose.Schema({
-  nameofCrewingAgent: { type: String, trim: true },
-  rpslNumber: { type: String, trim: true },
-  issueDate: { type: Date },
-  expiryDate: { type: Date },
-  issuePlace: { type: String, trim: true },
-  tinTanNumber: { type: String, trim: true },
-  bankName: { type: String, trim: true },
-  bankGuaranteeValidityDate: { type: Date },
-  guaranteeAmount: { type: Number },
-  seafarerRecruited: { type: Number },
-  inspectionDate: { type: Date },
-  panNumber: { type: String, trim: true },
-  office: { type: String, trim: true },
-  leasedValidityDate: { type: Date }, // Fixed typo
-  status: { type: String, trim: true },
-  aadharNumber: { type: String, trim: true },
-  inspectorName: { type: String, trim: true },
-  organizationName: { type: String, trim: true },
-  lastAnnualInspectionDate: { type: Date },
-  lastRenewalDate: { type: Date },
-  lastInspectionPlace: { type: String, trim: true },
-  nextRenewalDate: { type: Date },
-  addressLine1: { type: String, trim: true },
-  city: { type: String, trim: true },
-  addressLine2: { type: String, trim: true },
-  district: { type: String, trim: true },
-  addressLine3: { type: String, trim: true },
-  state: { type: String, trim: true },
-  phoneNumber: { type: String, trim: true },
-  mobileNumber: { type: String, trim: true },
-  pin: { type: String, trim: true },
-  fax: { type: String, trim: true },
-  webUrl: { type: String, trim: true },
-  contactPersonName: { type: String, trim: true },
-  contactPersonMobile: { type: String, trim: true },
-  contactPersonEmail: { type: String, trim: true },
-  criminalCasePending: { type: Boolean },
-  criminalCaseDetails: { type: String, default: null },
-  complaintsPending: { type: Boolean },
-  complaintsDetails: { type: String, default: null },
-  shippingActivitiesCarriedOut: { type: Boolean },
-  shippingActivitiesDetails: { type: String, default: null },
-  registrationDocuments: { type: mongoose.Schema.Types.Mixed, default: {} },
-  rpsLicense: { type: mongoose.Schema.Types.Mixed, default: {} },
-  profitLossBalanceSheet: { type: mongoose.Schema.Types.Mixed, default: {} },
-  bankGuarantee: { type: mongoose.Schema.Types.Mixed, default: {} },
-  assetsLiabilitiesCertificate: { type: mongoose.Schema.Types.Mixed, default: {} },
-  incomeTaxReturns: { type: mongoose.Schema.Types.Mixed, default: {} },
-  auditReport: { type: mongoose.Schema.Types.Mixed, default: {} },
-
-  registrationDocuments: { originalName: String, filePath: String, },
-  rpsLicense: { originalName: String, filePath: String, },
-  profitLossBalanceSheet: { originalName: String, filePath: String, },
-  bankGuarantee: { originalName: String, filePath: String, },
-  assetsLiabilitiesCertificate: { originalName: String, filePath: String, },
-  incomeTaxReturns: { originalName: String, filePath: String, },
-  auditReport: { originalName: String, filePath: String, }, 
+const crewingAgentSchema = new mongoose.Schema({
+  agentName: { type: String, required: true },
+  shortName: { type: String, required: true },
+  address: { type: String, required: true },
+  contactPerson: {
+    title: { type: String, required: true },
+    name: { type: String, required: true },
+  },
+  country: { type: String, required: true },
+  contactNumber: { type: String, required: true },
+  email: { type: String, required: true },
 });
 
-const CompanyProfile = mongoose.model("createCrewprofile", companyProfileSchema);
 
-export default CompanyProfile;
+const CrewingAgent = mongoose.model("CrewingAgent", crewingAgentSchema);
+export default CrewingAgent;

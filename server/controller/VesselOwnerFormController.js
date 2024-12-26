@@ -115,3 +115,23 @@ export const getVesselOwnerForm = async (req, res) => {
     res.status(500).json({ message: "Error fetching data", error });
   }
 };
+
+export const getVesselOwnerFormById = async (req, res) => {
+  try {
+    const { id } = req.params; // Get the id from the URL parameters
+    
+    // Use Mongoose's findById() method to fetch the specific document
+    const vesselOwner = await VesselOwner.findById(id);
+
+    // If the vessel owner with the given id is not found
+    if (!vesselOwner) {
+      return res.status(404).json({ message: "Vessel owner not found" });
+    }
+
+    // Return the specific vessel owner data
+    res.status(200).json({ message: "Vessel owner data fetched successfully", data: vesselOwner });
+  } catch (error) {
+    console.error("Error fetching vessel owner data by ID:", error);
+    res.status(500).json({ message: "Error fetching data", error });
+  }
+};
