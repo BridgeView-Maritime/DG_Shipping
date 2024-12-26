@@ -11,7 +11,7 @@ const CrewingAgentTable = () => {
   useEffect(() => {
     const fetchCrewingAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/crewingAgentDetails');
+        const response = await axios.get('http://3.110.185.220:8000/api/crewingAgentDetails');
         setCrewingAgents(response.data);
         setLoading(false);
       } catch (error) {
