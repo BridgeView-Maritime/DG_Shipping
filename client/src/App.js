@@ -12,11 +12,10 @@ import VesselOwnerForm from "./Vessel_Owner/VesselOwnerForm/VesselOwnerForm.jsx"
 import VesselForm from "./Vessel_Owner/VesselForm/VesselForm.jsx";
 import VesselTable from "./Vessel_Owner/VesselTable/VesselTable.jsx";
 import VesselMangerForm from "./Vessel_Manager/VesselMangerForm/VesselMangerForm.jsx";
-import CrewingAgent from "./Crewing_Agent/Crewing_agentForm/CrewingAgent.jsx";
 import CrewingAgentTable from "./Crewing_Agent/Crewing_agent_table/CrewingAgentTable.jsx";
+import CrewingAgentForm from "./Crewing_Agent/Crewing_agentForm/CrewingAgentForm.jsx";
 
 function App() {
-
   const route = createBrowserRouter([
     {
       path: "/",
@@ -40,7 +39,7 @@ function App() {
     },
     {
       path: "/vesselownerform",
-      element: <VesselOwnerForm />
+      element: <VesselOwnerForm />,
     },
     {
       path: "/SeafarerProfile",
@@ -55,27 +54,31 @@ function App() {
       element: <VesselForm />,
     },
     {
-      path : "/vessel_Table",
-      element: <VesselTable />
+      path: "/vessel_Table",
+      element: <VesselTable />,
     },
     {
       path: "/ManningAggrementDisplay",
-      element: <ManningAggrementDisplay />
+      element: <ManningAggrementDisplay />,
     },
     //vessel Manger routes
     {
-      path : "/VesselMangerForm",
-      element: <VesselMangerForm />
+      path: "/VesselMangerForm",
+      element: <VesselMangerForm />,
     },
-
     //Crewing_Agent routes
     {
       path: "/Crewing_Agent",
-      element: <CrewingAgent />
+      element: <CrewingAgentForm />,
     },
     {
       path: "/CrewingAgentTable",
-      element: <CrewingAgentTable />
+      element: <CrewingAgentTable />,
+    },
+    // Vessel route with dynamic ID
+    {
+      path: "/vessel/:id",
+      element: <VesselForm />,
     },
   ]);
 
