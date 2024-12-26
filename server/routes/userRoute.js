@@ -10,10 +10,10 @@ import {
 import { createCrewDetails } from "../controller/crewController.js"; 
 
 import { login, signup } from "../controller/loginController.js";
-import { createCrewprofile , ComapanyuploadMiddleware, getCrewingAgent} from "../controller/CrewingAgentController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 import { CreateVesselOwner, getVesselOwnerForm, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
+import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails } from "../controller/CrewingAgentController.js";
 
 const route = express.Router();
 
@@ -26,9 +26,10 @@ route.delete("/delete/:id", deleteUser);
 route.post("/login", login);
 route.post("/signup", signup);
 
+
 //Crewing Agent route
-route.post("/crewingAgent",ComapanyuploadMiddleware, createCrewprofile); 
-route.get("/crewingAgentTable", getCrewingAgent);
+route.post("/crewingAgentDetails", CreateCrewingAgentDetails);
+route.get("/crewingAgentDetails", GetAllCrewingAgentDetails);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details
