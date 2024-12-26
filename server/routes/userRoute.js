@@ -12,7 +12,7 @@ import { createCrewDetails } from "../controller/crewController.js";
 import { login, signup } from "../controller/loginController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
-import { CreateVesselOwner, getVesselOwnerForm, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
+import { CreateVesselOwner, getVesselOwnerForm, getVesselOwnerFormById, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
 import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails } from "../controller/CrewingAgentController.js";
 
 const route = express.Router();
@@ -45,5 +45,8 @@ route.get("/vesselform", getshipDetails)
 //VesselOwnerForm Route
 route.post("/vesselOwnerform", VesselOwnerFormMiddleware, CreateVesselOwner)
 route.get("/vesselOwnerform", getVesselOwnerForm)
+
+// New route to fetch vessel owner data by ID
+route.get("/vesselOwnerform/:id", getVesselOwnerFormById);
 
 export default route;
