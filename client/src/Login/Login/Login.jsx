@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login", userData);
+      const response = await axios.post("http://3.110.185.220:8000/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucess full"); 
@@ -24,6 +24,7 @@ function Login() {
          // Store the userType in localStorage or sessionStorage
          const { userType } = response.data;  // Assume response contains userType
          localStorage.setItem("userType", userType);
+         console.log("usertuype check", userType)
          // Redirect based on userType
          if (userType === "crew") {
            navigate("/SeafarerProfile");
@@ -34,6 +35,10 @@ function Login() {
            navigate("/vessel_owner_table");
          } else if(userType === "crewing_agent"){ 
               navigate("/CrewingAgentTable");
+         }else if(userType === "vessel_manager"){
+              navigate("/VesselMangerForm");
+         }else if(userType ==="admin"){
+              navigate("/vessel_owner_table")
          }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");

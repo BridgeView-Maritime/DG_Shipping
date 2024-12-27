@@ -2,6 +2,8 @@
 // cREWINGAGENT TABLE
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navbar from '../../Navbar/Navbar';
+import { Link } from 'react-router-dom';
 
 const CrewingAgentTable = () => {
   const [crewingAgents, setCrewingAgents] = useState([]);
@@ -11,7 +13,7 @@ const CrewingAgentTable = () => {
   useEffect(() => {
     const fetchCrewingAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/crewingAgentDetails');
+        const response = await axios.get('http://3.110.185.220:8000/api/crewingAgentDetails');
         setCrewingAgents(response.data);
         setLoading(false);
       } catch (error) {
@@ -28,7 +30,10 @@ const CrewingAgentTable = () => {
   }
 
   return (
-    <div className="table-container">
+    <>
+    <Navbar />
+    <div className="CrewingTable-container">
+      <Link to="/Crewing_Agent"><button>Add Crewing Agent</button></Link>
       <h2>Crewing Agent Table</h2>
       <table>
         <thead>
@@ -63,6 +68,7 @@ const CrewingAgentTable = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

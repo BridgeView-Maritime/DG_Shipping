@@ -47,7 +47,7 @@ function Signup() {
     try {
       // Sending a POST request to the backend
       const response = await axios.post(
-        "http://localhost:8000/api/signup",
+        "http://3.110.185.220:8000/api/signup",
         userData
       );
       console.log("Signup Success:", response.data);
@@ -124,6 +124,7 @@ function Signup() {
               required
             >
               <option value="">Select User Type</option>
+              <option value="admin">Admin</option>
               <option value="crew">Crew</option>
               <option value="crewing_agent">Crewing Agent</option>
               <option value="vessel_owner">Vessel Owner</option>
