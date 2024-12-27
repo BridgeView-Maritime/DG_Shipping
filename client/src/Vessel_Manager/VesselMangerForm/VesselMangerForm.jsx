@@ -61,7 +61,7 @@ const VesselManagerForm = () => {
     }
   
     try {
-      const response = await axios.post("http://localhost:8000/api/vesselManager", formDataToSend, {
+      const response = await axios.post("http://3.110.185.220:8000/api/vesselManager", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
