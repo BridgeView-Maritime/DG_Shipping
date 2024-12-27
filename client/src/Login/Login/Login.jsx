@@ -24,6 +24,7 @@ function Login() {
          // Store the userType in localStorage or sessionStorage
          const { userType } = response.data;  // Assume response contains userType
          localStorage.setItem("userType", userType);
+         console.log("usertuype check", userType)
          // Redirect based on userType
          if (userType === "crew") {
            navigate("/SeafarerProfile");
@@ -34,6 +35,8 @@ function Login() {
            navigate("/vessel_owner_table");
          } else if(userType === "crewing_agent"){ 
               navigate("/CrewingAgentTable");
+         }else if(userType === "vessel_manager"){
+              navigate("/VesselMangerForm");
          }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");

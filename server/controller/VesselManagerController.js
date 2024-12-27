@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 export const createVesselManager = async (req, res) => {
+  console.log("managerform", req.body);
   try {
     const {
       companyName,
@@ -40,7 +41,12 @@ export const createVesselManager = async (req, res) => {
 
     const newVesselManager = new VesselManager({
       companyName,
-      companyDocument, // For simplicity, assume we are storing the file name or URL
+      companyDocument: req.files?.companyDocument
+        ? {
+            originalName: req.files.companyDocument[0].originalname,
+            filePath: req.files.companyDocument[0].path,
+          }
+        : null,
       companyShortName,
       phoneNumber,
       title,
@@ -69,4 +75,17 @@ export const createVesselManager = async (req, res) => {
   }
 };
 
+export const VesselManagerMiddleware = upload.fields([
+  { name: "companyDocument", maxCount: 1 },
+]);
 
+export const getVesselManagerDetails = async (req, res) => {
+  try {
+    // Fetch all documents from the VesselManager collection
+    const vesselManagers = await VesselManager.find();
+    res.status(200).json(vesselManagers); // Respond with the data
+  } catch (error) {
+    console.error("Error fetching Vessel Manager details:", error);
+    res.status(500).json({ message: "Server error while fetching Vessel Manager details." });
+  }
+};

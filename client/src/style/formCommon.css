@@ -13,7 +13,7 @@
   }
   
   /* Dashboard and Page Styles */
-  .agreement-table, .ship-details-table, .profile-table {
+  .agreement-table, .ship-details-table, .profile-table, .vesselMangerTable{
     padding: 20px;
     background-color: white;
     margin: 20px;
@@ -22,6 +22,9 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
+  .vesselMangerTable{
+    margin-top: 2rem;
+  }
   h3, h2 {
     font-size: 24px;
     margin-bottom: 20px;

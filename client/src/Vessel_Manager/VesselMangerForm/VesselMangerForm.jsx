@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const VesselManagerForm = () => {
   // List of countries (you can replace this with dynamic data or API call)
@@ -7,7 +8,10 @@ const VesselManagerForm = () => {
 
   const [formData, setFormData] = useState({
     companyName: "",
-    companyDocument: null,
+    companyDocument: {
+      originalName: "",
+      filePath: "",
+    },
     companyShortName: "",
     phoneNumber: "",
     title: "MR.",
@@ -30,19 +34,48 @@ const VesselManagerForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setFormData({ ...formData, [name]: files[0] });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files[0],
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can replace this with your submission logic (e.g., API call)
-    console.log("Form Data Submitted:", formData);
-  };
+  
+    const formDataToSend = new FormData();
+    for (const key in formData) {
+      if (formData[key]) {
+        formDataToSend.append(key, formData[key]); 
+      } else {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+  
+    try {
+      const response = await axios.post("http://localhost:8000/api/vesselManager", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      if (response.status === 200) {
+        console.log(response.data.message || "Data saved successfully!");
+      } else {
+        console.log(response.data.message || "Something went wrong.");
+      }
+    } catch (err) {
+      console.error("Request error:", err);
+    }
+  };  
 
   return (
     <div className="container">
