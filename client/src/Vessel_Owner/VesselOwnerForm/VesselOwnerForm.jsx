@@ -70,7 +70,7 @@ const VesselOwnerForm = () => {
     }
 
     try{
-      const response = await axios.post("http://3.110.185.220:8000/api/vesselOwnerform", formDataToSend, {
+      const response = await axios.post("http://65.2.6.57:8000/api/vesselOwnerform", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data", 
         }},)

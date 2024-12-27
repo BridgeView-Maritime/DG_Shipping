@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./CrewingAgentForm.css";
 import axios from "axios";
 import Navbar from "../../Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CrewingAgentForm() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,8 @@ function CrewingAgentForm() {
     contactNumber: "",
     email: "",
   });
+
+  const navigate= useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +31,7 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.post(
-      "http://3.110.185.220:8000/api/crewingAgentDetails",
+      "http://65.2.6.57:8000/api/crewingAgentDetails",
       formData
     );
 
@@ -50,6 +52,7 @@ const handleSubmit = async (e) => {
       console.error("Unexpected response:", response);
       alert("Failed to submit form. Please try again.");
     }
+    navigate("/CrewingAgentTable")
   } catch (error) {
     console.error("Error submitting form:", error);
     if (error.response) {

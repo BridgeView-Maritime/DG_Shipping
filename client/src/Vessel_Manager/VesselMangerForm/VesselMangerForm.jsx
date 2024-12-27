@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../Navbar/Navbar";
 
 const VesselManagerForm = () => {
   // List of countries (you can replace this with dynamic data or API call)
   const countries = ["USA", "India", "Germany", "Canada"];
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -63,7 +65,7 @@ const VesselManagerForm = () => {
   
     try {
 
-      const response = await axios.post("http://3.110.185.220:8000/api/vesselManager", formDataToSend, {
+      const response = await axios.post("http://65.2.6.57:8000/api/vesselManager", formDataToSend, {
          headers: {
           "Content-Type": "multipart/form-data",
          },
@@ -74,6 +76,7 @@ const VesselManagerForm = () => {
       } else {
         console.log(response.data.message || "Something went wrong.");
       }
+      navigate("/VesselManagerTable")
     } catch (err) {
       console.error("Request error:", err);
     }

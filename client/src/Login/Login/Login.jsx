@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("http://3.110.185.220:8000/api/login", userData);
+      const response = await axios.post("http://65.2.6.57:8000/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucess full"); 

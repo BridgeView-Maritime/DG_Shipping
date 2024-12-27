@@ -8,7 +8,7 @@ const VesselManagerTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://3.110.185.220:8000/api/vesselManager")
+      .get("http://65.2.6.57:8000/api/vesselManager")
       .then((response) => setVesselManagers(response.data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
