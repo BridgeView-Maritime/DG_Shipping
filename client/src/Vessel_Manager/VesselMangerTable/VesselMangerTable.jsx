@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "../../Navbar/Navbar";
+import { Link } from "react-router-dom";
 
 const VesselManagerTable = () => {
   const [vesselManagers, setVesselManagers] = useState([]);
@@ -12,7 +14,10 @@ const VesselManagerTable = () => {
   }, []);
 
   return (
+    <>
+    <Navbar />
     <div className="vesselMangerTable">
+      <Link to="/VesselMangerForm"><button>Add Vessel Manager</button></Link>
       <h2>Vessel Manager Data</h2>
       <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
@@ -68,6 +73,7 @@ const VesselManagerTable = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,8 @@
 // cREWINGAGENT TABLE
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navbar from '../../Navbar/Navbar';
+import { Link } from 'react-router-dom';
 
 const CrewingAgentTable = () => {
   const [crewingAgents, setCrewingAgents] = useState([]);
@@ -28,7 +30,10 @@ const CrewingAgentTable = () => {
   }
 
   return (
-    <div className="table-container">
+    <>
+    <Navbar />
+    <div className="CrewingTable-container">
+      <Link to="/Crewing_Agent"><button>Add Crewing Agent</button></Link>
       <h2>Crewing Agent Table</h2>
       <table>
         <thead>
@@ -63,6 +68,7 @@ const CrewingAgentTable = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

@@ -28,7 +28,7 @@ const VesselOwnerTable = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
+      <div className="vesselOwnerTable">
         <h2>Vessel Owner Information</h2>
         <Link to="/vesselownerform">
           <button>Add Vessel Owner</button>
