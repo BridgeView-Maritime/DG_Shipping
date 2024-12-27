@@ -25,6 +25,36 @@ const Navbar = () => {
     }
   };
 
+  let navLinks;
+
+  // Conditional rendering of navigation links
+  if (userType === "admin") {
+    navLinks = (
+      <>
+        <Link to="/SeafarerProfile">Seafarer Profile</Link>
+        <Link to="/VesselManagerTable">Vessel Manager</Link>
+        <Link to="/vessel_owner_table">Vessel Owner</Link>
+        <Link to="/vessel_Table">Vessel</Link>
+        <Link to="/CrewingAgentTable">Crewing Agent</Link>
+      </>
+    );
+  } else if (userType === "crew") {
+    navLinks = <Link to="/SeafarerProfile">Seafarer Profile</Link>;
+  } else if (userType === "Vessel_vendor") {
+    navLinks = <Link to="/Vesselvendor">Vessel Vendor</Link>;
+  } else if (userType === "vessel_owner") {
+    navLinks = (
+      <>
+        <Link to="/vessel_owner_table">Vessel Owner</Link>
+        <Link to="/vessel_Table">Vessel</Link>
+      </>
+    );
+  } else if (userType === "crewing_agent") {
+    navLinks = <Link to="/CrewingAgentTable">Crewing Agent</Link>;
+  } else {
+    navLinks = null; // No additional links for other user types
+  }
+
   return (
     <header className="navbar-homepage">
       <div className="navbar-logo">MyLogo</div>
@@ -48,27 +78,9 @@ const Navbar = () => {
         >
           Contact
         </a>
-
-        {userType === "crew" && (
-          <Link to="/SeafarerProfile">Seafarer Profile</Link>
-        )}
-        {userType === "Vessel_vendor" && (
-          <Link to="/Vesselvendor">Vessel Vendor</Link>
-        )}
-        {userType === "vessel_owner" && (
-          <>
-            <Link to="/vessel_owner_table">Vessel Owner</Link>
-            {/* <Link to="/ManningAggrementDisplay">Manning Agreement</Link> */}
-            <Link to="/vessel_Table">Vessel</Link>
-          </>
-        )}
-          {userType === "crewing_agent" && (
-            <Link to="/CrewingAgentTable">Crewing Agent</Link>
-          )}
+        {navLinks}
         {userType ? (
-          <>
-            <button onClick={handleLogout}>Logout</button>
-          </>
+          <button onClick={handleLogout}>Logout</button>
         ) : (
           <Link to="/login">Login</Link>
         )}
@@ -78,5 +90,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-

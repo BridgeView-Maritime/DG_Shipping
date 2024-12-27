@@ -14,6 +14,7 @@ import { createManningAgreement, getAgreement , manninguploadMiddleware} from ".
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 import { CreateVesselOwner, getVesselOwnerForm, getVesselOwnerFormById, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
 import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails } from "../controller/CrewingAgentController.js";
+import { createVesselManager, getVesselManagerDetails, VesselManagerMiddleware } from "../controller/VesselManagerController.js";
 
 const route = express.Router();
 
@@ -48,5 +49,9 @@ route.get("/vesselOwnerform", getVesselOwnerForm)
 
 // New route to fetch vessel owner data by ID
 route.get("/vesselOwnerform/:id", getVesselOwnerFormById);
+
+//Vessel Manager Routes
+ route.post("/vesselManager", VesselManagerMiddleware , createVesselManager)
+ route.get("/vesselManager", getVesselManagerDetails)
 
 export default route;

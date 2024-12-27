@@ -14,6 +14,7 @@ import VesselTable from "./Vessel_Owner/VesselTable/VesselTable.jsx";
 import VesselMangerForm from "./Vessel_Manager/VesselMangerForm/VesselMangerForm.jsx";
 import CrewingAgentTable from "./Crewing_Agent/Crewing_agent_table/CrewingAgentTable.jsx";
 import CrewingAgentForm from "./Crewing_Agent/Crewing_agentForm/CrewingAgentForm.jsx";
+import VesselManagerTable from "./Vessel_Manager/VesselMangerTable/VesselMangerTable.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -65,6 +66,10 @@ function App() {
     {
       path: "/VesselMangerForm",
       element: <VesselMangerForm />,
+    },
+    {
+      path: "/VesselManagerTable",
+      element: <VesselManagerTable />
     },
     //Crewing_Agent routes
     {
