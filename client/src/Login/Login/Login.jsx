@@ -38,7 +38,7 @@ function Login() {
          }else if(userType === "vessel_manager"){
               navigate("/VesselMangerForm");
          }else if(userType ==="admin"){
-              navigate("/vessel_owner_table")
+              navigate("/VesselManagerTable")
          }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");

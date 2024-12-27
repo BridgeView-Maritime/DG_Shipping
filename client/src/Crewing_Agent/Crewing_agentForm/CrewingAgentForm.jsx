@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./CrewingAgentForm.css";
 import axios from "axios";
+import Navbar from "../../Navbar/Navbar";
+import { Link } from "react-router-dom";
 
 function CrewingAgentForm() {
   const [formData, setFormData] = useState({
@@ -61,7 +63,10 @@ const handleSubmit = async (e) => {
 };
 
   return (
+    <>
+    <Navbar />
     <div className="form-wrapper">
+    <Link to="/CrewingAgentTable" className="backbtn">Back</Link>
       <div className="form-container">
         <h2>Crewing Agent Form</h2>
         <form onSubmit={handleSubmit}>
@@ -186,6 +191,7 @@ const handleSubmit = async (e) => {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

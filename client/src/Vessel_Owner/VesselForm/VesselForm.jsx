@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./VesselForm.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar.jsx";
 
 const VesselForm = () => {
@@ -105,6 +105,7 @@ const VesselForm = () => {
       <Navbar />
       <div className="ship-form-container">
         <h2>Ship Details</h2>
+       <Link to="/vessel_Table" className="Vesselbackbtn">Back</Link>
         <form className="shipContainer" onSubmit={handlesubmit}>
           {/* Ship Details Section */}
           <div className="form-section">

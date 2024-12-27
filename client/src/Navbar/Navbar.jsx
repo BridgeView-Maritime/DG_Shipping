@@ -31,7 +31,7 @@ const Navbar = () => {
   if (userType === "admin") {
     navLinks = (
       <>
-        <Link to="/SeafarerProfile">Seafarer Profile</Link>
+        {/* <Link to="/SeafarerProfile">Seafarer Profile</Link> */}
         <Link to="/VesselManagerTable">Vessel Manager</Link>
         <Link to="/vessel_owner_table">Vessel Owner</Link>
         <Link to="/vessel_Table">Vessel</Link>

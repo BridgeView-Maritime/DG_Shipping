@@ -1,6 +1,19 @@
 /* General Styling */
+
+.ship-form-container{
+    margin-top: 5rem;
+}
+
+.Vesselbackbtn{
+    margin-left: 22%;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.5rem;
+}
 .ship-form-container .shipContainer {
-    margin: 55px auto;
+    margin: 1rem auto;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 8px;
