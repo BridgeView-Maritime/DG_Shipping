@@ -39,7 +39,7 @@ const VesselForm = () => {
     if (id) {
       // Fetch the company data based on the id
       axios   
-        .get(`http://65.2.6.57:8000/api/vesselOwnerform/${id}`) // Adjust the endpoint to match your API
+        .get(`http://bridgeviewships.ae:8000/api/vesselOwnerform/${id}`) // Adjust the endpoint to match your API
         .then((response) => {
           const companyData = response.data;
           setFormData((prevData) => ({
@@ -85,7 +85,7 @@ const VesselForm = () => {
 
     try {
       const response = await axios.post(
-        "http://65.2.6.57:8000/api/vesselform",
+        "http://bridgeviewships.ae:8000/api/vesselform",
         FormDataToSend,
         {
           headers: {
