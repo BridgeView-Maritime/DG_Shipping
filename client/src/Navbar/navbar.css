@@ -1,29 +1,41 @@
-/* src/components/navbar.css */
 .navbar-homepage {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    position: fixed; /* Keeps the navbar fixed at the top */
-    width: 100%; /* Ensures navbar spans the full width */
-    top: 0; /* Position it at the top */
-    z-index: 1; /* Ensure navbar is above the main content */
-  }
-  
-  .navbar-logo {
-    font-size: 24px;
-  }
-  
-  .navbar-homepage > .navbar-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .navbar-links a,
-  .navbar-links .Link {
-    text-decoration: none;
-    color: white;
-    font-size: 1.5rem;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+.navbar-logo {
+  font-size: 24px;
+}
+
+.logoImage{
+  width: 3rem;
+  margin-left: 2rem;
+}
+
+.navbar-homepage > .navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* .admin-navbar {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex: 1;
+  margin-left: 10rem;
+} */
+
+
+.navbar-links a,
+.navbar-links .Link {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+}
