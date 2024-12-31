@@ -33,13 +33,13 @@ const HomePage = () => {
         <h2>Contact Us</h2>
         <p>Have questions? Feel free to reach out to us at:</p>
         <p>
-          <strong>Email:</strong> support@bridgeviewship.com
+          <strong>Email:</strong> admin@bridgeviewships.ae
         </p>
         <p>
-          <strong>Phone:</strong> +1-234-567-8900
+          <strong>Phone:</strong> +971 554168425
         </p>
         <p>
-          <strong>Address:</strong> 123 Maritime Street, Oceanview, CA 90210
+          <strong>Address:</strong> 209, Arzu Building AI Qusais, Dubai, UAE.
         </p>
       </div>
       {/* Footer Section */}
