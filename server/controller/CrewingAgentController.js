@@ -61,3 +61,20 @@ export const GetAllCrewingAgentDetails = async (req, res) => {
       });
     }
   };
+
+  export const updatedCrewingAgentDetails = async (req, res) => {
+    const { id } = req.params; // Extract id from URL
+    const updates = req.body; // Data to update
+
+    try {
+      const updatedAgent = await CrewingAgent.findByIdAndUpdate(id, updates, { new: true });
+      if (!updatedAgent) {
+        return res.status(404).json({ message: "Crewing Agent not found" });
+      }
+      res.status(200).json(updatedAgent);
+    } catch (error) {
+      console.error("Error updating Crewing Agent:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
