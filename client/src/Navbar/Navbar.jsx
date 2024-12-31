@@ -38,7 +38,7 @@ const Navbar = () => {
         <>
           <Link to="/vessel_owner_table">Vessel Owner</Link>
           <Link to="/VesselManagerTable">Vessel Manager</Link>
-          <Link to="/vessel_Table">Vessel</Link>
+          <Link to="/vessel_Table">Vessels</Link>
           <Link to="/CrewingAgentTable">Crewing Agent</Link>
           <Link to="/SeafarerProfile">Crew</Link>
         </>
@@ -51,7 +51,7 @@ const Navbar = () => {
       navLinks = (
         <>
           <Link to="/vessel_owner_table">Vessel Owner</Link>
-          <Link to="/vessel_Table">Vessel</Link>
+          <Link to="/vessel_Table">Vessels</Link>
         </>
       );
     } else if (userType === "crewing_agent") {

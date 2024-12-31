@@ -13,7 +13,7 @@ const CrewingAgentTable = () => {
   useEffect(() => {
     const fetchCrewingAgents = async () => {
       try {
-        const response = await axios.get('http://bridgeviewships.ae:8000/api/crewingAgentDetails');
+        const response = await axios.get('https://bridgeviewships.ae:8000/api/crewingAgentDetails');
         setCrewingAgents(response.data);
         setLoading(false);
       } catch (error) {

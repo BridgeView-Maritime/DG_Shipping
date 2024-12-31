@@ -31,7 +31,7 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.post(
-      "http://bridgeviewships.ae:8000/api/crewingAgentDetails",
+      "https://bridgeviewships.ae:8000/api/crewingAgentDetails",
       formData
     );
 
