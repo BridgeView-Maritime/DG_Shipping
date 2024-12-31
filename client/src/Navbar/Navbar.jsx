@@ -3,6 +3,12 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./navbar.css"; 
 
 const Navbar = () => {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   const [userType, setUserType] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,8 +33,13 @@ const Navbar = () => {
     navLinks = (
       <>
         <Link to="/">Home</Link>
-        <Link to="/about-us">About Us</Link>
-        <Link to="/contact-us">Contact Us</Link>
+        <Link to="#" onClick={() => scrollToSection('about')}>
+            About Us
+          </Link>
+          <Link to="#" onClick={() => scrollToSection('contact')}>
+            Contact Us
+          </Link>
+
         <Link to="/login">Login</Link>
       </>
     );
