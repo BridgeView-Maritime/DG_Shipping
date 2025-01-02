@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import "./CrewingAgentForm.css";
 import axios from "axios";
+import Navbar from "../../Navbar/Navbar";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function CrewingAgentForm() {
-  const [formData, setFormData] = useState({
+  const location = useLocation();
+
+  const [formData, setFormData] = useState(
+    location.state?.agent || {
     agentName: "",
     shortName: "",
     address: "",
@@ -14,6 +19,8 @@ function CrewingAgentForm() {
     email: "",
   });
 
+  const navigate= useNavigate()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -22,46 +29,48 @@ function CrewingAgentForm() {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await axios.post(
-      "http://3.110.185.220:8000/api/crewingAgentDetails",
-      formData
-    );
-
-    if (response.status === 200 || response.status === 201) {
-      console.log("Form submitted successfully:", response.data);
-      alert("Crewing Agent details submitted successfully!");
-      setFormData({
-        agentName: "",
-        shortName: "",
-        address: "",
-        contactPersonTitle: "",
-        contactPersonName: "",
-        country: "",
-        contactNumber: "",
-        email: "",
-      });
-    } else {
-      console.error("Unexpected response:", response);
-      alert("Failed to submit form. Please try again.");
+    const updatedFormData = {
+      ...formData,
+      contactPerson: {
+        title: formData.contactPersonTitle,
+        name: formData.contactPersonName,
+      },
+    };
+    try {
+      const response = formData._id
+        ? await axios.put(`http://localhost:8000/crewingAgentDetails/${formData._id}`, updatedFormData)
+        : await axios.post("http://localhost:8000/api/crewingAgentDetails", updatedFormData);
+  
+      if (response.status === 200 || response.status === 201) {
+        alert(formData._id ? "Crewing Agent details updated successfully!" : "Crewing Agent details submitted successfully!");
+        if (!formData._id) {
+          setFormData({
+            agentName: "",
+            shortName: "",
+            address: "",
+            contactPersonTitle: "",
+            contactPersonName: "",
+            country: "",
+            contactNumber: "",
+            email: "",
+          });
+        }
+        navigate("/CrewingAgentTable");
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "Unexpected error occurred!");
     }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    if (error.response) {
-      // Server responded with a status other than 200 range
-      alert(`Error: ${error.response.data.message || "Submission failed"}`);
-    } else {
-      // Network or other error
-      alert("Network error. Please check your connection and try again.");
-    }
-  }
-};
-
+    
+  };
+  
   return (
+    <>
+    <Navbar />
     <div className="form-wrapper">
+    <Link to="/CrewingAgentTable" className="backbtn">Back</Link>
       <div className="form-container">
         <h2>Crewing Agent Form</h2>
         <form onSubmit={handleSubmit}>
@@ -186,6 +195,7 @@ const handleSubmit = async (e) => {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

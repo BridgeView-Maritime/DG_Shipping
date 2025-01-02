@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../../Navbar/Navbar";
 
 const VesselManagerForm = () => {
   // List of countries (you can replace this with dynamic data or API call)
   const countries = ["USA", "India", "Germany", "Canada"];
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -61,8 +64,7 @@ const VesselManagerForm = () => {
     }
   
     try {
-
-      const response = await axios.post("http://3.110.185.220:8000/api/vesselManager", formDataToSend, {
+      const response = await axios.post("http://localhost:8000/api/vesselManager", formDataToSend, {
          headers: {
           "Content-Type": "multipart/form-data",
          },
@@ -73,16 +75,19 @@ const VesselManagerForm = () => {
       } else {
         console.log(response.data.message || "Something went wrong.");
       }
+      navigate("/VesselManagerTable")
     } catch (err) {
       console.error("Request error:", err);
     }
   };  
 
   return (
+    <>
+    <Navbar />
     <div className="container">
       <h2>Company Information Form</h2>
       <div className="add-back-button">
-        <Link to="/vessel_owner_table" className="backbtn">Back</Link>
+        <Link to="/VesselManagerTable" className="backbtn">Back</Link>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -314,6 +319,7 @@ const VesselManagerForm = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./VesselForm.css";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar.jsx";
 
 const VesselForm = () => {
@@ -39,7 +39,7 @@ const VesselForm = () => {
     if (id) {
       // Fetch the company data based on the id
       axios   
-        .get(`http://3.110.185.220:8000/api/vesselOwnerform/${id}`) // Adjust the endpoint to match your API
+        .get(`http://localhost:8000/api/vesselOwnerform/${id}`) // Adjust the endpoint to match your API
         .then((response) => {
           const companyData = response.data;
           setFormData((prevData) => ({
@@ -85,7 +85,7 @@ const VesselForm = () => {
 
     try {
       const response = await axios.post(
-        "http://3.110.185.220:8000/api/vesselform",
+        "http://localhost:8000/api/vesselform",
         FormDataToSend,
         {
           headers: {
@@ -105,6 +105,7 @@ const VesselForm = () => {
       <Navbar />
       <div className="ship-form-container">
         <h2>Ship Details</h2>
+       <Link to="/vessel_Table" className="Vesselbackbtn">Back</Link>
         <form className="shipContainer" onSubmit={handlesubmit}>
           {/* Ship Details Section */}
           <div className="form-section">

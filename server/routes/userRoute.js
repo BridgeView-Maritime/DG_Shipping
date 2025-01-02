@@ -13,7 +13,7 @@ import { login, signup } from "../controller/loginController.js";
 import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
 import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
 import { CreateVesselOwner, getVesselOwnerForm, getVesselOwnerFormById, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
-import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails } from "../controller/CrewingAgentController.js";
+import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails, updatedCrewingAgentDetails } from "../controller/CrewingAgentController.js";
 import { createVesselManager, getVesselManagerDetails, VesselManagerMiddleware } from "../controller/VesselManagerController.js";
 
 const route = express.Router();
@@ -31,6 +31,7 @@ route.post("/signup", signup);
 //Crewing Agent route
 route.post("/crewingAgentDetails", CreateCrewingAgentDetails);
 route.get("/crewingAgentDetails", GetAllCrewingAgentDetails);
+route.put("/crewingAgentDetails/:id", updatedCrewingAgentDetails);
 
 // Crew details route
 route.post("/crewdetails", createCrewDetails); // Handle the POST request to submit crew details

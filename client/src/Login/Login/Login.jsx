@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("http://3.110.185.220:8000/api/login", userData);
+      const response = await axios.post("http://localhost:8000/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucess full"); 
@@ -38,7 +38,7 @@ function Login() {
          }else if(userType === "vessel_manager"){
               navigate("/VesselMangerForm");
          }else if(userType ==="admin"){
-              navigate("/vessel_owner_table")
+              navigate("/VesselManagerTable")
          }else {
           //  alert("Unknown user type");
            toast.error("Unknown user type");
@@ -84,9 +84,9 @@ function Login() {
           <button className="loginbtn" type="submit">
             Login
           </button>
-          <p>
+          {/* <p>
           If you don't have an account, <Link to="/signup">Signup</Link>
-        </p>
+        </p> */}
         </form>
       </div>
 
