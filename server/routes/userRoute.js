@@ -1,4 +1,4 @@
-// server/routes/userRoute.js
+
 import express from "express";
 import {
   create,
@@ -7,18 +7,52 @@ import {
   getUserById,
   update,
 } from "../controller/userController.js";
-import { createSeafarerDetails } from "../controller/seafererController.js"; // Updated import for Seafarer Controller
+import { createCrewDetails } from "../controller/crewController.js"; 
+
+import { login, signup } from "../controller/loginController.js";
+import { createManningAgreement, getAgreement , manninguploadMiddleware} from "../controller/manningAgreementController.js";
+import { createshipDetails, uploadMiddleware, getshipDetails} from "../controller/shipdetailsController.js";
+import { CreateVesselOwner, getVesselOwnerForm, getVesselOwnerFormById, VesselOwnerFormMiddleware } from "../controller/VesselOwnerFormController.js";
+import { CreateCrewingAgentDetails, GetAllCrewingAgentDetails, updatedCrewingAgentDetails } from "../controller/CrewingAgentController.js";
+import { createVesselManager, getVesselManagerDetails, VesselManagerMiddleware } from "../controller/VesselManagerController.js";
 
 const route = express.Router();
 
 // User routes
-route.post("/user", create); // Add a new user
-route.get("/users", getAllUsers); // Fetch all users
-route.get("/user/:id", getUserById); // Fetch a user by ID
-route.put("/update/user/:id", update); // Update a user by ID
-route.delete("/delete/:id", deleteUser); // Delete a user by ID
+route.post("/user", create);
+route.get("/users", getAllUsers);
+route.get("/user/:id", getUserById);
+route.put("/update/user/:id", update);
+route.delete("/delete/:id", deleteUser);
+route.post("/login", login);
+route.post("/signup", signup);
+
+
+//Crewing Agent route
+route.post("/crewingAgentDetails", CreateCrewingAgentDetails);
+route.get("/crewingAgentDetails", GetAllCrewingAgentDetails);
+route.put("/crewingAgentDetails/:id", updatedCrewingAgentDetails);
 
 // Seafarer details route
 route.post("/seafarerdetails", createSeafarerDetails); // Handle the POST request to submit seafarer details
+
+//manningAgrement Route
+route.post("/manningAgreement", manninguploadMiddleware, createManningAgreement);
+route.get("/manningAgreement", getAgreement);
+
+//vessel Form route
+route.post("/vesselform", uploadMiddleware, createshipDetails);
+route.get("/vesselform", getshipDetails)
+
+//VesselOwnerForm Route
+route.post("/vesselOwnerform", VesselOwnerFormMiddleware, CreateVesselOwner)
+route.get("/vesselOwnerform", getVesselOwnerForm)
+
+// New route to fetch vessel owner data by ID
+route.get("/vesselOwnerform/:id", getVesselOwnerFormById);
+
+//Vessel Manager Routes
+ route.post("/vesselManager", VesselManagerMiddleware , createVesselManager)
+ route.get("/vesselManager", getVesselManagerDetails)
 
 export default route;

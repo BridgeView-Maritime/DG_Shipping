@@ -311,11 +311,11 @@ input[type="email"],
 input[type="number"],
 input[type="date"],
 select {
-  width: 80%; /* Adjust width of input fields */
-  padding: 5px;
+  width: 100%; /* Adjust width of input fields */
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #333;
 }
 
