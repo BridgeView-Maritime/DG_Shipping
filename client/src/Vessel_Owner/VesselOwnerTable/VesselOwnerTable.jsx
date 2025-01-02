@@ -13,7 +13,7 @@ const VesselOwnerTable = () => {
     const fetchVesselData = async () => {
       try {
         const response = await axios.get(
-          "https://bridgeviewships.ae:8000/api/vesselOwnerform"
+          "https://bridgeviewships.ae/api/vesselOwnerform"
         );
         setVesselData(response.data.data); // Assuming data is in `response.data.data`
       } catch (error) {
@@ -84,7 +84,7 @@ const VesselOwnerTable = () => {
                         <strong>Company Document:</strong>
                         {vessel.companyDocument ? (
                           <a
-                            href={`https://bridgeviewships.ae:8000/${vessel.companyDocument.filePath}`}
+                            href={`https://bridgeviewships.ae/${vessel.companyDocument.filePath}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
