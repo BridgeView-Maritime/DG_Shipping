@@ -1,9 +1,10 @@
 .navbar-homepage {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
-  background-color: #333;
-  color: white;
+  background-color: white;
+  color: black;
   position: fixed;
   width: 100%;
   top: 0;
@@ -15,7 +16,7 @@
 }
 
 .logoImage{
-  width: 3rem;
+  width: 5rem;
   margin-left: 2rem;
 }
 
@@ -36,6 +37,6 @@
 .navbar-links a,
 .navbar-links .Link {
   text-decoration: none;
-  color: white;
+  color: black;
   font-size: 1.5rem;
 }

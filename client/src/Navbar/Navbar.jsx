@@ -75,7 +75,7 @@ const Navbar = () => {
   return (
     <header className="navbar-homepage">
       <div className="navbar-logo">
-        <img src="/assets/bsplLogoRE.png" alt="logo" className="logoImage" />
+        <img src="/assets/bsplLogoREmover.png" alt="logo" className="logoImage" />
       </div>
       <nav
         className={`navbar-links ${userType === "admin" ? "admin-navbar" : ""}`}
