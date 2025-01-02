@@ -37,9 +37,9 @@
 
 .active-link {
   font-weight: bold;
-  background-color: blue;
+  /* background-color: blue; */
   /* padding: 0.5rem; */
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
 }
 
 /* Dropdown css */
