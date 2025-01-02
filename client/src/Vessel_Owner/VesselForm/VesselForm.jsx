@@ -85,7 +85,7 @@ const VesselForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/vesselform",
+        "http://bridgeviewships.ae:8000/api/vesselform",
         FormDataToSend,
         {
           headers: {

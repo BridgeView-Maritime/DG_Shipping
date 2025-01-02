@@ -7,7 +7,7 @@ const VesselManagerTable = () => {
   const [vesselManagers, setVesselManagers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/vesselManager")
+    axios.get("http://bridgeviewships.ae:8000/api/vesselManager")
       .then((response) => {setVesselManagers(response.data)
         console.log(response.data)
       })

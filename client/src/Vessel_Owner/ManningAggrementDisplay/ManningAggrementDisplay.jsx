@@ -14,7 +14,7 @@ const ManningAggrementDisplay = () => {
     const fetchAgreements = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/manningAgreement"
+          "http://bridgeviewships.ae:8000/api/manningAgreement"
         );
         setAgreements(response.data.data || []);
         setLoading(false);

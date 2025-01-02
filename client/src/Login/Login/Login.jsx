@@ -19,7 +19,7 @@ function Login() {
       const response = await axios.post("http://bridgeviewships.ae:8000/api/login", userData);
       if (response.status === 200) {
        
-         console.log("login sucess full"); 
+         console.log("login sucessfull!"); 
         
          // Store the userType in localStorage or sessionStorage
          const { userType } = response.data;  // Assume response contains userType
@@ -84,9 +84,9 @@ function Login() {
           <button className="loginbtn" type="submit">
             Login
           </button>
-          {/* <p>
+           <p>
           If you don't have an account, <Link to="/signup">Signup</Link>
-        </p> */}
+        </p> 
         </form>
       </div>
 
