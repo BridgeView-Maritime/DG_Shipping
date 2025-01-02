@@ -74,7 +74,7 @@ const CrewingAgentTable = () => {
                   <td>{agent.country}</td>
                   <td>{agent.contactNumber}</td>
                   <td>{agent.email}</td>
-                  <FaEdit onClick={() => handleEdit(agent)} style={{ cursor: "pointer" }} />
+                  <td><FaEdit onClick={() => handleEdit(agent)} style={{ cursor: "pointer" }} /></td>
                 </tr>
               ))
             ) : (
