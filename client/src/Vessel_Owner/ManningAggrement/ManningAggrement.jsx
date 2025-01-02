@@ -121,7 +121,7 @@ const ManningAgrrement = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/manningAgreement", {
+      const response = await fetch("https://bridgeviewships.ae:5000/api/manningAgreement", {
         method: "POST",
         body: formDataToSend,
       });
