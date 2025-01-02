@@ -42,8 +42,8 @@ function CrewingAgentForm() {
     };
     try {
       const response = formData._id
-        ? await axios.put(`https://bridgeviewships.ae/crewingAgentDetails/${formData._id}`, updatedFormData)
-        : await axios.post("https://bridgeviewships.ae/api/crewingAgentDetails", updatedFormData);
+        ? await axios.put(`http://localhost:8000/crewingAgentDetails/${formData._id}`, updatedFormData)
+        : await axios.post("http://localhost:8000/api/crewingAgentDetails", updatedFormData);
   
       if (response.status === 200 || response.status === 201) {
         alert(formData._id ? "Crewing Agent details updated successfully!" : "Crewing Agent details submitted successfully!");

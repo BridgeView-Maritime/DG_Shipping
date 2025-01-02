@@ -73,7 +73,7 @@ const ManningAgrrement = () => {
     }
 
     try {
-      const response = await fetch("https://bridgeviewships.ae/api/manningAgreement", {
+      const response = await fetch("http://localhost:8000/api/manningAgreement", {
         method: "POST",
         body: formDataToSend,
       });
@@ -83,7 +83,7 @@ const ManningAgrrement = () => {
       if (response.ok) {
         toast.success("Data added to list successfully!");
 
-        fetch("https://bridgeviewships.ae/api/manningAgreement")
+        fetch("http://localhost:8000/api/manningAgreement")
           .then((res) => res.json())
           .then((data) => {
             setAgreements(data.data);
@@ -121,7 +121,7 @@ const ManningAgrrement = () => {
     }
 
     try {
-      const response = await fetch("https://bridgeviewships.ae:5000/api/manningAgreement", {
+      const response = await fetch("http://localhost:8000:5000/api/manningAgreement", {
         method: "POST",
         body: formDataToSend,
       });

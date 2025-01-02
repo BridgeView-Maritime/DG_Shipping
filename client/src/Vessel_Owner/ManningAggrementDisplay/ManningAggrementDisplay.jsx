@@ -14,7 +14,7 @@ const ManningAggrementDisplay = () => {
     const fetchAgreements = async () => {
       try {
         const response = await axios.get(
-          "https://bridgeviewships.ae/api/manningAgreement"
+          "http://localhost:8000/api/manningAgreement"
         );
         setAgreements(response.data.data || []);
         setLoading(false);
@@ -63,7 +63,7 @@ const ManningAggrementDisplay = () => {
                 <td>
                   {agreement.aggrementformvii && (
                     <a
-                      href={`https://bridgeviewships.ae/${agreement.aggrementformvii.filePath}`}
+                      href={`http://localhost:8000/${agreement.aggrementformvii.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -74,7 +74,7 @@ const ManningAggrementDisplay = () => {
                 <td>
                   {agreement.manningAgree && (
                     <a
-                      href={`https://bridgeviewships.ae/${agreement.manningAgree.filePath}`}
+                      href={`http://localhost:8000/${agreement.manningAgree.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

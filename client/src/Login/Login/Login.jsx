@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("https://bridgeviewships.ae/api/login", userData);
+      const response = await axios.post("http://localhost:8000/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucessfull!"); 
