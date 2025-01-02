@@ -47,7 +47,7 @@ function Signup() {
     try {
       // Sending a POST request to the backend
       const response = await axios.post(
-        "http://bridgeviewships.ae:8000/api/signup",
+        "https://bridgeviewships.ae/api/signup",
         userData
       );
       console.log("Signup Success:", response.data);

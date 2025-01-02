@@ -8,7 +8,7 @@ const VesselTable = () => {
   useEffect(() => {
     const fetchShipDetails = async () => {
       try {
-        const response = await fetch("http://bridgeviewships.ae:8000/api/vesselform");
+        const response = await fetch("https://bridgeviewships.ae/api/vesselform");
         const data = await response.json();
         setShipDetails(data); 
       } catch (error) {

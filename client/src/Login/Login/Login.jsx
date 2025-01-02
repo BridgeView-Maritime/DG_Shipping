@@ -16,7 +16,7 @@ function Login() {
     const userData = { email, password };
 
     try {
-      const response = await axios.post("http://bridgeviewships.ae:8000/api/login", userData);
+      const response = await axios.post("https://bridgeviewships.ae/api/login", userData);
       if (response.status === 200) {
        
          console.log("login sucessfull!"); 
@@ -84,7 +84,7 @@ function Login() {
           <button className="loginbtn" type="submit">
             Login
           </button>
-           <p>
+          <p>
           If you don't have an account, <Link to="/signup">Signup</Link>
         </p> 
         </form>

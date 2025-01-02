@@ -13,7 +13,7 @@ const VesselOwnerTable = () => {
     const fetchVesselData = async () => {
       try {
         const response = await axios.get(
-          "http://bridgeviewships.ae:8000/api/vesselOwnerform"
+          "https://bridgeviewships.ae/api/vesselOwnerform"
         );
         setVesselData(response.data.data); // Assuming data is in `response.data.data`
       } catch (error) {
