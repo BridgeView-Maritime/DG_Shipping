@@ -63,7 +63,7 @@ const ManningAggrementDisplay = () => {
                 <td>
                   {agreement.aggrementformvii && (
                     <a
-                      href={`http://localhost:8000/${agreement.aggrementformvii.filePath}`}
+                      href={`https://bridgeviewships.ae/${agreement.aggrementformvii.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -74,7 +74,7 @@ const ManningAggrementDisplay = () => {
                 <td>
                   {agreement.manningAgree && (
                     <a
-                      href={`http://localhost:8000/${agreement.manningAgree.filePath}`}
+                      href={`https://bridgeviewships.ae/${agreement.manningAgree.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

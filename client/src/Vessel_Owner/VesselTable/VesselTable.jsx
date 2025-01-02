@@ -68,7 +68,7 @@ const VesselTable = () => {
                 <td>
                   {ship.seaAgreement && (
                     <a
-                      href={`http://localhost:8000/${ship.seaAgreement.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.seaAgreement.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -78,7 +78,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.cbaAgreement && (
                     <a
-                      href={`http://localhost:8000/${ship.cbaAgreement.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.cbaAgreement.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -88,7 +88,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.piDoc && (
                     <a
-                      href={`http://localhost:8000/${ship.piDoc.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.piDoc.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -98,7 +98,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.mlcCertDoc && (
                     <a
-                      href={`http://localhost:8000/${ship.mlcCertDoc.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.mlcCertDoc.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -108,7 +108,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.financialDoc && (
                     <a
-                      href={`http://localhost:8000/${ship.financialDoc.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.financialDoc.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -118,7 +118,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.dmlcPart1 && (
                     <a
-                      href={`http://localhost:8000/${ship.dmlcPart1.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.dmlcPart1.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -128,7 +128,7 @@ const VesselTable = () => {
                   <hr />
                   {ship.dmlcPart2 && (
                     <a
-                      href={`http://localhost:8000/${ship.dmlcPart2.filePath}`}
+                      href={`https://bridgeviewships.ae/${ship.dmlcPart2.filePath}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
