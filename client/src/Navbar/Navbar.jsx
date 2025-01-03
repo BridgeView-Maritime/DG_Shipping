@@ -60,9 +60,9 @@ const Navbar = () => {
             <Link to="/VesselManagerTable" className={getActiveLinkClass("/VesselManagerTable")}>Vessel Manager</Link>
             {showDropdown && (
               <div className="dropdown-menu">
-                <Link to="/assign-vessel" className={getActiveLinkClass("/assign-vessel")}>Assign Vessel</Link>
-                <Link to="/crewing-agent" className={getActiveLinkClass("/crewing-agent")}>Crewing Agent</Link>
-                <Link to="/crew" className={getActiveLinkClass("/crew")}>Crew</Link>
+                <Link to="/vessel" className={getActiveLinkClass("/assign-vessel")}>Assign Vessel</Link>
+                <Link to="/Crewing_Agent" className={getActiveLinkClass("/crewing-agent")}>Crewing Agent</Link>
+                <Link to="/SeafarerProfile" className={getActiveLinkClass("/crew")}>Crew</Link>
               </div>
             )}
           </div>
