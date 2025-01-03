@@ -40,14 +40,19 @@ const VesselManagerTable = () => {
                 <strong>Person Name:</strong> {manager.personName} <br />
                 <strong>Email:</strong> {manager.email} <br />
                 <strong>Address:</strong> {manager.address} <br />
-                <strong>Document:</strong>{" "}
-                <a
-                  href={manager.companyDocument.filePath}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {manager.companyDocument.originalName}
-                </a>{" "}
+                {manager.companyDocument &&
+                  manager.companyDocument.filePath ? (
+                    <a
+                      href={manager.companyDocument.filePath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {manager.companyDocument.originalName}
+                    </a>
+                  ) : (
+                    "No Documents Available"
+                  )}
+                  <br />
                 <br />
                 <strong>Country:</strong> {manager.country}
               </td>
